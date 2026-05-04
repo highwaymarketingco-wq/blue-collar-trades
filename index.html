@@ -126,6 +126,87 @@ table tr:hover td{background:var(--panel2)}
 .alert.warn{background:rgba(251,191,36,0.08);border-color:var(--warn);color:#e8d99a}
 .alert.danger{background:rgba(248,113,113,0.08);border-color:var(--danger);color:#e9b7b7}
 .alert.success{background:rgba(52,211,153,0.08);border-color:var(--accent);color:#b7e9d3}
+
+/* === Studio (Industry Picker + Deep Dive) === */
+.studio-hero{padding:48px 32px;border-radius:20px;background:linear-gradient(135deg,#0f1219 0%,#1a1f2e 50%,#0f2027 100%);border:1px solid var(--line2);margin-bottom:28px;position:relative;overflow:hidden}
+.studio-hero::before{content:"";position:absolute;top:-50%;right:-20%;width:60%;height:200%;background:radial-gradient(circle,rgba(52,211,153,0.08) 0%,transparent 70%);pointer-events:none}
+.studio-hero h1{font-size:38px;font-weight:800;letter-spacing:-0.03em;margin-bottom:10px;line-height:1.05;background:linear-gradient(90deg,#e8ecf3 0%,#34d399 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.studio-hero p{font-size:16px;color:#c5ccd9;max-width:720px}
+.industry-picker{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:32px}
+.ind-pick{background:linear-gradient(180deg,var(--panel) 0%,var(--panel2) 100%);border:1px solid var(--line);border-radius:14px;padding:20px;cursor:pointer;transition:all .2s ease;position:relative;overflow:hidden}
+.ind-pick:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 24px rgba(52,211,153,0.12)}
+.ind-pick.selected{border-color:var(--accent);background:linear-gradient(180deg,rgba(52,211,153,0.08) 0%,var(--panel2) 100%);box-shadow:0 0 0 2px rgba(52,211,153,0.3)}
+.ind-pick .icon{font-size:32px;margin-bottom:10px;line-height:1}
+.ind-pick .name{font-size:17px;font-weight:700;letter-spacing:-0.01em;margin-bottom:4px}
+.ind-pick .pickfit{font-size:11px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:8px;display:inline-block;padding:3px 8px;border-radius:4px}
+.ind-pick .pickfit.best{background:rgba(52,211,153,0.2);color:var(--tier1)}
+.ind-pick .pickfit.strong{background:rgba(96,165,250,0.2);color:var(--tier2)}
+.ind-pick .pickfit.fair{background:rgba(251,191,36,0.2);color:var(--tier4)}
+.ind-pick .pickfit.weak{background:rgba(167,139,250,0.2);color:var(--tier3)}
+.ind-pick .blurb{font-size:12px;color:var(--muted);line-height:1.5}
+.ind-pick .ind-tags{margin-top:10px;display:flex;flex-wrap:wrap;gap:4px}
+
+.studio-detail{display:none;animation:fadeIn .35s ease}
+.studio-detail.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.detail-hero{background:linear-gradient(135deg,#0f1219 0%,#1a2438 50%,#0f2027 100%);border:1px solid var(--line2);border-radius:18px;padding:36px;margin-bottom:24px;position:relative;overflow:hidden}
+.detail-hero .icon-big{font-size:64px;line-height:1;margin-bottom:8px}
+.detail-hero h2{font-size:34px;font-weight:800;letter-spacing:-0.02em;margin-bottom:8px}
+.detail-hero .subtitle{font-size:15px;color:var(--muted);max-width:680px;line-height:1.55}
+.detail-hero .quick-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:24px}
+.detail-hero .quick-stat{background:rgba(255,255,255,0.04);border:1px solid var(--line);border-radius:10px;padding:14px;backdrop-filter:blur(10px)}
+.detail-hero .quick-stat .qs-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;margin-bottom:4px}
+.detail-hero .quick-stat .qs-value{font-size:18px;font-weight:800;color:var(--text);letter-spacing:-0.01em}
+
+.section-block{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px;margin-bottom:18px}
+.section-block h3{font-size:20px;font-weight:800;letter-spacing:-0.01em;margin-top:0;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.section-block h3 .num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;background:rgba(52,211,153,0.15);color:var(--accent);font-size:12px;font-weight:800}
+
+.network-map{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:8px}
+.net-node{background:linear-gradient(180deg,rgba(96,165,250,0.06) 0%,var(--panel2) 100%);border:1px solid rgba(96,165,250,0.25);border-radius:12px;padding:16px}
+.net-node .nn-icon{font-size:24px;margin-bottom:6px}
+.net-node .nn-role{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+.net-node .nn-impact{font-size:12px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px}
+.net-node .nn-action{font-size:12px;color:var(--muted);line-height:1.5}
+
+.money-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.money-card{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px}
+.money-card .mc-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;font-weight:700;margin-bottom:4px}
+.money-card .mc-amount{font-size:22px;font-weight:800;color:var(--text);letter-spacing:-0.01em;margin-bottom:6px}
+.money-card .mc-note{font-size:12px;color:var(--muted);line-height:1.5}
+.money-card.big{grid-column:1/-1;background:linear-gradient(135deg,rgba(52,211,153,0.08) 0%,var(--panel2) 100%);border-color:rgba(52,211,153,0.3)}
+.money-card.big .mc-amount{font-size:36px;color:var(--accent)}
+
+.income-curve{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px}
+.income-step{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:18px;position:relative}
+.income-step .is-year{font-size:12px;color:var(--accent);font-weight:800;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px}
+.income-step .is-rev{font-size:24px;font-weight:800;color:var(--text);letter-spacing:-0.01em}
+.income-step .is-detail{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5}
+.income-step .is-take{font-size:13px;font-weight:700;color:var(--accent);margin-top:8px}
+
+.timeline-modern{position:relative;padding-left:32px;margin-top:8px}
+.timeline-modern::before{content:"";position:absolute;left:10px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--accent) 0%,var(--line2) 100%)}
+.timeline-modern .tm-step{position:relative;margin-bottom:20px;padding:14px 18px;background:var(--panel2);border:1px solid var(--line);border-radius:10px}
+.timeline-modern .tm-step::before{content:"";position:absolute;left:-26px;top:18px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--bg),0 0 0 4px var(--line2)}
+.timeline-modern .tm-when{font-size:11px;color:var(--accent);font-weight:800;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px}
+.timeline-modern .tm-what{font-size:14px;font-weight:700;margin-bottom:4px}
+.timeline-modern .tm-detail{font-size:13px;color:#c5ccd9;line-height:1.55}
+
+.master-card{background:linear-gradient(135deg,rgba(167,139,250,0.06) 0%,var(--panel2) 100%);border:1px solid rgba(167,139,250,0.25);border-radius:14px;padding:20px}
+.master-card h4{font-size:15px;margin-bottom:8px;color:var(--tier3)}
+
+.risk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:8px}
+.risk-card{background:rgba(248,113,113,0.04);border:1px solid rgba(248,113,113,0.2);border-radius:12px;padding:16px}
+.risk-card .rc-title{font-size:14px;font-weight:700;color:var(--danger);margin-bottom:6px}
+.risk-card .rc-mit{font-size:13px;color:var(--text);margin-top:8px;padding-top:8px;border-top:1px solid rgba(248,113,113,0.15)}
+.risk-card .rc-mit strong{color:var(--accent)}
+
+.quote-block{background:rgba(96,165,250,0.04);border-left:3px solid var(--accent2);padding:14px 18px;border-radius:0 8px 8px 0;margin:10px 0;font-style:italic;font-size:13px;color:#c5ccd9;line-height:1.6}
+.quote-block .source{display:block;margin-top:8px;font-size:11px;color:var(--muted);font-style:normal;text-transform:uppercase;letter-spacing:0.05em;font-weight:700}
+
+.back-btn{background:var(--panel2);border:1px solid var(--line2);color:var(--muted);padding:8px 14px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:700;font-family:inherit;margin-bottom:18px;display:inline-flex;align-items:center;gap:6px}
+.back-btn:hover{color:var(--accent);border-color:var(--accent)}
+
 .presetBtn{background:var(--panel2);border:1px solid var(--line2);color:var(--text);padding:7px 12px;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit;font-weight:600;margin:4px 4px 0 0}
 .presetBtn:hover{border-color:var(--accent);color:var(--accent)}
 #cmpTable table{font-size:12px}
@@ -148,6 +229,7 @@ table tr:hover td{background:var(--panel2)}
 
 <nav class="tabs" id="nav">
   <button data-tab="overview" class="active">Overview</button>
+  <button data-tab="studio" style="color:var(--accent);font-weight:800">⚡ Industry Studio</button>
   <button data-tab="industries">Industries (24)</button>
   <button data-tab="compare">Compare</button>
   <button data-tab="verdicts">Verdicts</button>
@@ -232,6 +314,21 @@ table tr:hover td{background:var(--panel2)}
     <button id="fReset">Reset</button>
   </div>
   <div class="industry-grid" id="industryGrid"></div>
+</section>
+
+<section class="tab" id="studio">
+  <div id="studioPicker">
+    <div class="studio-hero">
+      <h1>Pick Your Trade. Get Your Roadmap.</h1>
+      <p>Each card opens a tailored startup playbook for South Carolina — built around <strong>YOUR network</strong> (GCs, engineers, architects, flippers, realtors). Real money, real SC salaries, real first-90-day actions. No acquisition jargon. No MBA-speak. Just the path.</p>
+    </div>
+    <div class="industry-picker" id="industryPicker"></div>
+    <div class="card" style="margin-top:20px">
+      <h4>How to read these</h4>
+      <p>Every roadmap covers: <strong>Why this fits you</strong> · <strong>Your network's role</strong> (each contact mapped to a job) · <strong>Real money to start</strong> · <strong>Income reality</strong> (Y1/Y3/Y5 honest numbers) · <strong>Your master hire</strong> (SC salary + where to find them) · <strong>Marketing on Day 1</strong> · <strong>90-day plan</strong> · <strong>Honest risks</strong> · <strong>Forum reality</strong> · <strong>SC license path</strong>.</p>
+    </div>
+  </div>
+  <div id="studioDetail"></div>
 </section>
 
 <section class="tab" id="verdicts">
@@ -1953,6 +2050,641 @@ function calc4(){
   `;
 }
 
+// ==================== INDUSTRY STUDIO ====================
+const STUDIO_INDUSTRIES = {
+foundation:{
+  key:'foundation',name:'Foundation Repair &amp; Waterproofing',icon:'🏗️',fit:'best',
+  blurb:'Your engineer family member + GC/realtor/flipper network = the perfect setup. Highest margin trade in your top 3.',
+  tags:['Best fit for YOU','High margin','PE exit at 7–10×','Engineer leverage'],
+  subtitle:'Where your engineer family member becomes your biggest moat — and your GC/realtor/flipper network becomes your demand engine.',
+  quickStats:[{label:'Avg Job',value:'$5K–$50K'},{label:'Year 1 Revenue',value:'$300–500K'},{label:'Year 3 Revenue',value:'$2–3M'},{label:'Year 5 Exit',value:'$7–14M'}],
+  whyFit:'Foundation repair is a high-anxiety sale. Homeowners with cracked walls, sinking porches, or wet basements are scared. They buy from operators who feel <strong>authoritative and trustworthy</strong> — not the cheapest. That\'s exactly where your network becomes a moat. Engineer family member stamps structural repairs in-house (saves $500–$2K per job versus external PEs and lands faster). GCs find foundation issues on every other remodel — they refer them out. House flippers find issues on 3 of every 15 properties. Realtors close deals around foundation fixes. Architect referrals upmarket you to luxury work. None of these channels exist for garage floor coating.',
+  network:[
+    {role:'Engineer (Family)',icon:'📐',impact:'PE Stamps + Authority Moat',action:'Stamps structural repair designs in-house. Saves $500–$2K per job. Becomes your "Engineer-on-Staff" marketing headline — wins the trust sale. Handle as retainer or 5–10% equity.'},
+    {role:'GCs (15+ relationships)',icon:'🔨',impact:'45–90 warm leads/year',action:'GCs encounter foundation issues on 10–30% of remodel/addition projects. They refer them out. 20 GC relationships × 3–6 referrals/year = your demand engine. Pay $250–500 per booked referral.'},
+    {role:'House Flippers',icon:'🏚️',impact:'Repeat high-urgency work',action:'Flipper buying 15 properties/year finds foundation issues on 3–5. Deadline-driven, budget-driven, repeat customer. Become the standing foundation partner.'},
+    {role:'Real Estate Agents',icon:'🔑',impact:'Transaction-urgency closes',action:'Pre-listing inspection finds foundation issue → "Deal dies without a fix" → price-insensitive close. Lunch-and-learn the top 50 producers in your service area.'},
+    {role:'Architects',icon:'✏️',impact:'Luxury upmarket positioning',action:'Custom-home / luxury foundation work pays 2–3× tract margin. Architect referrals come pre-qualified with money to spend.'},
+    {role:'Marketing Co (You)',icon:'📈',impact:'Demand generation',action:'SEO authority site, Google LSA + Verified, geotargeted Meta ads to clay-soil/flood ZIPs in Greenville/Charleston, financing partner integration (GreenSky/Synchrony — 50–70% of jobs financed).'},
+  ],
+  money:{
+    lean:{amount:'$35–50K',title:'Lean Startup (Year 1 — Subcontract Model)',items:[
+      {item:'Used service truck',cost:'$15–25K'},
+      {item:'Hand tools + level + transit',cost:'$3–5K'},
+      {item:'GC license application + Business/Law exam',cost:'$1K'},
+      {item:'GL insurance Year 1',cost:'$3–5K'},
+      {item:'Workers comp (when you hire)',cost:'$0 starting'},
+      {item:'Marketing launch budget',cost:'$8–15K'},
+      {item:'Working capital cushion',cost:'$5–10K'},
+    ],note:'Subcontract the labor to trusted crews at 55–70% of job revenue. Capture margin on the gap + your engineer\'s stamp work. Test demand before fixed costs.'},
+    serious:{amount:'$200–300K',title:'Direct Crew Model (Year 2 Target)',items:[
+      {item:'Used push pier rig',cost:'$40–60K'},
+      {item:'Mini-excavator',cost:'$25–45K'},
+      {item:'Crew truck + trailer',cost:'$30–45K'},
+      {item:'Crew lead 6-month float',cost:'$50K'},
+      {item:'Helper + materials inventory',cost:'$15K'},
+      {item:'Insurance + bonds full year',cost:'$15K'},
+      {item:'Marketing scaled',cost:'$25–50K'},
+    ],note:'Wait until you have 8+ jobs/month consistent before hiring W-2 crew. Prove demand first.'}
+  },
+  income:[
+    {year:'Year 1',revenue:'$300–500K',take:'$60–120K to you',detail:'Subcontract model. Owner-operated sales. 30–50 jobs at $10K avg ticket. You ride along every job to learn craft economics. Engineer family member handles stamps.'},
+    {year:'Year 3',revenue:'$2–3M',take:'$400–700K EBITDA',detail:'2 W-2 crews. Field supervisor. Marketing engine humming. Crawl space encapsulation premium line ($5–15K per job, very high margin). Realtor referral program live.'},
+    {year:'Year 5',revenue:'$5–8M',take:'$1–1.6M EBITDA',detail:'Multi-crew + commercial / structural specialty. Charleston + Greenville footprint. Groundworks (KKR-backed) is your direct exit buyer at 7–10× EBITDA = $7–14M enterprise value.'}
+  ],
+  master:{
+    title:'Foundation Crew Lead (NOT a master license)',
+    profile:'Foundation in SC is GC license + engineer stamps — there is no separate "master foundation" license. Your key hire is a <strong>crew lead with 7–10+ years</strong> of helical pier, push pier, wall anchor, and waterproofing experience. They run the field; you run sales/marketing/finance.',
+    sc_salary:'$75K–$95K base + $10–15K performance bonus + 5–10% profit share',
+    where:'Tap GC network — ask "who\'s the best foundation crew lead you\'ve worked with?" Poach from Groundworks/Mount Valley/Cantey/Ram Jack/58 Foundations crews — many feel "cogged out" post-PE acquisition. Stone Mountain Materials counter staff knows everyone. Carolinas AGC chapter referrals. Indeed/ZipRecruiter as last resort.',
+    pitch:'"I\'ll generate the leads. You run the field. I\'ll personally guarantee the SBA loan, you sign nothing. 5-year math: $1M EBITDA × 5× exit = $5M sale, your 10% = $500K. Plus better trucks, better tools, no on-call BS. ServiceTitan from day one."'
+  },
+  marketing:[
+    {tactic:'Google Business Profile + Review Velocity',detail:'Get to 25 reviews from network/family/first 5 customers in Week 4. Target 8–12 new reviews/month thereafter. Schema markup on website. Cost: $0–$200/mo.'},
+    {tactic:'Google LSA + Verified Badge',detail:'CPL $87–113 in SC metros. Apply for Google Verified. Train the call-answer process — sub-5-minute response. Cost: $1.5–4K/mo at launch.'},
+    {tactic:'Direct Mail to Clay-Soil ZIPs',detail:'EDDM postcards to past-job neighborhoods + Greenville/Charleston clay-soil/flood-prone ZIPs. 3% response rate, $17/lead implied. Cost: $1.5–3K per drop.'},
+    {tactic:'Realtor Referral Program',detail:'Lunch-and-learn 50 top producers. Pre-listing inspection offer (free, 30 min). $300–500 spiff per booked job. RESPA-compliant structuring.'},
+    {tactic:'GC Referral Program',detail:'Personal visit to your 20 GC relationships. Tell them you\'ve launched. 5% of job value or $500 flat per booked job. Get them yard signs branded with both names.'},
+    {tactic:'Financing Partner Integration',detail:'GreenSky / Service Finance / Synchrony — 50–70% of foundation jobs are financed. Integrating financing into the in-home sale lifts close rate 15–25%. Setup is free.'},
+    {tactic:'Authority Content + Engineer Videos',detail:'YouTube channel: "Why your basement crack matters (or doesn\'t)" hosted by your engineer family member. 5–10 videos in Q1. Compounds local SEO over 12 months.'},
+  ],
+  roadmap:[
+    {when:'Week 1',what:'Form SC LLC + retain attorney',detail:'$110 LLC filing. Trades-experienced M&amp;A attorney for QP agreements + future deals. Set up business banking. Buy domain.'},
+    {when:'Week 2–3',what:'GC license application',detail:'CLB Group 1 minimum (or work under family member\'s existing GC license). Engineer family member commits as PE on retainer/equity. Trade exam waived if you have license in TN/NC/GA/AL.'},
+    {when:'Week 3–4',what:'Recruit crew lead',detail:'Ask 20 GC relationships for foundation crew lead candidates. 3-meeting sequence (coffee → plan → attorney). Sign offer by Week 5.'},
+    {when:'Week 5–6',what:'Insurance + truck + tools',detail:'GL ($1M/$2M, ~$4K/yr), commercial auto, surety bond. Used truck $20K. Tools $5K. Open accounts at Stone Mountain Materials, ABC Supply.'},
+    {when:'Week 7–8',what:'Marketing infrastructure',detail:'Website (Wix/Webflow with schema). Google Business Profile. ServiceTitan or Housecall Pro setup. CallRail for tracking. NiceJob for review automation.'},
+    {when:'Week 9–10',what:'Network activation',detail:'Personal in-person visit to 20 GCs, top 30 realtors, 10 architects, 10 flippers. Tell them you\'ve launched. Hand them the referral fee structure on a one-pager.'},
+    {when:'Week 11–13',what:'First 5 jobs from network',detail:'Subcontract the labor for first 5–10 jobs. Ride along every one. Learn what a job ACTUALLY costs you in time + materials. Build the playbook.'},
+    {when:'Day 90',what:'Reality check',detail:'Booked $30–50K. 25+ Google reviews. 5 paying customers. CSR script live. Hiring helper if volume sustains.'},
+  ],
+  risks:[
+    {title:'Engineer family member burnout',mitigation:'<strong>Formalize the relationship Week 1.</strong> Retainer ($2K/mo) or 5–10% equity. Market-rate per-stamp billing. Cap hours/month. Don\'t take family for granted.'},
+    {title:'Subcontract crew unavailability',mitigation:'<strong>Cultivate 3 backup crews from Day 1.</strong> Don\'t lock yourself to one. Pay subs on time, every time — that\'s how you become their preferred client.'},
+    {title:'Cash flow on large jobs',mitigation:'<strong>50% deposit policy on every job over $5K.</strong> Non-negotiable. Balance on completion. Use Stripe ACH (1.6%) not credit card (3.5%).'},
+    {title:'Hiring crew lead too early',mitigation:'<strong>Don\'t hire W-2 until 8+ jobs/month sustained for 60 days.</strong> Idle labor will eat you. Stay subcontract until volume justifies fixed cost.'},
+    {title:'Underpricing because you don\'t know your costs',mitigation:'<strong>Ride along every job for first 90 days.</strong> Track time + materials in ServiceTitan. After 5 jobs you know your true cost. Until then add 30% buffer to estimates.'},
+  ],
+  forum:[
+    {quote:'In SC, Lowcountry coastal soil + high water tables drive demand for piers, helical anchors, and crawlspace encapsulation. Charleston pre-1980 housing on stub piers is a perpetual maintenance pool.',source:'SC Trade Landscape Research, April 2026'},
+    {quote:'Most foundation operators in SC carry CLB GC Group 3+ because piers and underpinning routinely cross $10K. There\'s no separate foundation license.',source:'SC LLR / CLB classifications'},
+    {quote:'Groundworks (KKR-backed) is the only true national platform with a structural lock on Charleston/Columbia/Greenville. Almost every other operator is sub-scale — that\'s the opportunity.',source:'PE M&amp;A research'}
+  ],
+  license:'<strong>Path A (cleanest):</strong> Get GC license through SC LLR Contractor\'s Licensing Board. Group 1 ($100K bid limit) is fine for residential. Trade exam + Business/Law exam. Trade exam waived for license earned in TN/NC/GA/AL/LA/MS/OH/TX/UT.<br><br><strong>Path B:</strong> Work under family/network member\'s existing GC license as Qualifying Party (you, an officer, or a hired qualifier). SC requires QP "actively engaged in management, supervision, and operations" — no passive figureheads.<br><br><strong>Engineer stamps</strong> required for any structural design (typically piers, wall anchors, underpinning). Your family engineer handles these.<br><br><strong>Insurance:</strong> $1M/$2M GL (~$4K/yr), commercial auto, workers comp at 4+ employees, surety bond ($10–15K typical).'
+},
+
+restoration:{
+  key:'restoration',name:'Water Damage Restoration',icon:'💧',fit:'best',
+  blurb:'Insurance-paid tickets $3–30K. Plumbers in your GC orbit are the #1 referral channel ($95K spend → $2.5M revenue documented).',
+  tags:['Tier 1','Insurance-paid','Plumber referral moat','24/7 emergency'],
+  subtitle:'The trade where ServPro and PuroClean franchises are widely disliked (1.4★ and 1.6★ respectively) — opening a clean lane for a marketing-led operator who builds plumber relationships and avoids the TPA trap.',
+  quickStats:[{label:'Avg Mitigation',value:'$3–7.5K'},{label:'Avg Insurance Claim',value:'$15,400'},{label:'Year 1 Revenue',value:'$200–400K'},{label:'Year 5 Exit',value:'$5–10M'}],
+  whyFit:'The "saturation" claim you heard is wrong. Charleston has only ~9 named restoration companies. The reason existing operators complain about saturation is that they got <strong>trapped in TPA dependency</strong> (Alacrity, Code Blue, Crawford, Accuserve) which compresses gross margins from 50–80% down to ~20%. A marketing-led entrant who deliberately builds plumber + GC + realtor referral networks instead of TPA dependency has a clear path. Your network is the killer differentiator: plumbers in your GC orbit call you when a pipe bursts at 11pm. GCs sub out mitigation on flips. Flippers buy water-damaged properties. Realtors find damage on pre-listing.',
+  network:[
+    {role:'Plumbers (in GC orbit)',icon:'🔧',impact:'#1 channel — $95K → $2.5M case',action:'When a pipe bursts at 11pm, the plumber arrives first. The plumber who calls YOU for mitigation is the channel. Documented: $95K paid to plumbers → $2.5M restoration revenue (26× ROI). Build relationships with top 50 plumbers by Google reviews. Spiff: $500–1,250 per qualified water-damage referral that books.'},
+    {role:'GCs (15+ relationships)',icon:'🔨',impact:'Emergency sub work + remodel discoveries',action:'GCs uncover hidden water/mold during remodels constantly. Many prefer to sub out mitigation/demo and keep reconstruction. Become their go-to mitigation partner.'},
+    {role:'House Flippers',icon:'🏚️',impact:'Damaged properties = repeat customer',action:'Flippers buy distressed properties. 3–5 of every 15 have meaningful water/mold/fire damage. Repeat business with deadlines = your dream customer.'},
+    {role:'Real Estate Agents',icon:'🔑',impact:'Pre-listing discovery work',action:'Pre-listing inspection finds water damage. Less core than foundation but real. $300–500 spiff. RESPA-compliant.'},
+    {role:'Insurance Adjusters',icon:'📋',impact:'Direct work pipeline (carrier-direct)',action:'Build relationships with top State Farm, Allstate, USAA, Liberty Mutual adjusters in Charleston/Greenville. Carrier-direct work = 40–50% gross margin. NOT TPA work.'},
+    {role:'Marketing Co (You)',icon:'📈',impact:'Emergency SEO + LSA + review automation',action:'"Water damage near me" emergency searches at 2am. LSA + Google Verified + 60-second answer time = win. Cost: $80–180 CPL but tickets are $3–30K so it pays.'},
+  ],
+  money:{
+    lean:{amount:'$60–90K',title:'Lean Startup (Year 1)',items:[
+      {item:'Used service vehicle',cost:'$15–25K'},
+      {item:'Air movers (20 units @ $300)',cost:'$6K'},
+      {item:'Dehumidifiers (5 LGR @ $2K)',cost:'$10K'},
+      {item:'Truck-mount extractor',cost:'$8–12K'},
+      {item:'Moisture meters + thermal cam + tools',cost:'$5K'},
+      {item:'IICRC WRT/ASD certifications (you + 1 tech)',cost:'$2K'},
+      {item:'Insurance + bonds Year 1',cost:'$5–8K'},
+      {item:'Marketing + Xactimate + DASH software',cost:'$10–15K'},
+    ],note:'No SC contractor license required for mitigation-only (drying, demo, cleanup). IICRC certs are 2–4 weeks. Lowest licensing friction of any major trade.'},
+    serious:{amount:'$200–350K',title:'Direct Crew + Reconstruction (Year 2)',items:[
+      {item:'Second service vehicle',cost:'$25–35K'},
+      {item:'Equipment fleet expansion',cost:'$40–60K'},
+      {item:'Crew lead 6-month float',cost:'$45K'},
+      {item:'2 mitigation techs (3 mo float)',cost:'$30K'},
+      {item:'IICRC firm certification',cost:'$500/yr'},
+      {item:'Residential Builder license (reconstruction)',cost:'$5K'},
+      {item:'Marketing + plumber spiff budget',cost:'$50–80K'},
+    ],note:'Reconstruction work requires Residential Builder license. Plumber spiffs are an investment, not a cost — 26× ROI documented.'}
+  },
+  income:[
+    {year:'Year 1',revenue:'$200–400K',take:'$50–120K to you',detail:'Owner-operated mitigation. 50–100 jobs. You + 1 tech. Build plumber relationships (top 20 plumbers in metro). Avoid TPAs entirely.'},
+    {year:'Year 3',revenue:'$1.5–2.5M',take:'$300–500K EBITDA',detail:'3 mitigation crews + reconstruction. Plumber referral program at $50K/yr generating $1M+ in revenue. Carrier-direct work mix. Optionally cap TPA work at 30%.'},
+    {year:'Year 5',revenue:'$3–5M',take:'$600K–$1M EBITDA',detail:'Multi-crew + commercial mitigation + fire/large-loss capability. BluSky/BELFOR/ATI tier acquirers active. Exit at 6–10× EBITDA = $5–10M.'}
+  ],
+  master:{
+    title:'IICRC-Certified Crew Lead',
+    profile:'No master license required. Your key hire is an IICRC-certified Lead Tech with WRT (Water Restoration Tech), ASD (Applied Structural Drying), and ideally FSRT (Fire/Smoke). 5+ years in the field. Knows Xactimate. Comfortable with 24/7 emergency response.',
+    sc_salary:'$55K–$75K base + $10K on-call stipend + commission on closed jobs (3–5% of net)',
+    where:'Tap plumbing network — ask plumbers "who do you call for mitigation? Are they good?" Poach from ServPro/PuroClean franchisees (many feel underpaid given the chaos). Indeed for "IICRC certified" + Charleston/Greenville. Trident Tech and Greenville Tech don\'t train this — it\'s on-the-job.',
+    pitch:'"You\'re tired of getting woken up for $10/hr franchise BS. With me, you\'re crew lead with profit share. ServiceTitan + Encircle + DASH from day one. Modern stack, fair comp, no franchise corporate BS, and a path to $100K+ if we hit our numbers."'
+  },
+  marketing:[
+    {tactic:'Plumber Referral Program (#1 priority)',detail:'Identify top 50 plumbers in service area by Google reviews + revenue. Monthly check-ins, lunch/coffee, ride-alongs, branded lockboxes, dispatch hotline. Spiff: $500–1,250 per booked water-damage referral. Software: Airtable + Twilio + Stripe payouts. Documented: $95K spend → $2.5M revenue (26× ROI).'},
+    {tactic:'Google LSA + Emergency SEO',detail:'CPL $80–180 in Charleston/Greenville. "Water damage near me" + "[city] water restoration" target. Sub-60-second answer is mandatory. Costs $3–8K/mo but tickets are $3–30K so payback is fast.'},
+    {tactic:'Insurance Carrier Direct (NOT TPAs)',detail:'Build relationships with top State Farm, Allstate, USAA adjusters in your metro. Cap TPA work at 30% to preserve margin. Carrier-direct = 40–50% gross vs TPA 20%.'},
+    {tactic:'Real Estate Agent Network',detail:'Pre-listing inspection finds = $300–500 spiff per booked job. Lunch-and-learn 30 top producers per metro.'},
+    {tactic:'GC + Flipper Direct Outreach',detail:'Personal visits. Same-week response promise. 24/7 emergency line. They want one call, one company, one bill.'},
+    {tactic:'Review Automation Stack',detail:'NiceJob ($75/mo) or Podium ($399+/mo) + post-job SMS within 1 hour. Restoration industry avg is 8–15 reviews; top quartile 200+. The gap is your moat.'},
+  ],
+  roadmap:[
+    {when:'Week 1',what:'IICRC WRT + ASD certifications',detail:'Online course + exam in 2–4 weeks. ~$700 each. Get yourself + first hire certified. No SC contractor license needed for mitigation.'},
+    {when:'Week 2',what:'LLC + insurance + truck',detail:'$110 SC LLC. GL $1M/$2M (~$4K/yr). Commercial auto. Used cargo van $20K.'},
+    {when:'Week 3–4',what:'Equipment fleet purchase',detail:'20 air movers + 5 LGR dehumidifiers + truck-mount extractor + moisture meters + thermal camera. ~$30K all in.'},
+    {when:'Week 5–6',what:'Software + scoping',detail:'Xactimate + DASH + Encircle setup. CallRail for emergency line. NiceJob for reviews. Total ~$500/mo.'},
+    {when:'Week 7–8',what:'Plumber outreach (the #1 priority)',detail:'List top 50 plumbers by Google reviews. Personal coffee meeting with at least 20. Hand them the spiff structure on a one-pager. Branded lockbox with cards + magnets.'},
+    {when:'Week 9–10',what:'Marketing launch',detail:'Google Business Profile + 10 reviews from network. LSA + Verified application. Website with emergency 24/7 messaging. Direct outreach to 20 GCs + 10 flippers.'},
+    {when:'Week 11–13',what:'First 5 emergency calls',detail:'You + tech respond to every call. Document everything in DASH. Build your job-cost data. Practice the Xactimate scope.'},
+    {when:'Day 90',what:'Reality check',detail:'5–10 booked jobs. 15+ reviews. Plumber spiffs paying out (track every referral source). Considering 2nd tech if volume sustains.'},
+  ],
+  risks:[
+    {title:'24/7 on-call burnout',mitigation:'<strong>Set the boundary Day 1.</strong> Rotate on-call with crew lead from Week 8. Use answering service ($150/mo) for non-emergency hours. Pay $200 stipend per night on-call. Without this, you crash by Month 6.'},
+    {title:'Insurance AR drag (60–120 day pays)',mitigation:'<strong>Line of credit Week 12.</strong> 60–75% advance against AR at Prime + 2–4%. Keep 3 months operating cash. Get deposits where possible (carrier won\'t allow, but flippers/direct will).'},
+    {title:'Becoming TPA-dependent',mitigation:'<strong>Cap TPA work at 30% of revenue.</strong> The other 70% is plumber-referred + carrier-direct + GC/realtor referred. TPA work is fine as fill, not as foundation.'},
+    {title:'Underpricing emergencies',mitigation:'<strong>Use Xactimate for every quote.</strong> Don\'t shoot from the hip. Industry pricing is published; insurance won\'t pay above it but won\'t pay below it either.'},
+    {title:'Tech turnover (industry avg 20–30%)',mitigation:'<strong>Pay 15–20% above market + on-call stipends + cert reimbursement.</strong> Mitigation work is grueling — comp must reflect it.'},
+  ],
+  forum:[
+    {quote:'Mostly negative feelings about flood restoration companies, with concerns that they overcharge for what customers get... homeowners sometimes receive insurance checks directly and spend the money elsewhere, causing mitigation companies to go unpaid.',source:'PlumbingZone — operator forum'},
+    {quote:'70% of restoration businesses fail within 10 years. Top failure mode: technicians who undercharge because they think with their hearts rather than business operators.',source:'Reets Drying Academy'},
+    {quote:'ServPro: 1.4★ avg across 87 reviews. PuroClean: 1.6★ across 55 reviews. Pattern: tripling quotes, charging multiple times for identical services, resistance to providing itemized invoices.',source:'Pissed Consumer + UnhappyFranchisee aggregated complaints'},
+    {quote:'High-profit mitigation is a thing of the past, especially when there are multi-tiered TPAs involved.',source:'Multiple operator forums'}
+  ],
+  license:'<strong>Mitigation only:</strong> NO SC contractor license required. IICRC WRT/ASD/FSRT/AMRT certifications are de facto industry standard. 2–4 weeks per cert. ~$300–700 each.<br><br><strong>Reconstruction work:</strong> Residential Builder license OR GC (if commercial) required to do the rebuild after mitigation. You can stay mitigation-only Year 1 and add reconstruction Year 2.<br><br><strong>Mold remediation:</strong> SC does NOT require dedicated mold license (FL/LA/TX/NY do). IICRC AMRT covers it.<br><br><strong>Insurance:</strong> $1M/$2M GL (~$4K/yr), pollution liability for mold work ($1–2K/yr), commercial auto, workers comp.<br><br><strong>Software stack:</strong> Xactimate ($200/mo/seat — mandatory for insurance billing), DASH ($75–150/user/mo), Encircle for AI scoping (cuts on-site time 2hrs → 15min).'
+},
+
+pest:{
+  key:'pest',name:'Pest Control',icon:'🐛',fit:'best',
+  blurb:'Best recurring revenue economics in trades. LTV:CAC 10–25:1. Realtor network = perfect referral source.',
+  tags:['Best recurring rev','LTV:CAC 10–25:1','PE exits 14–18×','Easiest licensing'],
+  subtitle:'70–85% recurring revenue at well-run operators. Marketing skill compounds directly into enterprise value at the highest exit multiples in trades. SC\'s climate (Formosan termite epicenter, year-round mosquito) is a structural tailwind.',
+  quickStats:[{label:'Monthly per Customer',value:'$40–80'},{label:'5-yr LTV',value:'$3K–5.7K'},{label:'Year 1 Revenue',value:'$150–300K'},{label:'Year 5 Exit',value:'$3–6M (8–14× EBITDA)'}],
+  whyFit:'Pest control is the trade where <strong>marketing skill compounds hardest</strong>. Unit economics only work at scale with retention and CAC discipline — both marketing outputs. Nick Huber (Sweaty Startup) explicitly described it as "an old-school industry... no website, no digital marketing, no sales tracking systems" — meaning a marketing-led entrant beats incumbents on every dimension. Your realtor network is gold here: every closing creates a pest opportunity (move-in treatment, termite letter, ongoing service). Your flippers need pre-listing pest treatment. SC\'s climate (Formosan termite epicenter since 1957, year-round mosquito) is the cleanest demand tailwind of any trade. PE is buying mom-and-pop pest shops at 14–18× EBITDA above $1M.',
+  network:[
+    {role:'Real Estate Agents',icon:'🔑',impact:'Move-in treatments + termite letters',action:'Every closing creates a pest opportunity. CL-100 (termite letter) required for VA loans, common for FHA. Move-in treatment $200–400. Lunch-and-learn 50 top realtors. $50–100 spiff per booked recurring customer.'},
+    {role:'House Flippers',icon:'🏚️',impact:'Pre-listing treatment + recurring on rentals',action:'Flippers + landlords need pre-listing treatment + ongoing service on rental portfolios. Repeat predictable revenue.'},
+    {role:'GCs (15+ relationships)',icon:'🔨',impact:'New construction + commercial routes',action:'GCs need pre-construction termite treatment. Commercial accounts (restaurants, multifamily) come through GC relationships. Recurring contracts $200–500/mo each.'},
+    {role:'Property Managers',icon:'🏘️',impact:'Multi-unit recurring contracts',action:'Property mgmt companies want one pest provider for the whole portfolio. $300–2K/mo per multi-unit account. Cold outreach + flipper-network warm intros.'},
+    {role:'Marketing Co (You)',icon:'📈',impact:'Retention compounds enterprise value',action:'Pest LTV depends on retention. 60% → 88% retention via automated text/email after each service = 2–3× exit multiple at sale. This is your superpower.'},
+  ],
+  money:{
+    lean:{amount:'$30–55K',title:'Lean Startup (Year 1)',items:[
+      {item:'Used service vehicle',cost:'$15–25K'},
+      {item:'Bulk tank sprayer + B&amp;G compressed sprayer',cost:'$3–5K'},
+      {item:'Initial chemical inventory',cost:'$3K'},
+      {item:'SC Cat 7A applicator certification (you take it)',cost:'$200'},
+      {item:'SC Pesticide Business License + DCA',cost:'$500'},
+      {item:'$100K combined-single-limit GL (statute)',cost:'$3–5K/yr'},
+      {item:'FieldRoutes/PestPac/GorillaDesk (smaller)',cost:'$500–2K/yr'},
+      {item:'Marketing launch budget',cost:'$8–15K'},
+    ],note:'YOU can take the SC Cat 7A applicator exam yourself in ~1 month. No master license needed. Lowest licensing friction of any major trade.'},
+    serious:{amount:'$120–200K',title:'Multi-Route (Year 2)',items:[
+      {item:'2nd service vehicle',cost:'$25–35K'},
+      {item:'Tech 1 hire (6 mo float)',cost:'$30K'},
+      {item:'Tech 2 hire (3 mo float)',cost:'$15K'},
+      {item:'Equipment + chemical inventory expansion',cost:'$15K'},
+      {item:'Marketing scaled (incl D2D testing)',cost:'$25–50K'},
+      {item:'Termite specialty equipment + inspector training',cost:'$5–10K'},
+    ],note:'Termite + mosquito add-on lines unlock 50–80% additional ARR per customer.'}
+  },
+  income:[
+    {year:'Year 1',revenue:'$150–300K',take:'$50–100K to you',detail:'You + 1 tech. 100–200 quarterly residential customers ($600/yr each = $60–120K recurring base). Add termite letters and one-time treatments. Build the recurring base — DON\'T optimize for one-time revenue.'},
+    {year:'Year 3',revenue:'$1–1.5M',take:'$250–400K EBITDA (25–30%)',detail:'3 techs + dispatcher. 800+ recurring customers. Termite + mosquito + commercial mix. Retention 80%+. ServiceTitan/FieldRoutes humming. Database email automation working.'},
+    {year:'Year 5',revenue:'$2.5–4M',take:'$700K–$1.2M EBITDA',detail:'Multi-route + commercial recurring. Rollins/Rentokil/Anticimex/Aruza all calling. Exit at 8–14× EBITDA = $5.6M–$16.8M. Retention metrics drive multiple — 88% retention → 14×; 60% retention → 8×.'}
+  ],
+  master:{
+    title:'Lead Tech / Service Manager (NOT a master license)',
+    profile:'No master license needed in pest. Your key hire is a Lead Tech with 3–5 years experience, holds SC Cat 7A (gen pest) + ideally Cat 7B (termite). Knows the chemistry, can train new hires, has ServiceTitan/FieldRoutes muscle memory.',
+    sc_salary:'$50K–$65K base + commission on add-on sales (5–10%) + termite inspection bonus',
+    where:'Poach from Terminix/Orkin/Arrow branches in your metro — many feel "cogged out" post-PE acquisition. Tap Gregory Pest Solutions (Greenville HQ) crew. Indeed for "Cat 7A certified" + your metro. Zero master-license barrier means more candidates.',
+    pitch:'"At Orkin you\'re a number with corporate quotas. With me, you\'re running the technical side. Better truck, better commission, no D2D quota BS, fair on-call rotation, ServiceTitan from day one, and a real path to $80–100K+ within 18 months."'
+  },
+  marketing:[
+    {tactic:'Realtor Referral Program',detail:'Lunch-and-learn 50 top producers per metro. CL-100 termite letters at-cost as relationship builder. $50–100 per booked recurring customer. Become the realtor\'s go-to.'},
+    {tactic:'Google LSA + Local SEO',detail:'CPL $35–65 in SC (one of the lowest in trades). LSA + 100+ Google reviews + neighborhood landing pages.'},
+    {tactic:'Database Retention Automation',detail:'Automated text/email after each service. NPS follow-up. Annual check-in. Moves retention 60% → 88% = 2–3× exit multiple. ServiceTitan Marketing Pro or Klaviyo.'},
+    {tactic:'D2D Cluster Marketing (optional)',detail:'Moxie/Aptive/Edge model is a $500M+ summer sales machine but high churn. Best for your situation: targeted neighborhood D2D in clusters where you already have 1–2 customers (route density compounds).'},
+    {tactic:'Up-Sell Stack',detail:'Gen pest customer → mosquito ($69–99/mo seasonal) → termite ($1.2–3.5K + $250–400/yr renewal) → wildlife removal. Each line adds 20–40% ARR per customer.'},
+    {tactic:'Commercial Outreach',detail:'Restaurants (food service code requires regular service), multifamily, schools, healthcare. Recurring contracts $300–2K/mo. Cold outreach + GC/property manager warm intros.'},
+  ],
+  roadmap:[
+    {when:'Week 1',what:'SC Cat 7A applicator exam',detail:'Study materials from Clemson Dept of Pesticide Regulation. ~3–4 weeks of study. $200 exam fee. 100-question general + 50-question category exam (70% pass).'},
+    {when:'Week 2',what:'LLC + business license + DCA',detail:'$110 SC LLC. SC Pesticide Business License application ($500). Designate yourself or hire as DCA (Designated Certified Applicator).'},
+    {when:'Week 3–4',what:'Insurance + vehicle + equipment',detail:'$100K combined-single-limit GL (statute requirement, max $1K deductible) ~$3–5K/yr. Used service truck $20K. Bulk tank sprayer + B&amp;G $3K. Chemical inventory $3K.'},
+    {when:'Week 5–6',what:'Software + branding',detail:'FieldRoutes (~$200/mo) or GorillaDesk ($49+/mo). Truck wraps. Uniforms. Domain + Wix site. Google Business Profile.'},
+    {when:'Week 7–8',what:'Realtor network activation',detail:'Lunch-and-learn 30 top realtors. CL-100 termite letter offer. Spiff structure handout.'},
+    {when:'Week 9–10',what:'Direct outreach + first customers',detail:'Personal calls to your network — every realtor, GC, flipper, property manager you know. First 10 customers from network referrals.'},
+    {when:'Week 11–13',what:'Recurring base build',detail:'Goal: 30 quarterly recurring customers by Day 90. That\'s ~$18K/yr recurring base. Foundation for everything that follows.'},
+    {when:'Day 90',what:'Reality check',detail:'30+ recurring customers. 25+ Google reviews. Realtor referral program live. Hiring 2nd tech if volume sustains.'},
+  ],
+  risks:[
+    {title:'D2D regulatory pressure',mitigation:'<strong>Stick with referral + digital marketing.</strong> SC and several states are tightening unlicensed solicitation rules. D2D is optional, not required.'},
+    {title:'Tech retention chronic',mitigation:'<strong>Pay 15–20% above Orkin/Terminix base.</strong> Tiered career path posted on the wall. Truck quality matters more than people admit.'},
+    {title:'Chemical regulation changes',mitigation:'<strong>Monitor Clemson Dept of Pesticide Regulation quarterly.</strong> Neonics, glyphosate, etc. are subject to ongoing review. Diversify chemistry options.'},
+    {title:'Underpricing recurring (the LTV math gets you fired up)',mitigation:'<strong>Quarterly $125 minimum, monthly $45 minimum.</strong> Below this you can\'t hit retention investment + LTV math. Don\'t race to the bottom.'},
+  ],
+  forum:[
+    {quote:'Customers are going to pay you $40 a month or more...if you treat them well they\'ll be on board for years and years to come. No website. No digital marketing. No sales tracking systems.',source:'Sweaty Startup (Nick Huber)'},
+    {quote:'About 80 percent of pest control businesses shut down in the first 2 years. But a $70K initial capital play getting to $7-8K/month by year 3 is realistic.',source:'ContractorTalk operator thread'},
+    {quote:'PE is buying mom-and-pop shops like crazy, particularly anything over $1M in revenue. Multiples 14–18× EBITDA at that scale.',source:'Capstone Partners + Sweaty Startup'},
+    {quote:'88% of Mosquito Joe franchisees\' 2022 services were recurring — reinforcing the pest recurring story.',source:'Franchise FDD analysis'}
+  ],
+  license:'<strong>Two-layer licensing through Clemson Dept of Pesticide Regulation (NOT SC LLR):</strong><br><br><strong>1. Individual Applicator Cert</strong> by category. Cat 7A = "Industrial, Institutional, Structural, Health-Related Pest Control" (residential gen pest). Cat 7B = termite. Cat 6 = ornamental/turf. Cat 8 = mosquito/public health. Most operators hold 2–4. ~$200 per cert. <strong>YOU can take Cat 7A in ~1 month.</strong><br><br><strong>2. Pesticide Business License</strong> for the company. Each location needs a DCA (Designated Certified Applicator) with 2 yrs verifiable experience or a 4-year degree.<br><br><strong>Insurance:</strong> $100,000 combined-single-limit GL mandated by SC statute, max $1,000 deductible. ~$3–5K/yr. Pesticide pollution coverage layered on top ($1–2K/yr).<br><br><strong>CEU requirements:</strong> 10–40 hours over 3–5 years per category.'
+},
+
+hvac:{
+  key:'hvac',name:'HVAC',icon:'❄️',fit:'strong',
+  blurb:'Largest market + biggest PE rollup wave + best maintenance plan playbook. License-gated but worth it.',
+  tags:['Tier 1','PE darlings','High-ticket replacement','Recurring plans'],
+  subtitle:'Most marketing-leveraged trade in residential services. Industry CSR booking rate is 46%; top quartile 77–85% — moving the needle 20 points on a $200K LSA spend = $300K/yr free revenue. License-gated (Master HVAC required), but the comp + structural tailwinds (refrigerant transition, IRA heat pump credits, electrification) make the entry barrier worth clearing.',
+  quickStats:[{label:'Avg Replacement',value:'$8–15K'},{label:'Service Plan/yr',value:'$150–300'},{label:'Year 1 Revenue',value:'$300–600K'},{label:'Year 5 Exit',value:'$8–18× EBITDA'}],
+  whyFit:'HVAC is biggest, fastest-rolling-up, highest-multiple of all residential trades. Your network helps but isn\'t as direct as foundation/restoration: GCs refer HVAC on remodels (every kitchen reno = potential mini-split), realtors point to home inspector findings, but the bulk of HVAC demand is non-network (homeowner\'s system fails). You win this on <strong>marketing + booking + membership attach</strong> — exactly your skill set. Master HVAC license is the gate; pay $115–150K + equity to clear it.',
+  network:[
+    {role:'GCs (15+ relationships)',icon:'🔨',impact:'Remodel + new construction sub work',action:'Every kitchen remodel, addition, basement finish = HVAC sub work. Mini-split installs $4.5–7.5K each. Recurring sub relationships.'},
+    {role:'Real Estate Agents',icon:'🔑',impact:'Pre-listing inspection finds + closing referrals',action:'Home inspection report finding aging HVAC system → $8–15K replacement before closing. $200–500 spiff per booked replacement.'},
+    {role:'House Flippers',icon:'🏚️',impact:'New systems on flips',action:'Most flips need HVAC system upgrade pre-listing. Recurring high-ticket work with deadlines.'},
+    {role:'Property Managers',icon:'🏘️',impact:'Maintenance contracts + emergency response',action:'Multi-unit recurring maintenance contracts. Emergency response on rentals. Recurring revenue.'},
+    {role:'Marketing Co (You)',icon:'📈',impact:'CSR booking + LSA + membership attach',action:'46% industry → 70% top quartile booking rate. 20% → 40% membership attach. These two levers alone are worth 30–50% revenue lift on a $3M shop.'},
+  ],
+  money:{
+    lean:{amount:'$50–80K',title:'Solo Operator Year 1',items:[
+      {item:'Used service van',cost:'$15–25K'},
+      {item:'Tools (gauges, recovery, vacuum, leak detector)',cost:'$5–10K'},
+      {item:'EPA 608 Universal cert',cost:'$200'},
+      {item:'Initial parts inventory',cost:'$3–5K'},
+      {item:'GL + commercial auto + WC',cost:'$5–8K'},
+      {item:'Housecall Pro + CallRail + NiceJob',cost:'$2K/yr'},
+      {item:'Marketing launch',cost:'$10–15K'},
+      {item:'Working capital cushion',cost:'$10–20K'},
+    ],note:'Master HVAC required as your QP — either you partner with one (equity) or hire one ($115–150K + equity).'},
+    serious:{amount:'$300–500K',title:'2–3 Truck Operation',items:[
+      {item:'3 wrapped vans @ $55–75K each',cost:'$165–225K'},
+      {item:'Tools per truck @ $8–12K',cost:'$25–35K'},
+      {item:'Inventory',cost:'$25–50K'},
+      {item:'ServiceTitan setup + Y1',cost:'$25–40K'},
+      {item:'Master HVAC QP + 2 techs (3 mo float)',cost:'$80–120K'},
+      {item:'CSR + dispatcher (3 mo float)',cost:'$25K'},
+      {item:'Insurance full year',cost:'$25–45K'},
+      {item:'Marketing scaled',cost:'$50–75K'},
+    ],note:'Capital threshold is real. ServiceTitan is justified at 5 trucks but starts at $50K/yr.'}
+  },
+  income:[
+    {year:'Year 1',revenue:'$300–600K',take:'$50–120K to you',detail:'Owner-operated solo or partnered with master HVAC. 1 truck. Service-heavy mix. Build maintenance plan base from Day 1 — every customer asked at register.'},
+    {year:'Year 3',revenue:'$2–3.5M',take:'$300–600K EBITDA (15–18%)',detail:'3–5 trucks. CSR team. Comfort Advisor closing replacements. Marketing engine optimized. 30%+ recurring on maintenance plans. ServiceTitan running scorecards.'},
+    {year:'Year 5',revenue:'$5–10M',take:'$1–2M EBITDA',detail:'10+ trucks. Sales manager + ops manager. Multi-metro. PE acquirers (Apex, Wrench, Champions, Blackstone) calling. Exit at 8–18× EBITDA = $8–36M. Champions sold to Blackstone Feb 2026 at 18.5×.'}
+  ],
+  master:{
+    title:'Master HVAC (the licensed QP)',
+    profile:'SC requires Master HVAC for Class M license. Your key hire (or partner) is a Master with 5+ years post-journeyman experience, EPA 608 Universal, and ideally NATE certification. Old enough to want a 10-yr equity run, young enough not to be retiring (38–55).',
+    sc_salary:'$115K–$160K base + 1–3% net profit bonus + 5–15% phantom equity vesting 4–5 years (or 15–20% real equity if true partner)',
+    where:'Tap Carrier Enterprise + Trane Supply + Reece counter staff — they know every operating master in the metro and who\'s unhappy. Poach from ARS/Rescue Rooter, Apex Service Partners, Wrench Group brands operating in SC. Greenville Tech HVAC advisory board. Carolinas AGC chapter referrals.',
+    pitch:'"Your name on the door. You run the trade. I run the marketing + ops + finance. I\'ll personally guarantee the SBA loan, you sign nothing. ServiceTitan from day 1. 5-year exit math: $1M EBITDA × 10× = $10M sale, your 15% = $1.5M. Plus better trucks, fair on-call rotation, no PE corporate BS."'
+  },
+  marketing:[
+    {tactic:'Google LSA + Verified Badge',detail:'CPL $45–80 in SC. Aggressive bid mgmt + dispute discipline = 30–50% lead volume gains over set-and-forget.'},
+    {tactic:'CSR Booking Rate Optimization (#1 lever)',detail:'46% → 70% on $200K LSA spend = $300K/yr free revenue. Power Selling Pros at $325/CSR/mo. Six-step protocol: warm greeting → problem ack → specific timing → price range → direct booking ask → rescue offer.'},
+    {tactic:'Maintenance Plan Attach',detail:'Industry attach 20% → top quartile 40%. $150–300/yr per customer. Member households book 1.6–2× more frequently. Drives membership LTV 2–3× non-member.'},
+    {tactic:'Database Reactivation',detail:'Most $2-5M shops have 5–25K dormant customers. Monthly drip + seasonal $99 tune-up offer = 1–3% activation = pure margin. Klaviyo or ServiceTitan Marketing Pro.'},
+    {tactic:'Branded SEO + Local Pack',detail:'"HVAC repair [city]" + "AC replacement [city]" — high-intent emergency searches. Schema-marked location pages. 8–12 reviews/month cadence.'},
+    {tactic:'Realtor + GC Referral Programs',detail:'$200–500 spiff per booked replacement. Top 50 realtors and 20 GCs personally activated.'},
+  ],
+  roadmap:[
+    {when:'Week 1',what:'Recruit Master HVAC partner',detail:'Most important hire of the next 5 years. 3-meeting sequence. By Week 4 you have a signed offer.'},
+    {when:'Week 5–6',what:'SC license app + LLC',detail:'Class M Mechanical license through SC LLR CLB (Group 1 minimum, Group 3 if commercial). Master takes CAGC exam if not already certified (replaced MASC Jan 2026).'},
+    {when:'Week 7–8',what:'Insurance + truck + tools',detail:'Full insurance package. Used wrapped van. Tools complete. Inventory $5K starter.'},
+    {when:'Week 9–10',what:'Software + reviews',detail:'Housecall Pro or ServiceTitan. CallRail. NiceJob. Google Business Profile + first 10 reviews from network.'},
+    {when:'Week 11–12',what:'Network outreach + LSA',detail:'Personal visits to GCs, realtors, flippers. LSA + Google Verified application. First 20 leads via network referrals.'},
+    {when:'Week 13–14',what:'First 10 jobs',detail:'You + Master ride along. Build job-cost data. Begin maintenance plan attach (every customer asked at register).'},
+    {when:'Day 90',what:'Reality check',detail:'10+ jobs booked. 25+ reviews. 5+ maintenance plan members. Master comp working.'},
+  ],
+  risks:[
+    {title:'Master HVAC retention is existential',mitigation:'<strong>Equity + 90-day notice clauses + buyout formula in writing.</strong> Cross-qualify a 2nd master by Year 2 (redundancy is mandatory). Pay 10% above market, never 10% below.'},
+    {title:'Capital intensity (real)',mitigation:'<strong>Stay 1 truck for 6 months minimum.</strong> Don\'t hire your 2nd tech until 1st tech is 90% utilized. Don\'t hire CSR until you\'re missing 30%+ of calls.'},
+    {title:'Seasonal cash flow troughs',mitigation:'<strong>Maintenance plans are the ballast.</strong> Build 30%+ recurring base by Year 2. Shoulder-season marketing pushes (April + October).'},
+    {title:'Capacity ceiling vs marketing volume',mitigation:'<strong>Hire CSR before next ad channel. Hire dispatcher before next tech.</strong> Doubling leads without ops capacity destroys reviews and kills LSA rank.'},
+  ],
+  forum:[
+    {quote:'The HVAC industry doesn\'t reward the best technicians; it rewards the most visible ones... your marketing either puts you in that position or it doesn\'t.',source:'HVAC-Talk forum'},
+    {quote:'A 5% improvement in booking rate = ~$100K additional revenue for a 5–14 tech shop.',source:'ServiceTitan Data Report 2026'},
+    {quote:'Champions Group sold to Blackstone Feb 2026 at $2.5B / 18.5× EBITDA. Sets new ceiling for scaled HVAC platforms.',source:'Blackstone press + Home Pros News'}
+  ],
+  license:'<strong>SC requires Class M (unlimited) or M-1 (≤3 stories residential + light commercial) Mechanical license through SC LLR Contractor\'s Licensing Board.</strong><br><br><strong>QP requirement:</strong> Master HVAC with 2+ years experience in prior 5. CAGC master exam (replaced MASC Jan 1, 2026). Anyone certified by exam pre-2026 is grandfathered.<br><br><strong>EPA 608 Universal:</strong> Mandatory federally for refrigerant work. ~$200, 1–2 weeks of study.<br><br><strong>SC Financial Group requirement:</strong> Group 1 ($35K mechanical bid limit) is fine for residential service. Group 3+ ($200K bid limit) for new construction or commercial.<br><br><strong>Insurance:</strong> $1M/$2M GL (~$5–8K/yr), commercial auto ($2–4K per van), workers comp 4–8% of payroll, surety bond $10–25K typical.<br><br><strong>SC reciprocity:</strong> Trade exam waived for license earned in TN/NC/GA/AL/LA/MS/OH/TX/UT.'
+},
+
+roofing:{
+  key:'roofing',name:'Roofing',icon:'🏠',fit:'strong',
+  blurb:'SC storm corridor + hail belt = real demand. Marketing-led local beats storm chasers. Watch the AI risk (Rufus 5–10yr).',
+  tags:['Storm market','GC referrals','Insurance-paid','AI risk: Tier 4'],
+  subtitle:'SC is in the hurricane corridor (Helene + Debby 2024) and Greenville saw 42 ground-truth hail reports in trailing 12 months. Storm chasers from out of state saturate the market post-hurricane — but they leave. Marketing-led local operators with documented insurance work + GC/realtor referrals win the long game.',
+  quickStats:[{label:'Avg Re-Roof',value:'$20–25K'},{label:'Year 1 Revenue',value:'$400–800K'},{label:'Year 5 Exit',value:'$3–8M (4–9× EBITDA)'},{label:'AI Risk',value:'Tier 4 (Rufus)'}],
+  whyFit:'Roofing is the most marketing-driven trade in trades — fragmented (101K contractors nationally, top 3 &lt;4% share), insurance-paid (storm market), and dependent on D2D + LSA + SEO + reviews. Your GC network refers roofing constantly. Flippers always need roofs. Realtors care because home inspection reports flag aging roofs. Caveat: <strong>AI risk is real long-term</strong> — Renovate Robotics Rufus is shipping with Beacon partnership. 5-year: 5–15% of simple suburban tract installs robotic. 10-year: 20–40%. Don\'t build a 20-yr career as a residential asphalt-shingle installer. DO build one with commercial low-slope, restoration repair, storm response, or roof consulting.',
+  network:[
+    {role:'GCs (15+ relationships)',icon:'🔨',impact:'New construction + remodel sub work',action:'GCs need roofers on every new build, addition, and major remodel. Recurring sub relationships.'},
+    {role:'Real Estate Agents',icon:'🔑',impact:'Pre-listing inspection finds',action:'Aging roof flagged in inspection report → $20K replacement before closing. $300–500 spiff per booked job.'},
+    {role:'House Flippers',icon:'🏚️',impact:'Re-roof on every flip',action:'Most flips need re-roof or major repair. Repeat predictable work.'},
+    {role:'Insurance Adjusters',icon:'📋',impact:'Storm work pipeline',action:'Build relationships with State Farm, Allstate, Travelers, Liberty Mutual adjusters in your metro. Carrier panel placement = 80%+ close rate on inspected roofs.'},
+    {role:'Marketing Co (You)',icon:'📈',impact:'D2D + LSA + storm response stack',action:'Storm chasing tech stack: SalesRabbit + CompanyCam + Roofr/SumoQuote. Sub-60-second LSA response. 24-hr post-storm SMS to past customers.'},
+  ],
+  money:{
+    lean:{amount:'$15–35K',title:'Subcontract Crew Model',items:[
+      {item:'Used pickup truck',cost:'$10–18K'},
+      {item:'Basic tools (nail guns, ladders, fall protection)',cost:'$3–5K'},
+      {item:'GL insurance Year 1',cost:'$3–6K'},
+      {item:'AccuLynx or JobNimbus + CompanyCam',cost:'$2K/yr'},
+      {item:'Marketing launch',cost:'$5–10K'},
+    ],note:'Year 1 you BROKER jobs to crews — they do the install. You handle sales + permits + insurance docs.'},
+    serious:{amount:'$80–200K',title:'Direct Crew + Storm Operation',items:[
+      {item:'Multiple trucks + trailers',cost:'$40–60K'},
+      {item:'Crew tools + safety equipment',cost:'$15–25K'},
+      {item:'Crew lead + canvassers',cost:'$30–50K float'},
+      {item:'Insurance scaled (WC class 5551 = highest rate)',cost:'$20K+'},
+      {item:'EagleView measurements ($25–75/each)',cost:'$5K/yr'},
+      {item:'Marketing + D2D ramp',cost:'$50–80K'},
+    ],note:'WC class 5551 (roofing) is one of the most expensive — $15–25 per $100 payroll. Build into pricing.'}
+  },
+  income:[
+    {year:'Year 1',revenue:'$400–800K',take:'$50–100K to you',detail:'Subcontract crew model. Owner-operated sales. 20–40 jobs at $20K avg. Build storm-response playbook for first hurricane/hail event.'},
+    {year:'Year 3',revenue:'$2–4M',take:'$200–500K EBITDA (8–12%)',detail:'2–3 W-2 crews. Sales reps on commission. Storm + retail mix. Insurance carrier relationships.'},
+    {year:'Year 5',revenue:'$5–10M',take:'$500K–$1M EBITDA',detail:'Multi-crew + commercial mix. PE acquirers (Tecta, CentiMark, Peak Roofing Partners, Centerline) active. Exit at 6–9× EBITDA.'}
+  ],
+  master:{
+    title:'Crew Lead + Sales Manager (NOT a master license)',
+    profile:'SC residential roofing is exam-FREE Residential Specialty registration. NO master license. Your key hires are: (1) Crew lead with 5+ yrs install experience and (2) Sales manager who can run D2D canvass + close in-home appointments.',
+    sc_salary:'Crew lead $55–75K + production bonus. Top sales rep: 10/50/50 model = $70–130K solid, $200K+ top performers.',
+    where:'Crew lead: poach from established Charleston/Greenville roofers. Sales: poach from D2D solar / pest reps transitioning out of brutal canvassing. Trade events (IRE Feb each year).',
+    pitch:'"You\'re tired of installing 6 days a week and getting paid like a laborer. With me, you\'re crew lead with profit share + truck + benefits. Modern stack (Roofr, SumoQuote, CompanyCam). Real path to $80K+."'
+  },
+  marketing:[
+    {tactic:'D2D Canvass Stack',detail:'SalesRabbit ($30–50/user/mo) + CompanyCam ($30/user/mo) for documentation + Roofr/SumoQuote for proposals. Canvasser model: $500/job flat or 5–10% gross. Storm zones primary.'},
+    {tactic:'Storm Response Playbook',detail:'24hr post-storm SMS blast to customer DB + Facebook geo-targeted ads + canvass crew dispatched same day. CompanyCam every roof for insurance documentation.'},
+    {tactic:'Google LSA + Verified',detail:'CPL $30–75 baseline; storm season $150–210. Sub-60-second response. Apply for Google Verified badge.'},
+    {tactic:'GC + Realtor Referral Program',detail:'$300–500 spiff per booked job. Top 30 GCs and 30 realtors per metro.'},
+    {tactic:'Insurance Adjuster Relationships',detail:'Coffee meetings with adjusters at top carriers. Always document with EagleView + CompanyCam — adjusters love accurate scope.'},
+    {tactic:'Local SEO + Google Business Profile',detail:'15+ reviews/month cadence. Schema-marked location pages. "Roofing [city]" + "Storm damage repair [city]".'},
+  ],
+  roadmap:[
+    {when:'Week 1',what:'SC Residential Specialty registration',detail:'NO EXAM required for residential roofing in SC. $5K bond. 1 yr supervised experience documented (work under family/network member if needed).'},
+    {when:'Week 2',what:'LLC + insurance',detail:'$110 SC LLC. GL $1M/$2M (~$3–6K/yr). Commercial auto. Workers comp essential before any crew (class 5551 = $15–25 per $100 payroll).'},
+    {when:'Week 3–4',what:'Software + tools + equipment',detail:'AccuLynx/JobNimbus ($25–75/user/mo). CompanyCam. Roofr/SumoQuote. EagleView account. Used pickup + basic tools $15K.'},
+    {when:'Week 5–6',what:'Crew network',detail:'Identify 3–5 trusted subcontract crews. Background-check them. Get hold-harmless agreements. E-Verify compliance.'},
+    {when:'Week 7–8',what:'Network outreach',detail:'Personal visits to 20 GCs, 30 realtors, 10 flippers. Hand them spiff structure. Get them yard signs.'},
+    {when:'Week 9–10',what:'Marketing infrastructure',detail:'Google Business Profile + first 10 reviews. LSA + Verified application. Website. Storm-response SMS list.'},
+    {when:'Week 11–13',what:'First 5 jobs',detail:'Broker to subcontract crews. Document every job in CompanyCam. Build job-cost data.'},
+    {when:'Day 90 (or first storm event)',what:'Storm activation drill',detail:'When the next named storm/hail hits SC, you should have: SMS list, canvass crew list, supplier line of credit, and a 24-hr response capability.'},
+  ],
+  risks:[
+    {title:'AI substitute risk (Rufus, 5–10yr)',mitigation:'<strong>Position toward commercial low-slope + restoration repair + storm response.</strong> These stay human. Don\'t bet a 20-yr career on residential asphalt shingle installation.'},
+    {title:'1099 classification risk (federal + state)',mitigation:'<strong>Transition to W-2 crews by Year 2.</strong> CA AB-5, MA, NJ already crack down. SC will follow. PE-backed acquirers prefer W-2 ops at exit.'},
+    {title:'ICE enforcement on Hispanic immigrant labor',mitigation:'<strong>E-Verify Day 1.</strong> SC mandates E-Verify since 2012. Vet sub crews\' I-9 compliance. Hold-harmless contracts. Nov 2025 Charleston ICE operation is a real risk signal.'},
+    {title:'Storm chaser ethics perception',mitigation:'<strong>Position as local-led, insurance-documented, claims-advocacy roofing.</strong> Differentiate hard from out-of-state trucks. Carolina-licensed, locally-owned messaging.'},
+    {title:'WC class 5551 = highest WC rate of any trade',mitigation:'<strong>Build into pricing from Day 1.</strong> WC at $15–25 per $100 payroll = 15–25% labor cost premium. Don\'t under-bid.'},
+  ],
+  forum:[
+    {quote:'Yes you can make money as a storm chaser, you just have to understand how it works. Choose states with contractor licensing requirements [to avoid worst opportunists].',source:'RoofersCoffeeShop forum'},
+    {quote:'Renovate Robotics Rufus — Beacon (Fortune 500 distributor, 580+ branches) partnered/invested March 2025. PA/NJ launch. Modular plans for tear-off, cutting, solar bracket. Realest substitute automation threat in any trade.',source:'AI/Robotics Research, April 2026'},
+    {quote:'56 active PE-backed roofing platforms as of March 2025 (vs 17 two years prior). One platform acquired every 48 hours mid-2025.',source:'AXIA Advisors / Roofing Contractor'}
+  ],
+  license:'<strong>SC residential roofing = Residential Specialty Contractor registration through SC LLR Residential Builders Commission.</strong> NO trade exam required. $5,000 surety bond. 1 year supervised experience documented. Threshold: any work over $500.<br><br><strong>SC commercial roofing</strong> = GC-Building Roofing subclassification through CLB. Trade exam required.<br><br><strong>Insurance:</strong> $1M/$2M GL (~$3–6K/yr). WC class 5551 — one of highest in trades, $15–25 per $100 payroll. Commercial auto.<br><br><strong>EPA RRP cert</strong> required for any work on pre-1978 homes (lead-safe).'
+},
+
+garage:{
+  key:'garage',name:'Garage Floor Coating (Epoxy/Polyaspartic)',icon:'🚗',fit:'fair',
+  blurb:'Real opportunity but the "low competition" pitch is from the previous era. SC has 25+ active operators across the four metros.',
+  tags:['Low capital','High margin (60%+ metallic)','One-and-done (no recurring)','Network underutilized'],
+  subtitle:'Stress-tested honestly: garage floor coating is a real opportunity but NOT for the reasons you were told. Saturation IS happening in SC residential. Best fit if you commercial/industrial focus and you can stomach zero recurring revenue.',
+  quickStats:[{label:'Avg Job',value:'$1.5–5K'},{label:'Margin (metallic)',value:'60%+'},{label:'Year 1 Revenue',value:'$200–500K'},{label:'Year 5 Exit',value:'$2–4M (3–5× SDE)'}],
+  whyFit:'You were told this was the best play because saturation is low. <strong>That\'s no longer true in SC.</strong> Charleston has 7+ marketing-active operators. Greenville 5+. Statewide 25+. Wise Coatings, Floor Shield, GarageExperts, Garage Force franchises actively recruiting. Real fit for you: commercial/industrial focus (warehouses, dealerships, manufacturing). SC has Boeing/Volvo/BMW/port commercial inventory. Your GC network helps with commercial. NOT recurring revenue (one ticket per customer per decade). Best for a capital-light start ($50–100K) where you want to test entrepreneurship before committing $300K+ to a higher-margin trade.',
+  network:[
+    {role:'GCs (commercial)',icon:'🔨',impact:'Commercial floor jobs (high margin)',action:'Commercial garage floors / warehouse floors / restaurant kitchens. Higher ticket ($10K–$100K+), better margins (60%+ metallic), single decision maker.'},
+    {role:'House Flippers',icon:'🏚️',impact:'Pre-listing premium upgrade',action:'Coated garage = "premium upgrade" for flip resale. Occasional add-on, not core.'},
+    {role:'Real Estate Agents',icon:'🔑',impact:'Pre-listing finishing touch',action:'Garage coating before listing = "wow factor." Modest channel.'},
+    {role:'Marketing Co (You)',icon:'📈',impact:'Visual social media + Facebook + commercial outreach',action:'Visually compelling (Instagram/TikTok). $15–20/lead Facebook in residential. Direct B2B sales for commercial.'},
+  ],
+  money:{
+    lean:{amount:'$45–75K',title:'Lean Startup Year 1',items:[
+      {item:'Diamond grinder (15HP)',cost:'$15K'},
+      {item:'Shot blaster (used)',cost:'$5–8K'},
+      {item:'Sprayers + rollers + tools',cost:'$3K'},
+      {item:'Used trailer or work vehicle',cost:'$10–20K'},
+      {item:'Initial chemical/material inventory',cost:'$3–5K'},
+      {item:'Training (Floor Shield/Wise/etc 1-week)',cost:'$3–5K'},
+      {item:'Insurance + business setup',cost:'$3–5K'},
+      {item:'Marketing launch',cost:'$5–10K'},
+    ],note:'Production is teachable in 2–4 weeks. The moat is marketing + customer trust, not technique.'},
+    serious:{amount:'$120–250K',title:'Multi-Crew + Commercial',items:[
+      {item:'Box truck + 2nd grinder/blaster setup',cost:'$45–65K'},
+      {item:'Crew lead + helper float',cost:'$30K'},
+      {item:'Showroom/sample display',cost:'$10K'},
+      {item:'Marketing scaled',cost:'$25–60K'},
+      {item:'Commercial sales rep base',cost:'$30K float'},
+      {item:'Working capital',cost:'$20K'},
+    ],note:'Commercial sales unlock the bigger margins.'}
+  },
+  income:[
+    {year:'Year 1',revenue:'$200–500K',take:'$60–150K to you',detail:'Solo or 2-person crew. 80–200 residential jobs OR 5–15 commercial. You + helper. Build review base + Instagram.'},
+    {year:'Year 3',revenue:'$700K–$1.5M',take:'$120–300K SDE',detail:'2–3 crews. Commercial pipeline 30–50% of revenue. Showroom or by-appointment.'},
+    {year:'Year 5',revenue:'$1.5–3M',take:'$300–600K SDE',detail:'Multi-crew + dedicated commercial sales. Exit at 3–5× SDE = $1–3M. Smaller exit ceiling than foundation/restoration.'}
+  ],
+  master:{
+    title:'Crew Lead (NOT a license)',
+    profile:'No SC contractor license required for garage floor coating (residential under $500 specialty threshold; commercial may require GC depending on scope). No master cert. Your key hire is a crew lead with 2+ yrs prep + coating experience.',
+    sc_salary:'$50–65K base + commission on commercial jobs (3–5% of net) + production bonus',
+    where:'Trade events. Floor Shield/Wise/GarageExperts franchise crews (poach skilled crew leads). Indeed for "epoxy" or "polyaspartic" + Charleston/Greenville.',
+    pitch:'"At [franchise] you\'re working production quotas with no upside. With me, you\'re crew lead + commercial sales commission. We focus on $10K+ commercial jobs not $2K residential. Real path to $80K+."'
+  },
+  marketing:[
+    {tactic:'Instagram + TikTok Visual Content',detail:'Before/after timelapse videos go viral. Pour metallic = wow factor. Most operators post mediocre content. 20+ posts/month, daily stories. $0 if you do it; $1K/mo if you hire.'},
+    {tactic:'Facebook Lead Ads',detail:'$15–20/lead in residential SC. Photo carousel of finishes. Limited-time pricing offers.'},
+    {tactic:'Google Local SEO',detail:'"Garage floor coating [city]" — moderate competition in SC metros. Schema markup, location pages.'},
+    {tactic:'Commercial Direct B2B Sales',detail:'Cold outreach to dealerships, warehouses, manufacturers, fleet operators. Tap GC network for warm intros. Higher margins, longer sales cycles.'},
+    {tactic:'HOA Cluster Marketing',detail:'Residential cluster sales. Door hangers + neighborhood discount when 5 homes book. Density compounds.'},
+    {tactic:'Home Shows',detail:'Booth at Charleston/Greenville home and garden shows. Sample displays. $1.5–8K per show. 80–300 leads.'},
+  ],
+  roadmap:[
+    {when:'Week 1–2',what:'Training week',detail:'Floor Shield, Wise, or PennCoat 1-week training course. $3–5K. Hands-on production practice.'},
+    {when:'Week 3',what:'LLC + insurance',detail:'$110 SC LLC. GL ($2–4K/yr). Workers comp at hire 1.'},
+    {when:'Week 4–5',what:'Equipment purchase',detail:'15HP diamond grinder $15K. Shot blaster $5–8K used. Sprayers $1K. Material inventory $3–5K.'},
+    {when:'Week 6',what:'Truck + supplier accounts',detail:'Used trailer or box truck. Open accounts at coating manufacturer (Penntek, Floor Shield, Versatile, ArmorPoxy).'},
+    {when:'Week 7–8',what:'Sample displays + marketing assets',detail:'Build sample boards in 5+ finishes. Photograph everything in good light. Instagram + Google Business Profile.'},
+    {when:'Week 9–10',what:'Network outreach + first jobs',detail:'Visit 10 GCs (commercial focus). Family/friends discount on first 3 jobs for content + reviews.'},
+    {when:'Week 11–13',what:'First 5 paying jobs',detail:'Document every job in photo + video. Push social hard.'},
+    {when:'Day 90',what:'Reality check',detail:'5–10 booked jobs. 25+ Instagram posts of work. 15+ Google reviews. Considering hire if volume sustains.'},
+  ],
+  risks:[
+    {title:'No recurring revenue',mitigation:'<strong>Accept this trade-off going in.</strong> Every customer is one ticket. Compensate with high gross margin (40–60%) + low CAC ($60–120) + commercial volume.'},
+    {title:'Saturation in SC residential',mitigation:'<strong>Differentiate on commercial focus or premium tier.</strong> Don\'t race to the bottom on residential price. 1-day install + premium polyaspartic + warranty = positioning.'},
+    {title:'Callback hell from prep failures',mitigation:'<strong>Don\'t go cheap on prep.</strong> Industry data: 60–80% of total cost IS prep. Skipping moisture testing or grinding = callback nightmare.'},
+    {title:'Lower exit multiples (3–5× SDE)',mitigation:'<strong>Accept this. Plan to operate, not exit.</strong> Coating businesses don\'t command pest/HVAC multiples. Best treated as cash flow, not asset-build.'},
+  ],
+  forum:[
+    {quote:'I personally think there is too much emphasis put on web advertising. In my area there are a lot of people who do it, and I would surmise its a lot of people shopping on price when they call.',source:'Garage Journal — operator forum'},
+    {quote:'The market is very saturated and many people claim to be epoxy installers but don\'t do proper prep work and use wrong materials. However, money is good for a professional epoxy applicator.',source:'ContractorTalk operator forum'},
+    {quote:'Make sure you leave enough money in the job for a callback or two. Don\'t go cheap on materials or short on coats to save a customer a dollar. It will come back and bite you.',source:'ContractorTalk operator (CO Alliance Member)'},
+    {quote:'~45% of garage coating businesses fail in 5 years. Top failure mode: bad marketing OR thin prep that leads to callbacks.',source:'Floor Shield Coatings industry data'}
+  ],
+  license:'<strong>SC residential garage coating: NO contractor license required for jobs under $500.</strong> Realistic jobs are $1.5–5K so you\'ll cross that threshold — register as Residential Specialty Contractor through SC LLR (no exam, $5K bond if applicable).<br><br><strong>SC commercial work:</strong> May require GC license depending on scope. CLB threshold is $10,000 commercial.<br><br><strong>Training certifications</strong> (not legally required but customer-facing trust): Floor Shield Coatings certification, Penntek certification, Versatile Building Products dealer status.<br><br><strong>Insurance:</strong> $1M/$2M GL ($2–4K/yr), workers comp at first hire.<br><br><strong>Best fit franchise:</strong> Wise Coatings ($45K start, 25%+ margins claimed) — but franchise royalties = permanent 7–12% revenue tax. Independent build is preferred if you have marketing chops.'
+},
+};
+
+const STUDIO_ORDER = ['foundation','restoration','pest','hvac','roofing','garage'];
+
+function renderStudioPicker(){
+  const el=document.getElementById('industryPicker');
+  if(!el)return;
+  el.innerHTML=STUDIO_ORDER.map(k=>{
+    const i=STUDIO_INDUSTRIES[k];
+    const fitClass=i.fit;
+    const fitLabel={best:'Best Fit',strong:'Strong Fit',fair:'Fair Fit',weak:'Weak Fit'}[i.fit];
+    return `<div class="ind-pick" onclick="selectStudio('${i.key}')">
+      <div class="icon">${i.icon}</div>
+      <div class="name">${i.name}</div>
+      <span class="pickfit ${fitClass}">${fitLabel}</span>
+      <div class="blurb">${i.blurb}</div>
+      <div class="ind-tags">${i.tags.map(t=>`<span class="pill">${t}</span>`).join('')}</div>
+    </div>`;
+  }).join('');
+}
+
+function selectStudio(key){
+  const i=STUDIO_INDUSTRIES[key];
+  if(!i)return;
+  document.getElementById('studioPicker').style.display='none';
+  const detail=document.getElementById('studioDetail');
+  detail.innerHTML=`
+    <button class="back-btn" onclick="closeStudio()">← Back to all trades</button>
+    <div class="studio-detail active">
+      <div class="detail-hero">
+        <div class="icon-big">${i.icon}</div>
+        <h2>Starting ${i.name} in South Carolina</h2>
+        <div class="subtitle">${i.subtitle}</div>
+        <div class="quick-stats">
+          ${i.quickStats.map(qs=>`<div class="quick-stat"><div class="qs-label">${qs.label}</div><div class="qs-value">${qs.value}</div></div>`).join('')}
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h3><span class="num">1</span>Why This Fits YOU</h3>
+        <p style="font-size:14px;line-height:1.7">${i.whyFit}</p>
+      </div>
+
+      <div class="section-block">
+        <h3><span class="num">2</span>Your Network's Role — Each Contact Mapped to a Job</h3>
+        <div class="network-map">
+          ${i.network.map(n=>`<div class="net-node">
+            <div class="nn-icon">${n.icon}</div>
+            <div class="nn-role">${n.role}</div>
+            <div class="nn-impact">${n.impact}</div>
+            <div class="nn-action">${n.action}</div>
+          </div>`).join('')}
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h3><span class="num">3</span>Real Money to Start (Plain English)</h3>
+        <div class="money-grid">
+          <div class="money-card big">
+            <div class="mc-label">Lean Startup (Year 1)</div>
+            <div class="mc-amount">${i.money.lean.amount}</div>
+            <div class="mc-note">${i.money.lean.title}</div>
+          </div>
+          ${i.money.lean.items.map(it=>`<div class="money-card">
+            <div class="mc-label">${it.item}</div>
+            <div class="mc-amount" style="font-size:18px">${it.cost}</div>
+          </div>`).join('')}
+        </div>
+        <div class="alert info" style="margin-top:14px">${i.money.lean.note}</div>
+
+        <h4 style="margin-top:24px;margin-bottom:10px;color:var(--muted)">Year 2 — Direct Crew Model</h4>
+        <div class="money-grid">
+          <div class="money-card big" style="background:linear-gradient(135deg,rgba(96,165,250,0.08) 0%,var(--panel2) 100%);border-color:rgba(96,165,250,0.3)">
+            <div class="mc-label">Total to Scale</div>
+            <div class="mc-amount" style="color:var(--accent2)">${i.money.serious.amount}</div>
+            <div class="mc-note">${i.money.serious.title}</div>
+          </div>
+          ${i.money.serious.items.map(it=>`<div class="money-card">
+            <div class="mc-label">${it.item}</div>
+            <div class="mc-amount" style="font-size:18px">${it.cost}</div>
+          </div>`).join('')}
+        </div>
+        <div class="alert info" style="margin-top:14px">${i.money.serious.note}</div>
+      </div>
+
+      <div class="section-block">
+        <h3><span class="num">4</span>Income Reality (Honest Y1 / Y3 / Y5)</h3>
+        <div class="income-curve">
+          ${i.income.map(yr=>`<div class="income-step">
+            <div class="is-year">${yr.year}</div>
+            <div class="is-rev">${yr.revenue}</div>
+            <div class="is-take">${yr.take}</div>
+            <div class="is-detail">${yr.detail}</div>
+          </div>`).join('')}
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h3><span class="num">5</span>Your Master Hire — SC-Specific Salary &amp; Pitch</h3>
+        <div class="master-card">
+          <h4>${i.master.title}</h4>
+          <p style="font-size:13px;line-height:1.7"><strong>Profile:</strong> ${i.master.profile}</p>
+          <p style="font-size:13px;line-height:1.7;margin-top:12px"><strong>SC Comp Package:</strong> ${i.master.sc_salary}</p>
+          <p style="font-size:13px;line-height:1.7;margin-top:12px"><strong>Where to Find:</strong> ${i.master.where}</p>
+          <p style="font-size:13px;line-height:1.7;margin-top:12px"><strong>The Pitch:</strong> <em>${i.master.pitch}</em></p>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h3><span class="num">6</span>Marketing on Day 1 — Concrete Tactics</h3>
+        ${i.marketing.map((m,idx)=>`<div class="card" style="background:var(--panel2);margin-bottom:8px;padding:14px">
+          <h4 style="font-size:14px;color:var(--text);margin-bottom:6px">→ ${m.tactic}</h4>
+          <p style="font-size:13px;color:#c5ccd9;line-height:1.6;margin:0">${m.detail}</p>
+        </div>`).join('')}
+      </div>
+
+      <div class="section-block">
+        <h3><span class="num">7</span>90-Day Action Plan</h3>
+        <div class="timeline-modern">
+          ${i.roadmap.map(r=>`<div class="tm-step">
+            <div class="tm-when">${r.when}</div>
+            <div class="tm-what">${r.what}</div>
+            <div class="tm-detail">${r.detail}</div>
+          </div>`).join('')}
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h3><span class="num">8</span>Honest Risks &amp; How to Mitigate</h3>
+        <div class="risk-grid">
+          ${i.risks.map(r=>`<div class="risk-card">
+            <div class="rc-title">⚠ ${r.title}</div>
+            <div class="rc-mit">${r.mitigation}</div>
+          </div>`).join('')}
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h3><span class="num">9</span>Forum Reality — What Actual Operators Say</h3>
+        ${i.forum.map(f=>`<div class="quote-block">"${f.quote}"<span class="source">— ${f.source}</span></div>`).join('')}
+      </div>
+
+      <div class="section-block">
+        <h3><span class="num">10</span>SC License Path</h3>
+        <div style="font-size:14px;line-height:1.7">${i.license}</div>
+      </div>
+    </div>
+  `;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+window.selectStudio=selectStudio;
+
+function closeStudio(){
+  document.getElementById('studioPicker').style.display='block';
+  document.getElementById('studioDetail').innerHTML='';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+window.closeStudio=closeStudio;
+
 // ==================== COMPARE VIEW ====================
 let cmpSelected=new Set(['Foundation Repair','Water/Fire Restoration','Roofing']);
 
@@ -2085,6 +2817,7 @@ function init(){
   calc1();calc2();calc3();calc4();
   renderCmpSelector();
   renderCmpTable();
+  renderStudioPicker();
 }
 
 // Run init AFTER all variables (including let cmpSelected) have been initialized
