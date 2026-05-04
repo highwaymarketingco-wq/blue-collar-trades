@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Blue-Collar Diversification — Decision Tool</title>
+<style>
+:root{
+  --bg:#0b0d12; --panel:#12151c; --panel2:#171b24; --line:#222836; --line2:#2d3547;
+  --text:#e8ecf3; --muted:#8a93a6; --dim:#5b6577;
+  --accent:#34d399; --accent2:#60a5fa; --warn:#fbbf24; --danger:#f87171; --gold:#fcd34d;
+  --tier1:#34d399; --tier2:#60a5fa; --tier3:#a78bfa; --tier4:#fbbf24; --tier5:#f87171;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:var(--accent2);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1400px;margin:0 auto;padding:24px}
+.hero{padding:40px 24px 24px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#0f1219 0%,#0b0d12 100%)}
+.hero h1{font-size:32px;font-weight:800;letter-spacing:-0.02em;margin-bottom:8px}
+.hero .sub{color:var(--muted);font-size:15px;max-width:900px}
+.hero .tag{display:inline-block;font-size:11px;padding:3px 9px;border-radius:999px;background:rgba(52,211,153,0.15);color:var(--accent);font-weight:600;letter-spacing:0.03em;text-transform:uppercase;margin-bottom:12px}
+nav.tabs{display:flex;gap:2px;padding:0 24px;border-bottom:1px solid var(--line);background:var(--panel);position:sticky;top:0;z-index:50;overflow-x:auto;scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{background:none;border:none;color:var(--muted);padding:14px 18px;font-size:13px;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;font-family:inherit}
+nav.tabs button:hover{color:var(--text)}
+nav.tabs button.active{color:var(--accent);border-bottom-color:var(--accent)}
+section.tab{display:none;padding:24px}
+section.tab.active{display:block}
+h2{font-size:22px;font-weight:700;margin-bottom:8px;letter-spacing:-0.01em}
+h3{font-size:16px;font-weight:700;margin:20px 0 10px;color:var(--text)}
+h4{font-size:13px;font-weight:700;margin-bottom:8px;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em}
+p{color:#c5ccd9;margin-bottom:10px}
+.muted{color:var(--muted)}
+.dim{color:var(--dim)}
+.grid{display:grid;gap:16px}
+.grid-2{grid-template-columns:repeat(auto-fit,minmax(420px,1fr))}
+.grid-3{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.grid-4{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px}
+.card.accent{border-color:rgba(52,211,153,0.35)}
+.stat{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:12px}
+.stat .label{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;font-weight:600}
+.stat .value{font-size:18px;font-weight:700;color:var(--text)}
+.stat .sub{font-size:11px;color:var(--dim);margin-top:2px}
+.badge{display:inline-block;font-size:10px;padding:2px 7px;border-radius:6px;font-weight:700;letter-spacing:0.03em;text-transform:uppercase}
+.badge.tier1{background:rgba(52,211,153,0.15);color:var(--tier1)}
+.badge.tier2{background:rgba(96,165,250,0.15);color:var(--tier2)}
+.badge.tier3{background:rgba(167,139,250,0.15);color:var(--tier3)}
+.badge.tier4{background:rgba(251,191,36,0.15);color:var(--tier4)}
+.badge.tier5{background:rgba(248,113,113,0.15);color:var(--tier5)}
+.badge.low{background:rgba(52,211,153,0.12);color:var(--tier1)}
+.badge.med{background:rgba(251,191,36,0.12);color:var(--tier4)}
+.badge.high{background:rgba(248,113,113,0.12);color:var(--tier5)}
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;padding:14px;background:var(--panel);border:1px solid var(--line);border-radius:10px;align-items:center}
+.filters label{font-size:11px;color:var(--muted);margin-right:4px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em}
+.filters select,.filters input{background:var(--panel2);border:1px solid var(--line2);color:var(--text);padding:7px 10px;border-radius:6px;font-size:13px;font-family:inherit}
+.filters input[type=search]{min-width:200px}
+.filters button{background:var(--panel2);border:1px solid var(--line2);color:var(--text);padding:7px 12px;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit;font-weight:600}
+.filters button:hover{border-color:var(--accent)}
+.filters button.active{background:rgba(52,211,153,0.15);border-color:var(--accent);color:var(--accent)}
+.industry-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.industry{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;cursor:pointer;transition:transform .12s,border-color .12s;position:relative;overflow:hidden}
+.industry:hover{border-color:var(--accent);transform:translateY(-2px)}
+.industry .ind-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px;gap:8px}
+.industry .ind-name{font-size:15px;font-weight:700;letter-spacing:-0.01em}
+.industry .fit-score{font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;white-space:nowrap}
+.fit-95{background:rgba(52,211,153,0.2);color:var(--tier1)}
+.fit-85{background:rgba(52,211,153,0.15);color:var(--tier1)}
+.fit-75{background:rgba(96,165,250,0.15);color:var(--tier2)}
+.fit-65{background:rgba(167,139,250,0.15);color:var(--tier3)}
+.fit-50{background:rgba(251,191,36,0.15);color:var(--tier4)}
+.fit-35{background:rgba(248,113,113,0.15);color:var(--tier5)}
+.industry .tagline{font-size:12px;color:var(--muted);margin-bottom:12px;min-height:32px}
+.industry .mini-stats{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
+.industry .mini-stat{font-size:11px}
+.industry .mini-stat .k{color:var(--dim);text-transform:uppercase;letter-spacing:0.04em;font-weight:600;font-size:10px}
+.industry .mini-stat .v{color:var(--text);font-weight:600;margin-top:1px}
+.industry .pills{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.pill{font-size:9px;padding:2px 6px;border-radius:4px;background:var(--line);color:var(--muted);font-weight:600;letter-spacing:0.03em;text-transform:uppercase}
+.pill.good{background:rgba(52,211,153,0.12);color:var(--tier1)}
+.pill.warn{background:rgba(251,191,36,0.12);color:var(--tier4)}
+.pill.bad{background:rgba(248,113,113,0.12);color:var(--tier5)}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);display:none;z-index:200;overflow-y:auto;padding:40px 20px}
+.modal-bg.open{display:block}
+.modal{max-width:1000px;margin:0 auto;background:var(--panel);border:1px solid var(--line2);border-radius:12px;padding:28px;position:relative}
+.modal .close{position:absolute;top:12px;right:12px;background:var(--panel2);border:1px solid var(--line2);color:var(--muted);width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:18px}
+.modal .close:hover{color:var(--text)}
+.modal h2{font-size:26px;margin-bottom:4px}
+.modal .tagline{color:var(--muted);margin-bottom:20px;font-size:14px}
+.modal .section{margin:24px 0;padding-top:16px;border-top:1px solid var(--line)}
+.modal .section:first-of-type{border-top:none;padding-top:0}
+.kv{display:grid;grid-template-columns:180px 1fr;gap:8px 16px;margin:8px 0}
+.kv .k{color:var(--muted);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em}
+.kv .v{color:var(--text);font-size:13px}
+.bullets{list-style:none;padding-left:0}
+.bullets li{padding:6px 0 6px 20px;position:relative;color:#c5ccd9;font-size:13px}
+.bullets li:before{content:"→";position:absolute;left:0;color:var(--accent);font-weight:700}
+.bullets.warn li:before{content:"!";color:var(--warn)}
+.bullets.bad li:before{content:"×";color:var(--danger)}
+.tab-switcher{display:flex;gap:4px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:3px;margin-bottom:16px;width:fit-content}
+.tab-switcher button{background:none;border:none;color:var(--muted);padding:7px 14px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit}
+.tab-switcher button.active{background:var(--panel);color:var(--text)}
+.calc{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px;margin-bottom:16px}
+.calc h3{margin-top:0}
+.calc .inputs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:16px}
+.calc label{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:4px;font-weight:600}
+.calc input[type=number],.calc input[type=range],.calc select{width:100%;background:var(--panel2);border:1px solid var(--line2);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;font-family:inherit}
+.calc .range-val{font-size:16px;font-weight:700;color:var(--accent);margin-left:8px}
+.calc .output{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:16px;margin-top:12px}
+.calc .output .big{font-size:32px;font-weight:800;color:var(--accent);margin-bottom:4px;letter-spacing:-0.02em}
+.calc .output .small{color:var(--muted);font-size:12px}
+table{width:100%;border-collapse:collapse;font-size:12px;margin:8px 0}
+table th{text-align:left;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:0.04em;padding:8px 10px;border-bottom:1px solid var(--line2);font-weight:700}
+table td{padding:8px 10px;border-bottom:1px solid var(--line);color:#c5ccd9}
+table tr:hover td{background:var(--panel2)}
+.timeline{position:relative;padding-left:24px;margin:12px 0}
+.timeline:before{content:"";position:absolute;left:6px;top:4px;bottom:4px;width:2px;background:var(--line2)}
+.timeline .phase{position:relative;margin-bottom:18px}
+.timeline .phase:before{content:"";position:absolute;left:-22px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.timeline .phase .when{font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px}
+.timeline .phase .what{font-size:14px;font-weight:600;margin-bottom:4px}
+.timeline .phase .detail{font-size:12px;color:var(--muted)}
+.alert{padding:14px 16px;border-radius:8px;margin:12px 0;font-size:13px;border-left:3px solid}
+.alert.info{background:rgba(96,165,250,0.08);border-color:var(--accent2);color:#c5d4ea}
+.alert.warn{background:rgba(251,191,36,0.08);border-color:var(--warn);color:#e8d99a}
+.alert.danger{background:rgba(248,113,113,0.08);border-color:var(--danger);color:#e9b7b7}
+.alert.success{background:rgba(52,211,153,0.08);border-color:var(--accent);color:#b7e9d3}
+.presetBtn{background:var(--panel2);border:1px solid var(--line2);color:var(--text);padding:7px 12px;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit;font-weight:600;margin:4px 4px 0 0}
+.presetBtn:hover{border-color:var(--accent);color:var(--accent)}
+#cmpTable table{font-size:12px}
+#cmpTable th,#cmpTable td{padding:10px 12px;vertical-align:top;border-bottom:1px solid var(--line)}
+#cmpTable tr:hover td{background:transparent}
+@media (max-width:768px){
+  .hero h1{font-size:24px}
+  .kv{grid-template-columns:1fr}
+  .industry-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="tag">Decision Tool · April 2026</span>
+  <h1>Blue-Collar Diversification Playbook</h1>
+  <p class="sub">A marketing company's deep-research comparison of 24 trades — market size, economics, licensing, PE activity, AI/robotics risk, and the startup-vs-acquire path. Built to answer the question: <em>which trade converts our marketing edge into the biggest enterprise value?</em></p>
+</div>
+
+<nav class="tabs" id="nav">
+  <button data-tab="overview" class="active">Overview</button>
+  <button data-tab="industries">Industries (24)</button>
+  <button data-tab="compare">Compare Side-by-Side</button>
+  <button data-tab="path">Your Path (SC/NC)</button>
+  <button data-tab="startbuy">Start vs Acquire</button>
+  <button data-tab="calc">Calculators</button>
+  <button data-tab="plan">Action Plan</button>
+  <button data-tab="risks">Risks &amp; Pitfalls</button>
+  <button data-tab="resources">Resources</button>
+</nav>
+
+<section class="tab active" id="overview">
+  <div class="grid grid-4" style="margin-bottom:20px">
+    <div class="stat"><div class="label">Industries Analyzed</div><div class="value">24</div><div class="sub">Residential &amp; light commercial</div></div>
+    <div class="stat"><div class="label">PE Deals in Home Svcs</div><div class="value">+88% YoY</div><div class="sub">Add-on activity mid-2025</div></div>
+    <div class="stat"><div class="label">SBA 7(a) Max</div><div class="value">$5.0M</div><div class="sub">10% down · ~9.25–9.75%</div></div>
+    <div class="stat"><div class="label">Ceiling Exit Multiple</div><div class="value">18.5× EBITDA</div><div class="sub">Blackstone/Champions Feb '26</div></div>
+  </div>
+
+  <div class="card accent" style="margin-bottom:20px">
+    <h3 style="margin-top:0">The Thesis in One Paragraph</h3>
+    <p>Home service trades are the single largest under-marketed industry in America. 80%+ of operators are technical founders who are bad at Google LSA, review velocity, CSR booking scripts, landing-page conversion, and database reactivation — every lever your firm already pulls daily. PE has spent 2022–2026 rolling these trades up at 8–18× EBITDA, buying $500K–$2M EBITDA shops at 5–7× and flipping platforms at double. <strong>Your edge isn't being a tradesperson — it's being the operator who closes the marketing gap.</strong> The math works because a target doing $3M revenue / $450K EBITDA can realistically become $4M / $750K in 18–24 months with no new trucks, just better booking rates + LSA optimization + membership attach. That's ~$1.5M of enterprise value created on a single lever you already know how to pull.</p>
+  </div>
+
+  <h3>Top 7 Picks for a Marketing-Led Operator</h3>
+  <div class="grid grid-2" id="topPicks"></div>
+
+  <h3 style="margin-top:24px">Key Strategic Takeaways</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <h4>Recurring Revenue = Multiple Expansion</h4>
+      <p>A shop with 30%+ recurring (maintenance plans, subscription cleaning, pest routes) trades at a <strong>full 1× EBITDA turn premium</strong>. Pest control at 70–85% recurring routinely exits at 14–18×. Build this in from day one.</p>
+    </div>
+    <div class="card">
+      <h4>The QI / Qualifying Agent Workaround</h4>
+      <p>FL, TX, CA, GA, NC, TN, AZ all permit a licensed "master" (Qualifying Individual) to hold the state contractor license while a non-trade owner runs the business. Pay $120K–$220K + phantom equity. <strong>This removes licensing as a blocker for any trade here.</strong></p>
+    </div>
+    <div class="card">
+      <h4>The PE Platform Ceiling Is Still Rising</h4>
+      <p>Champions Group sold to Blackstone at <strong>18.5× EBITDA ($2.5B)</strong> in Feb 2026. Sila to Goldman at 17–20×. The exit window for sub-scale platforms is wide open — buy at 5–7×, sell at 10×+ with a 3–5 year hold.</p>
+    </div>
+    <div class="card">
+      <h4>The $200K–$600K SDE Sweet Spot</h4>
+      <p>PE can't efficiently buy shops under ~$500K EBITDA (integration cost is too high). This is your acquisition target range: small enough to be under-marketed and owner-retiring, big enough to compound into a platform.</p>
+    </div>
+    <div class="card">
+      <h4>AI/Robotics Threat Is Near-Zero (Mostly)</h4>
+      <p>Physical work in variable environments, regulatory capture (EPA 608, state licensing), and in-home trust conversations stay safe for 15–20+ years. The only real watch-list: autonomous mowers in commercial landscaping (Scythe, Husqvarna, Honda shipping 2026–2028) and rooftop shingle robots (Rufus).</p>
+    </div>
+    <div class="card">
+      <h4>Capacity Ceiling &gt; Marketing Ceiling</h4>
+      <p>The #1 way marketers destroy trade businesses: doubling ad spend before CSR/dispatch/install capacity catches up. Hire the CSR <em>before</em> you hire the next tech. Install capacity is the governor on marketing volume.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:24px">Tier Framework</h3>
+  <div class="grid grid-3">
+    <div class="card"><div class="badge tier1" style="margin-bottom:8px">Tier 1 · Attack</div><p class="muted" style="font-size:12px">Perfect alignment with marketing edge + PE exit demand + recurring upside. HVAC, Plumbing, Electrical, Pest, Restoration, Roofing, Foundation.</p></div>
+    <div class="card"><div class="badge tier2" style="margin-bottom:8px">Tier 2 · Strong</div><p class="muted" style="font-size:12px">Solid economics and marketing-driven. Windows, Garage Door, Pool, Porta Potty, Dumpster, Gutters, Septic.</p></div>
+    <div class="card"><div class="badge tier3" style="margin-bottom:8px">Tier 3 · Specialty</div><p class="muted" style="font-size:12px">Good businesses, narrower exits or operational drag. Tree, Siding, Painting, Junk Removal, Landscaping.</p></div>
+    <div class="card"><div class="badge tier4" style="margin-bottom:8px">Tier 4 · Cautious</div><p class="muted" style="font-size:12px">Meaningful risk or structural drag. Fencing, Concrete/Epoxy, Pressure Washing, Mold (bolt-on only).</p></div>
+    <div class="card"><div class="badge tier5" style="margin-bottom:8px">Tier 5 · Avoid (for now)</div><p class="muted" style="font-size:12px">Solar — policy risk (ITC expired Jan 2026) + volatile labor. Distressed acquisition only, not greenfield.</p></div>
+  </div>
+</section>
+
+<section class="tab" id="industries">
+  <div class="filters">
+    <label>Tier</label>
+    <select id="fTier"><option value="">All</option><option value="1">Tier 1</option><option value="2">Tier 2</option><option value="3">Tier 3</option><option value="4">Tier 4</option><option value="5">Tier 5</option></select>
+    <label>Recurring Rev</label>
+    <select id="fRecurring"><option value="">Any</option><option value="high">High (40%+)</option><option value="med">Medium (15–40%)</option><option value="low">Low (&lt;15%)</option></select>
+    <label>Startup Capital</label>
+    <select id="fCapital"><option value="">Any</option><option value="low">&lt;$50K</option><option value="med">$50–250K</option><option value="high">$250K+</option></select>
+    <label>AI Threat</label>
+    <select id="fAI"><option value="">Any</option><option value="verylow">Very Low</option><option value="low">Low</option><option value="med">Moderate</option></select>
+    <label>Sort</label>
+    <select id="fSort"><option value="fit">Marketer Fit</option><option value="market">Market Size</option><option value="ticket">Avg Ticket</option><option value="multiple">Exit Multiple</option><option value="startup">Startup Cost ↑</option></select>
+    <input type="search" id="fSearch" placeholder="Search industry...">
+    <button id="fReset">Reset</button>
+  </div>
+  <div class="industry-grid" id="industryGrid"></div>
+</section>
+
+<section class="tab" id="compare">
+  <h2>Side-by-Side Industry Comparison</h2>
+  <p class="muted" style="margin-bottom:16px">Select 2–5 industries to compare head-to-head across every metric that matters for your decision. Designed for fast filtering — check, compare, decide.</p>
+  <div class="card" style="margin-bottom:16px">
+    <h4 style="margin-bottom:10px">Select Industries to Compare</h4>
+    <div id="cmpSelector" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+    <div style="margin-top:12px">
+      <button onclick="cmpPreset('topfit')" class="presetBtn">Top 5 Marketer Fit</button>
+      <button onclick="cmpPreset('recurring')" class="presetBtn">Recurring Revenue Leaders</button>
+      <button onclick="cmpPreset('foundation')" class="presetBtn">Foundation vs Restoration vs Roofing</button>
+      <button onclick="cmpPreset('low-cap')" class="presetBtn">Low Capital ($0–$50K)</button>
+      <button onclick="cmpPreset('mechanical')" class="presetBtn">HVAC vs Plumbing vs Electrical</button>
+      <button onclick="cmpPreset('clear')" class="presetBtn">Clear</button>
+    </div>
+  </div>
+  <div id="cmpTable"></div>
+</section>
+
+<section class="tab" id="path">
+  <h2>Your Path — SC Operator, No Trade Experience, Marketing + GC Network</h2>
+  <p class="muted" style="margin-bottom:16px">The honest playbook for how someone in your position actually builds a trade platform: who to hire first, how to structure the relationship, how to pitch them, and the SC/NC licensing reality.</p>
+
+  <div class="card accent" style="margin-bottom:20px">
+    <h3 style="margin-top:0">The Core Insight</h3>
+    <p>You are not going to personally become a master plumber in 6 years. You are also not going to run a $5M trade business on pure marketing without field fluency. The middle path is <strong>recruit a licensed master as your co-founder / equity partner / QI, then spend 18 months in the field learning the craft while your marketing edge fills the calendar.</strong> That is how every PE-backed home-service platform was built. Apex, Wrench, Champions, Groundworks all operate on this exact model — a financial/ops partner plus a technical partner plus a marketing engine. You have two of the three; you need to recruit the third.</p>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">Step 1 · The "Master-Hire" Framework</h3>
+    <p>The single most important hire of the next 5 years of your life. Get this wrong and the business shutters. Get it right and you have a 10–15 year partner.</p>
+
+    <h4 style="margin-top:16px">Who you're looking for (the ideal candidate profile)</h4>
+    <ul class="bullets">
+      <li><strong>Age 38–55.</strong> Old enough to have 15–25 yrs in the trade, young enough to want a 10-yr run at building equity. Someone 60+ is planning retirement, not a leap.</li>
+      <li><strong>Currently a field lead / service manager / senior tech</strong> at an established shop. Not an owner (they don't want to give up control). Not a 25-year-old (not enough seasoning).</li>
+      <li><strong>Holds the state license or has the experience hours to qualify</strong> (master plumber, master HVAC, master electrician, engineer for foundation).</li>
+      <li><strong>Has expressed frustration with current employer</strong> — bad owner, stagnant pay, no growth path. Listen for this in conversations with your GC/flipper network; they know who's restless.</li>
+      <li><strong>Has a good reputation with customers but no business training.</strong> They want to be the owner but don't know how to sell, market, or build systems.</li>
+      <li><strong>Not a drinker, no visible legal/ethical red flags, stable family situation.</strong> You're about to lock 10 years of your professional life to this person.</li>
+    </ul>
+
+    <h4 style="margin-top:16px">Where you find them</h4>
+    <ol class="bullets">
+      <li><strong>Your GC/flipper network — the highest-yield channel.</strong> Ask every GC relationship "who's the best master plumber / HVAC tech / foundation crew lead you've worked with? Are they happy where they are?" Most of your hires will come from this.</li>
+      <li><strong>Trade supply houses.</strong> Ferguson, Supply House, HD Supply counter guys know every master in town and who's job-hopping. Tip them $100 for a warm intro.</li>
+      <li><strong>Union halls</strong> (for plumbing/electrical in SC metros, less relevant). Business agents know everyone.</li>
+      <li><strong>IICRC roster</strong> for restoration techs.</li>
+      <li><strong>Indeed/ZipRecruiter/Facebook groups</strong> as a last resort. Better candidates come warm.</li>
+      <li><strong>LinkedIn Sales Navigator search</strong> for "Service Manager" + "Master" + trade + city. Cold outreach is tough but can work.</li>
+    </ol>
+
+    <h4 style="margin-top:16px">The "Leap of Faith" Pitch — how you actually recruit them</h4>
+    <div class="alert info">
+      The conversation is not "come be my employee." It's "let's be partners." Here's the structure that works:
+    </div>
+    <div class="card" style="background:var(--panel2);margin-top:12px">
+      <p><strong>Meeting 1 (45 minutes · coffee):</strong> Tell your story. Marketing company, GC/flipper/agent network, capital ready to deploy. Ask about their career — frustrations, ambitions. Don't pitch. Listen.</p>
+      <p style="margin-top:10px"><strong>Meeting 2 (90 minutes · their choice of location):</strong> Show them the plan. You bring: demand model (referrals + paid), financial projections, your marketing stack, your network list with names. Tell them: "I can drive 120 qualified leads in year 1. I need a partner who can execute the work and own the trade side. I can't do this without that person."</p>
+      <p style="margin-top:10px"><strong>Meeting 3 (2 hours · with your attorney):</strong> Present the structure. This is where the leap of faith happens. They're trading a stable $95K+ job for a 3-year climb to $200K+ and equity. You make the risk real by putting YOUR risk on the table first — you'll personally guarantee the SBA loan, you've already spent X on marketing/legal, you have Y committed to payroll, show them the runway.</p>
+    </div>
+
+    <h4 style="margin-top:16px">Compensation structures (pick one — don't freelance this)</h4>
+    <table>
+      <thead><tr><th>Structure</th><th>Their Year-1 Comp</th><th>Equity</th><th>Best For</th><th>Tradeoff</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Senior Employee + Phantom Equity</strong></td><td>$110–140K + 10% of net profit</td><td>Phantom (cash bonus on sale)</td><td>You're cautious, want full control</td><td>Weakest alignment; they can leave with no skin lost</td></tr>
+        <tr><td><strong>Profit Interest (LLC)</strong></td><td>$100–130K + 15–25% profit interest</td><td>Non-voting, vesting over 4–5 yrs</td><td>Middle ground — most common</td><td>Dilution but no voting rights given</td></tr>
+        <tr><td><strong>Minority Equity Partner</strong></td><td>$90–120K + 15–30% of equity</td><td>Voting or non-voting · vesting</td><td>Strongest alignment</td><td>Gave up material ownership; careful about control</td></tr>
+        <tr><td><strong>50/50 Co-Founder</strong></td><td>$80–100K + 50% of equity</td><td>Full partner</td><td>You genuinely want a co-founder</td><td>Lose control; have to agree on everything</td></tr>
+      </tbody>
+    </table>
+    <div class="alert warn" style="margin-top:10px"><strong>Most common successful structure for your situation:</strong> $105–130K base + $20–40K performance bonus + 15–20% profit interest vesting over 4 years + path to 25% equity after $2M revenue milestone. Put a buyout formula in writing (3–4× trailing earnings on their shares). Have a trades-experienced business attorney draft it — not a generalist.</div>
+
+    <h4 style="margin-top:16px">The QI agreement clauses that matter</h4>
+    <ul class="bullets">
+      <li><strong>License-tied non-compete:</strong> If they leave and take their license to a competitor within 50 miles for 3 years, they owe liquidated damages ($150K+).</li>
+      <li><strong>90-day minimum notice for QI status withdrawal.</strong> Gives you time to find a replacement before the license invalidates.</li>
+      <li><strong>Right to cross-qualify a second master</strong> without their approval. Redundancy is mandatory.</li>
+      <li><strong>Equity buyout formula locked in writing.</strong> Prevents future negotiation when emotions are hot.</li>
+      <li><strong>Vesting with accelerators.</strong> 4-year vest, 1-year cliff, double-trigger acceleration on sale.</li>
+      <li><strong>Role clarity.</strong> Written job description — they run field ops, you run sales/marketing/finance. Avoid overlap.</li>
+    </ul>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3 style="margin-top:0">Step 2 · South Carolina Licensing Reality</h3>
+    <p>SC is one of the <strong>friendlier states</strong> for the QI/qualifier model — less aggressive on passive-QP enforcement than FL/CA, but still requires the QP be "actively engaged" in the business. Here's the specific framework by trade:</p>
+
+    <h4 style="margin-top:14px">SC Contractor Licensing Board (under SC LLR)</h4>
+    <div class="kv">
+      <div class="k">Threshold for requiring license</div><div class="v">General Contractor / Mechanical: over $5,000 per project · Residential Specialty: over $200</div>
+      <div class="k">Qualifying Party rule</div><div class="v">Must be owner, officer, director, or bona fide employee · actively engaged in business · one QP per license classification per entity</div>
+      <div class="k">Enforcement posture</div><div class="v">Moderate — audits happen but less aggressive than FL. Still: document QP's operational involvement (payroll, meetings, job-site visits)</div>
+      <div class="k">Reciprocity</div><div class="v">Limited reciprocity with NC, GA, TN for some licenses — check state-by-state</div>
+    </div>
+
+    <h4 style="margin-top:16px">SC licensing by trade (what you actually need)</h4>
+    <table>
+      <thead><tr><th>Trade</th><th>SC License Needed</th><th>QP Experience Required</th><th>Your Practical Path</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Foundation Repair</strong></td><td>Residential Specialty Contractor (res only) OR Residential Builder OR General Contractor (larger scope)</td><td>2+ yrs experience · SC Business Mgmt + trade exam</td><td><strong>Easiest SC licensing path of major trades.</strong> Your family-network GC likely already holds one. Engineer stamps structural designs separately.</td></tr>
+        <tr><td><strong>Water Mitigation (restoration)</strong></td><td><strong>NO SC contractor license required for mitigation-only</strong> (drying, demolition, cleanup)</td><td>IICRC certifications (WRT/ASD/FSRT/AMRT) — 2–4 wks</td><td>Start here — lowest SC licensing friction. Get 2 techs IICRC-certified quickly. Add Residential Builder / GC license for reconstruction work later.</td></tr>
+        <tr><td><strong>Water Damage Reconstruction</strong></td><td>Residential Builder or General Contractor</td><td>Same as foundation</td><td>Same GC structure as foundation</td></tr>
+        <tr><td><strong>Plumbing</strong></td><td>SC Mechanical Contractor — Plumbing classification</td><td>QP must be Licensed Master Plumber · 5+ yrs journeyman experience</td><td>Hire master plumber as QP. Hardest QP to recruit, highest comp ($130–180K + equity in SC markets).</td></tr>
+        <tr><td><strong>HVAC</strong></td><td>SC Mechanical Contractor — Heating &amp; Air Conditioning sub-classification</td><td>QP must be Licensed Master HVAC · 2+ yrs experience</td><td>Easier than plumbing. Master HVAC more plentiful. $115–150K + equity.</td></tr>
+        <tr><td><strong>Electrical</strong></td><td>SC Residential Specialty (residential only) OR Electrical Contractor (commercial/higher voltage)</td><td>Master Electrician required for full license</td><td>Harder to find master electrician in SC. $130–170K + equity.</td></tr>
+        <tr><td><strong>Roofing</strong></td><td>Residential Specialty Contractor (residential roofing sub-class) OR GC</td><td>Modest; 2+ yrs experience + exam</td><td>Easy. GC license covers it. Storm/insurance work is SC coastal market dynamic.</td></tr>
+        <tr><td><strong>Pest Control</strong></td><td>Licensed through SC Dept of Pesticide Regulation (NOT LLR) — Commercial Applicator Categories</td><td>Applicator license: 2–4 wks training + exam · ~$100 fee</td><td>YOU can take this yourself in a month. No QP gymnastics needed.</td></tr>
+      </tbody>
+    </table>
+
+    <h4 style="margin-top:16px">Is "license rental" legal in SC?</h4>
+    <div class="alert info">
+      <strong>Not officially — but the QP model (which is the legal version of the same concept) is fully legal and standard.</strong> The distinction is bona-fide employment + operational involvement.
+    </div>
+    <p style="margin-top:10px">SC Title 40, Chapter 11 requires the Qualifying Party to be "actively engaged in the daily operations" of the business. Pure pay-for-signature "license rental" (where the QP has no operational role) violates this. SC LLR has investigation authority but enforcement actions are less aggressive than FL — typically triggered by customer complaints, failed inspections, or competitor tips.</p>
+    <p><strong>What passes muster in SC:</strong></p>
+    <ul class="bullets">
+      <li>QP is on W-2 payroll at the business</li>
+      <li>QP attends weekly ops meetings (documented)</li>
+      <li>QP visits job sites regularly and signs off on quality (logged)</li>
+      <li>QP is listed as contact on permits pulled under the license</li>
+      <li>QP has real authority over trade-side operations</li>
+      <li>QP has equity or phantom equity (shows long-term commitment)</li>
+    </ul>
+    <p><strong>What raises red flags in SC:</strong></p>
+    <ul class="bullets bad">
+      <li>QP is also qualifying 2+ other companies (one per classification rule)</li>
+      <li>QP doesn't live in SC (geographic presence matters)</li>
+      <li>QP has no documented job-site visits, no meeting attendance</li>
+      <li>QP's "compensation" is suspiciously low (&lt;$30K for a master) — suggests passive arrangement</li>
+      <li>Customer complaint mentions the QP is a ghost</li>
+    </ul>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3 style="margin-top:0">Step 3 · North Carolina Licensing Summary (secondary market)</h3>
+    <p>NC is <strong>stricter than SC on licensing but still permits the Qualifier model.</strong> Key differences:</p>
+    <table>
+      <thead><tr><th>Area</th><th>NC Detail</th></tr></thead>
+      <tbody>
+        <tr><td><strong>General Contracting</strong></td><td>NC Licensing Board for General Contractors · Limited/Intermediate/Unlimited by project size · Qualifier required · $30K exam + experience</td></tr>
+        <tr><td><strong>Residential Building</strong></td><td>NC separate Residential Contractor path · lower exam threshold</td></tr>
+        <tr><td><strong>Plumbing</strong></td><td>NC State Board of Examiners of Plumbing · Separate HVAC, plumbing, and fire sprinkler boards · QP must be licensed</td></tr>
+        <tr><td><strong>Electrical</strong></td><td>NC State Board of Examiners of Electrical Contractors · Very rigorous exam · Master electrician required as QP</td></tr>
+        <tr><td><strong>Foundation Repair</strong></td><td>Typically covered under General Contractor (or Residential Contractor for residential-only) · Engineer-stamped plans required for structural work</td></tr>
+        <tr><td><strong>Restoration (mitigation)</strong></td><td>No NC contractor license required for mitigation · IICRC certs standard · GC license for reconstruction</td></tr>
+        <tr><td><strong>Reciprocity with SC</strong></td><td>Limited — some classifications reciprocate, most require separate NC exam</td></tr>
+      </tbody>
+    </table>
+    <div class="alert warn" style="margin-top:10px">
+      <strong>Practical recommendation:</strong> Start SC-only for year 1–2. Expand into NC (Charlotte, Raleigh-Durham, Wilmington) after you have a playbook. NC's strictness means you either need your QP to hold NC licensure too, or you hire a second NC-licensed QP for the NC entity. Both add cost — only worth it once your SC operation is producing $2M+ revenue.
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3 style="margin-top:0">Step 4 · Your Fulfillment Model — Subcontractor vs W-2 Crew</h3>
+    <p>Most important operational decision of Year 1. Here's the honest comparison for someone without trade experience:</p>
+
+    <div class="grid grid-2" style="margin-top:14px">
+      <div class="card" style="background:var(--panel2)">
+        <h4>Model A · Subcontract Fulfillment (Year 1 Recommended)</h4>
+        <p><strong>How it works:</strong> You generate leads through your marketing + GC/agent/flipper network. Your QP/master vets the job and prices it. You subcontract the actual labor to a trusted crew (1099 contractor relationship) at 55–70% of the job revenue. You capture the margin on the gap + any engineer/permit work.</p>
+        <h4 style="margin-top:12px">Pros</h4>
+        <ul class="bullets">
+          <li>$50K–$100K total startup capital (no trucks, no payroll float, no equipment)</li>
+          <li>Pay only when job closes — no idle labor cost</li>
+          <li>Test demand before committing to fixed costs</li>
+          <li>Easy to scale up/down with volume</li>
+          <li>Crew takes their own liability on labor</li>
+        </ul>
+        <h4>Cons</h4>
+        <ul class="bullets bad">
+          <li>No control over quality or schedule — crew can bail on your job for a higher bidder</li>
+          <li>Margin compression: 20–30% of gross vs 40–50% for W-2</li>
+          <li>1099 misclassification risk if crew works exclusively for you (IRS 20-factor test)</li>
+          <li>Harder to build consistent customer experience / reviews</li>
+          <li>Can't do 24/7 emergency response reliably</li>
+        </ul>
+      </div>
+
+      <div class="card accent">
+        <h4>Model B · W-2 Crew (Year 2+ Target)</h4>
+        <p><strong>How it works:</strong> You hire the crew directly as employees. Trucks, tools, payroll, workers comp, benefits. Full control, full margin, full liability.</p>
+        <h4 style="margin-top:12px">Pros</h4>
+        <ul class="bullets">
+          <li>40–50% gross margin vs 20–30% subbed</li>
+          <li>Full quality control, consistent customer experience</li>
+          <li>24/7 emergency response capability (restoration)</li>
+          <li>Build real culture + retention</li>
+          <li>Higher exit multiple (PE buyers want W-2 ops)</li>
+        </ul>
+        <h4>Cons</h4>
+        <ul class="bullets warn">
+          <li>$300–500K capital to launch (trucks, tools, inventory, payroll float)</li>
+          <li>Fixed labor cost whether jobs close or not</li>
+          <li>Workers comp, healthcare, unemployment compliance</li>
+          <li>Hiring, managing, retaining humans = ops complexity</li>
+          <li>High turnover industry — constantly recruiting</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="alert success" style="margin-top:14px">
+      <strong>Recommended sequence:</strong> Start subcontract in months 1–9 while you learn craft economics and build pipeline. Hire first W-2 crew in month 9–12 once you have 20+ closed jobs of data on pricing and labor cost. Transition to fully W-2 by month 18–24. This is how Groundworks-style platforms started — they didn't show up with 50 crews on day one.
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3 style="margin-top:0">Step 5 · The Rollup Sequence — Foundation → Waterproofing → Restoration</h3>
+    <p>The smartest structural move for your specific network. Here's the logic and the exact sequence:</p>
+    <div class="timeline">
+      <div class="phase"><div class="when">Year 1 · Foundation Repair + Basement Waterproofing (combined launch)</div><div class="what">Brand: "[Name] Foundation &amp; Waterproofing"</div><div class="detail">Launch as combined service — 40–60% of foundation work is waterproofing-adjacent anyway (sump, drain tile, encapsulation). Same crew, same equipment, 2× the marketable services. Target: $400K–$800K revenue, 30–50 jobs, learn craft economics.</div></div>
+      <div class="phase"><div class="when">Year 2 · Scale Foundation + Add Crawl Space Encapsulation Premium Line</div><div class="what">Launch premium crawl space encapsulation</div><div class="detail">$5–15K per job, high margin, selfserving to existing customer base. Target $1.2M–$1.8M revenue. Hire 2nd crew. First W-2 transitions.</div></div>
+      <div class="phase"><div class="when">Year 2.5 · Add Water Mitigation (Restoration)</div><div class="what">Bolt-on restoration with 2 IICRC-certified techs</div><div class="detail">Same customer (wet basements, flooded crawl spaces). Same GC/plumber referral network. Incremental $50–100K equipment. Target $300–500K incremental restoration revenue. Now: Foundation + Waterproofing + Water Mitigation under one roof.</div></div>
+      <div class="phase"><div class="when">Year 3 · Acquire or Launch a Complementary Trade</div><div class="what">Option A: acquire a small restoration operator · Option B: launch fire/large-loss capability</div><div class="detail">With proven Year 1–2 track record, SBA financing for $500K–1.5M acquisition. Adding fire/large-loss restoration unlocks $50K–$2M tickets. Target: $3–5M combined revenue.</div></div>
+      <div class="phase"><div class="when">Year 4–5 · Platform Scale</div><div class="what">Multi-crew · regional brand · SC+NC footprint</div><div class="detail">Two legal entities (SC + NC). Two QPs minimum. Shared back-office, local field ops. Target: $6–12M revenue, $1.2–2.4M EBITDA.</div></div>
+      <div class="phase"><div class="when">Year 5–6 · Exit or Continue</div><div class="what">Sell platform to PE (Groundworks, BluSky-adjacent) or refinance and continue</div><div class="detail">Combined Foundation+Restoration platforms exit at 7–10× EBITDA. $1.5M EBITDA × 8× = $12M enterprise value. Deduct debt, split with your QP partner per your equity agreement.</div></div>
+    </div>
+    <div class="alert info" style="margin-top:12px">
+      <strong>Why this specific sequence vs reverse:</strong> Foundation is scheduled work (you can ramp ops intentionally). Restoration is emergency work (24/7, reactive, turnover-heavy). Starting with scheduled work means you build systems and culture before you try to run an emergency operation. Reverse is possible but operationally brutal.
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3 style="margin-top:0">Step 6 · 24-Month SC-Specific Roadmap</h3>
+    <div class="timeline">
+      <div class="phase"><div class="when">Months 1–2</div><div class="what">Commit to trade + pick target metro</div><div class="detail">Pick: Charleston (growth, coastal insurance), Greenville/Spartanburg (Upstate growth, lower comp), Columbia (steady), Myrtle Beach (storm market), Hilton Head (luxury). Greenville/Spartanburg or Charleston are likely best balance. Choose trade: Foundation+Waterproofing primary.</div></div>
+      <div class="phase"><div class="when">Months 2–3</div><div class="what">Recruit the Master/QP</div><div class="detail">Work the GC/flipper network for referrals to candidates. 3-meeting sequence. Target: signed offer by month 3. Equity structure with attorney-drafted op agreement.</div></div>
+      <div class="phase"><div class="when">Months 3–4</div><div class="what">Legal setup + SC licensing + insurance</div><div class="detail">Form SC LLC. Apply for Residential Builder or GC license via SC LLR (QP takes exam if not already licensed). GL insurance, workers comp (even for sub crews initially), commercial auto. Set up ServiceTitan or Housecall Pro.</div></div>
+      <div class="phase"><div class="when">Months 4–6</div><div class="what">Activate network + soft launch</div><div class="detail">Personal meetings with every GC/flipper/agent in your network. Tell them you've launched, with engineer-on-staff (family member), licensed QP, and 48-hour-response commitment. Referral program: flat $500 or 5% of job. First 5–10 jobs in this window — sub the labor to trusted crews while you learn.</div></div>
+      <div class="phase"><div class="when">Months 6–12</div><div class="what">Marketing stack + scale to 30–50 jobs</div><div class="detail">Google LSA + local SEO + aggressive review automation. Direct mail to clay-soil/flood-prone ZIPs. Financing partner (GreenSky/Service Finance/Synchrony). Target: $400K–$800K revenue by month 12.</div></div>
+      <div class="phase"><div class="when">Months 12–18</div><div class="what">First W-2 crew · add waterproofing scale</div><div class="detail">Buy push pier rig + mini-ex ($150–200K). Hire W-2 crew lead + 2 helpers. Crawl space encapsulation premium line. Target: $1M run rate by month 18.</div></div>
+      <div class="phase"><div class="when">Months 18–24</div><div class="what">Add restoration mitigation + prep NC expansion</div><div class="detail">2 techs IICRC-certified. $50–75K restoration equipment. Insurance carrier TPA onboarding (Alacrity, Contractor Connection). Begin NC license process if footprint makes sense. Target: $1.5–2M combined revenue.</div></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3 style="margin-top:0">Step 7 · Your Actual Day-to-Day Role</h3>
+    <p>So the "won't get dirty" critics don't land. Here's what YOU personally do in year 1 vs what the QP does:</p>
+    <table>
+      <thead><tr><th>Function</th><th>You (Owner / Marketing Lead)</th><th>QP / Master Partner</th></tr></thead>
+      <tbody>
+        <tr><td>In-home sales presentations</td><td>✅ You sell the first 50 jobs personally</td><td>Shadows for first 10, then handles technical questions</td></tr>
+        <tr><td>Job site supervision</td><td>✅ You ride along every day Months 1–3, weekly thereafter</td><td>✅ Runs every job technically</td></tr>
+        <tr><td>Lead generation + marketing</td><td>✅ Your core function</td><td>Not their skill</td></tr>
+        <tr><td>Customer phone answer (24/7 first 6 months)</td><td>✅ You — no CSR yet</td><td>After-hours only</td></tr>
+        <tr><td>Hiring / interviewing</td><td>✅ You + QP together</td><td>✅ Technical vetting</td></tr>
+        <tr><td>Bookkeeping / financial ops</td><td>✅ You (or contracted CPA)</td><td>—</td></tr>
+        <tr><td>Permit pulling / licensing compliance</td><td>Backup</td><td>✅ Primary — it's their license</td></tr>
+        <tr><td>Quality control / callbacks</td><td>Monitor metrics</td><td>✅ Primary</td></tr>
+        <tr><td>GC / agent / flipper network maintenance</td><td>✅ Your unfair advantage</td><td>—</td></tr>
+        <tr><td>Running payroll Saturday 6am because someone's pay is wrong</td><td>✅ You</td><td>—</td></tr>
+        <tr><td>Driving to a job site at 7am to unbreak something</td><td>✅ You</td><td>✅ With you</td></tr>
+      </tbody>
+    </table>
+    <div class="alert success" style="margin-top:12px">
+      You will be filthy, exhausted, and on-call in year 1. That's the getting-dirty answer. But the labor you're putting in is ownership labor — building systems, selling jobs, managing the QP, learning the craft — not swinging the jackhammer. That's the distinction that matters.
+    </div>
+  </div>
+</section>
+
+<section class="tab" id="startbuy">
+  <h2>Start From Scratch vs. Acquire an Existing Business</h2>
+  <p class="muted" style="margin-bottom:16px">For a marketer without trade credentials, acquisition has materially better risk-adjusted returns. Here's the honest side-by-side.</p>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3 style="margin-top:0"><span class="badge tier4">Option A</span> Start From Scratch</h3>
+      <div class="kv">
+        <div class="k">Capital Required</div><div class="v">$250–$500K (serious 2–3 truck HVAC/plumbing)</div>
+        <div class="k">Cash Burn</div><div class="v">~$38,700/mo (realistic HVAC startup)</div>
+        <div class="k">Breakeven</div><div class="v">Month 6 best case · Month 18–24 to disciplined profitability</div>
+        <div class="k">Year-1 Revenue</div><div class="v">$300–$500K per productive tech</div>
+        <div class="k">Year-2 Revenue</div><div class="v">$800K–$1.5M with 2–3 techs</div>
+        <div class="k">Failure Rate</div><div class="v">~90% per Deibel data</div>
+        <div class="k">License Path</div><div class="v">Hire QI (Master) at $120–220K + equity, OR partner with tradesperson</div>
+        <div class="k">Time to $2M Revenue</div><div class="v">36–60 months</div>
+      </div>
+      <h4 style="margin-top:16px">Pros</h4>
+      <ul class="bullets">
+        <li>Full control of brand, culture, systems from day one</li>
+        <li>No inherited technical debt or bad customer list</li>
+        <li>Build around your marketing stack natively</li>
+        <li>Lower absolute capital floor ($35–75K for solo)</li>
+      </ul>
+      <h4>Cons</h4>
+      <ul class="bullets bad">
+        <li>Zero cash flow for 6+ months while burning $40K/mo</li>
+        <li>No existing license — you're entirely QI-dependent</li>
+        <li>No techs, no CSR, no routes, no reviews — you're starting every flywheel from zero</li>
+        <li>Hiring first tech risks them poaching customers</li>
+        <li>90% failure rate vs 2% for acquisitions</li>
+      </ul>
+    </div>
+
+    <div class="card accent">
+      <h3 style="margin-top:0"><span class="badge tier1">Option B · Recommended</span> Acquire an Existing Business</h3>
+      <div class="kv">
+        <div class="k">Capital Required</div><div class="v">$150–$400K buyer equity (10–15% of $1.5–4M deal)</div>
+        <div class="k">Immediate Cash Flow</div><div class="v">Day 1 — from existing book</div>
+        <div class="k">Debt Service</div><div class="v">~$31K/mo on $2.4M SBA 7(a) @ 9.5% · 10 yrs</div>
+        <div class="k">Target Business</div><div class="v">$2–5M revenue · $350–750K SDE · owner-operated</div>
+        <div class="k">License</div><div class="v">Transfers with business · existing QI stays 12–24 mo</div>
+        <div class="k">Failure Rate</div><div class="v">~2% per Deibel data</div>
+        <div class="k">Time to $10M Platform</div><div class="v">36–60 months via organic + 1–3 tuck-ins</div>
+      </div>
+      <h4 style="margin-top:16px">Pros</h4>
+      <ul class="bullets">
+        <li>Immediate cash flow — Day 1 revenue from existing book</li>
+        <li>Existing license + QI + trained workforce</li>
+        <li>Customer list to reactivate via marketing</li>
+        <li>SBA 7(a) financing stacks cheap debt</li>
+        <li>45× lower failure rate than startup</li>
+        <li>Multiple arbitrage: buy at 4× SDE, sell at 8× EBITDA</li>
+      </ul>
+      <h4>Cons</h4>
+      <ul class="bullets warn">
+        <li>Higher absolute capital ($150K+ equity minimum)</li>
+        <li>Inherited tech debt (software, processes, culture)</li>
+        <li>Key person risk (owner, top tech, top CSR may leave)</li>
+        <li>Diligence is slow (4–6 months typical)</li>
+        <li>Must navigate existing team's skepticism of new owner</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:20px">
+    <h3>The Canonical $3M HVAC Acquisition — Real Deal Math</h3>
+    <table>
+      <thead><tr><th>Source</th><th>Amount</th><th>Terms</th><th>Monthly Impact</th></tr></thead>
+      <tbody>
+        <tr><td>SBA 7(a) senior</td><td>$2,400,000</td><td>10-yr amort · ~9.5% · P&amp;I</td><td>~$31,000</td></tr>
+        <tr><td>Seller note (full standby — counts as equity)</td><td>$150,000</td><td>No payments × 10 yrs</td><td>$0</td></tr>
+        <tr><td>Buyer cash equity</td><td>$150,000</td><td>Cash at close · required</td><td>—</td></tr>
+        <tr><td>Seller note (non-standby · paid after SBA)</td><td>$300,000</td><td>5-yr balloon · 6% · deferred</td><td>~$3,000 deferred</td></tr>
+        <tr><td><strong>Total purchase price</strong></td><td><strong>$3,000,000</strong></td><td>5.0× SDE ($600K EBITDA)</td><td><strong>~$31K debt service</strong></td></tr>
+      </tbody>
+    </table>
+    <div class="alert info" style="margin-top:14px">On $4–5M revenue at 15–20% EBITDA, free cash flow after debt service is the tightrope — this is why marketing-driven revenue expansion in year 1 is critical. A 20% revenue lift = ~$150K additional EBITDA = meaningful breathing room.</div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>Hybrid: Lead-Gen Partnership → Acquire Your Partner</h3>
+    <p>The recommended path for a marketer entering a trade cold:</p>
+    <div class="timeline">
+      <div class="phase"><div class="when">Months 1–6</div><div class="what">Lead-gen rev-share with 1–2 operators</div><div class="detail">Generate exclusive leads at cost, deliver qualified appointments, take 10–20% of booked revenue or $50–150/lead. Zero operational headache. Learn trade ops language. Identify acquisition target via real-time signal on their financials.</div></div>
+      <div class="phase"><div class="when">Months 6–9</div><div class="what">SBA pre-qualification + target search</div><div class="detail">Live Oak, Byline, Huntington, Newtek all aggressive in home services. Get term sheet template. Identify 3–5 deal candidates — ideally including your partner operator.</div></div>
+      <div class="phase"><div class="when">Months 9–15</div><div class="what">Diligence + close</div><div class="detail">QoE report (non-negotiable above $2M), customer concentration audit, QI retention agreement before close, key-employee 30/60/90/180/365 retention bonuses.</div></div>
+      <div class="phase"><div class="when">Months 15–27</div><div class="what">Deploy marketing stack · organic growth</div><div class="detail">Months 1–3 silent scorecards · Month 3 marketing stack deployment · Target 25–40% revenue growth with no new trucks.</div></div>
+      <div class="phase"><div class="when">Months 27–48</div><div class="what">Tuck-in #1 · build platform</div><div class="detail">Acquire nearby $500K SDE operator with same SBA structure. Integrate ops. Now a mini-platform. Refinance to lower blended rate.</div></div>
+      <div class="phase"><div class="when">Months 48–72</div><div class="what">Platform exit to PE at 8–10×</div><div class="detail">$10M+ revenue, $1.5M+ EBITDA, $12M+ enterprise value. Multiple arbitrage realized.</div></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>Franchise as a Middle Path</h3>
+    <p>If you want the playbook without building from zero but don't want to navigate a full acquisition:</p>
+    <table>
+      <thead><tr><th>Franchise</th><th>Trade</th><th>Fee</th><th>Royalty</th><th>Total Investment</th></tr></thead>
+      <tbody>
+        <tr><td>One Hour Heating &amp; Air</td><td>HVAC</td><td>$42.5K</td><td>6%</td><td>$121–411K</td></tr>
+        <tr><td>Benjamin Franklin Plumbing</td><td>Plumbing</td><td>$45K</td><td>6%</td><td>$101–323K</td></tr>
+        <tr><td>Mister Sparky</td><td>Electrical</td><td>$45K</td><td>6%</td><td>$116–306K</td></tr>
+        <tr><td>Precision Garage Door</td><td>Garage Door</td><td>$75–150K</td><td>—</td><td>$164–360K ($5.2M avg rev)</td></tr>
+        <tr><td>Servpro</td><td>Restoration</td><td>$50–60K</td><td>3%</td><td>$241–302K (~2,000 locs)</td></tr>
+        <tr><td>Renewal by Andersen</td><td>Windows</td><td>$45–60K</td><td>5–7%</td><td>$300K–$1M (gold standard)</td></tr>
+        <tr><td>CertaPro Painters</td><td>Painting</td><td>$65K</td><td>6% declining</td><td>$171–302K</td></tr>
+        <tr><td>Mosquito Joe</td><td>Pest</td><td>$42.5K</td><td>10%</td><td>$151–193K (88% recurring)</td></tr>
+        <tr><td>Brothers That Just Do Gutters</td><td>Gutters</td><td>$49.5K</td><td>6% or $125/wk min</td><td>$143–217K</td></tr>
+        <tr><td>1-800-GOT-JUNK</td><td>Junk Removal</td><td>$65K+</td><td>8% + 8% SMT + 5% brand = 21%</td><td>$165–258K ($2.56M avg)</td></tr>
+      </tbody>
+    </table>
+    <div class="alert warn" style="margin-top:12px">Royalty stack (5–10% + 2% marketing + co-op) equals a permanent 7–12% tax on your revenue forever. Only worth it if brand delivers genuine CAC advantage you can't build organically. <strong>Alternative: Best Practice Groups</strong> — Nexstar Network ($20–40K/yr, 800+ members, no royalty), Service Nation, Service Roundtable. Same playbook, no royalty drag.</div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>Due Diligence Checklist (Home Service Specific)</h3>
+    <div class="grid grid-2">
+      <div>
+        <h4>Financial</h4>
+        <ul class="bullets">
+          <li>3-yr P&amp;L reconciled to tax returns — watch addbacks</li>
+          <li>QoE report from CPA (non-negotiable &gt;$2M)</li>
+          <li>AR aging — &gt;60 days is red flag (restoration &gt;120 days is warning)</li>
+          <li>CC/merchant processor statements to verify revenue</li>
+          <li>Work-in-process schedule (half-done installs = cash minefield)</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Operational</h4>
+        <ul class="bullets">
+          <li>Tech-level scorecards (ServiceTitan) — close rate, avg ticket, memb conv, callback %</li>
+          <li>Membership count + attrition (numbers you buy ≠ numbers you keep)</li>
+          <li>Truck fleet age + maintenance log</li>
+          <li>Parts inventory — dead stock from phased-out refrigerants</li>
+          <li>Software contract status (ServiceTitan switches are expensive)</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal / Regulatory</h4>
+        <ul class="bullets">
+          <li>QI status — who holds master? Post-close commitment? Exit clause?</li>
+          <li>Pending lawsuits, L&amp;I claims, warranty disputes</li>
+          <li>EPA 608 status of all refrigerant techs</li>
+          <li>I-9 compliance · any DOL investigations</li>
+          <li>Customer concentration &gt;15% of any one customer = yellow flag</li>
+        </ul>
+      </div>
+      <div>
+        <h4>People</h4>
+        <ul class="bullets">
+          <li>1:1 with top 2 techs, top CSR, service manager</li>
+          <li>Retention agreements signed BEFORE close</li>
+          <li>Comp benchmarking — if underpaid, you inherit raise problem</li>
+          <li>Key person dependency audit (previous owner selling big jobs?)</li>
+          <li>Cultural read — do they respect the new owner?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tab" id="calc">
+  <h2>Decision Calculators</h2>
+  <p class="muted" style="margin-bottom:20px">Plug in real numbers for your target scenario. All live-update as you change inputs.</p>
+
+  <div class="calc">
+    <h3>1 · Acquisition ROI Calculator (5-Year Projection)</h3>
+    <p class="muted" style="font-size:12px;margin-bottom:12px">Models buying a home-service business, applying your marketing edge, and exiting to PE.</p>
+    <div class="inputs">
+      <div><label>Purchase Price</label><input type="number" id="c1_price" value="3000000" step="100000"></div>
+      <div><label>Current EBITDA</label><input type="number" id="c1_ebitda" value="600000" step="50000"></div>
+      <div><label>Purchase Multiple (×EBITDA)</label><input type="number" id="c1_mult" value="5" step="0.25"></div>
+      <div><label>Buyer Equity %</label><input type="number" id="c1_equity" value="10" step="1"></div>
+      <div><label>SBA Rate %</label><input type="number" id="c1_rate" value="9.5" step="0.25"></div>
+      <div><label>Year-1 Revenue Growth % (marketing lift)</label><input type="number" id="c1_growth" value="30" step="5"></div>
+      <div><label>Year 2–5 Annual Growth %</label><input type="number" id="c1_growth2" value="15" step="5"></div>
+      <div><label>Target Exit Multiple</label><input type="number" id="c1_exitmult" value="8" step="0.5"></div>
+      <div><label>Hold Period (Years)</label><input type="number" id="c1_hold" value="5" step="1"></div>
+    </div>
+    <div class="output" id="c1_out"></div>
+  </div>
+
+  <div class="calc">
+    <h3>2 · Startup Burn &amp; Breakeven Calculator</h3>
+    <p class="muted" style="font-size:12px;margin-bottom:12px">Model the first 24 months if you start from scratch.</p>
+    <div class="inputs">
+      <div><label>Truck Count (month 1)</label><input type="number" id="c2_trucks" value="2" step="1"></div>
+      <div><label>Cost per Truck All-In</label><input type="number" id="c2_truck_cost" value="65000" step="5000"></div>
+      <div><label>Initial Tech Count</label><input type="number" id="c2_techs" value="2" step="1"></div>
+      <div><label>Tech Burden Cost/mo (incl fringe)</label><input type="number" id="c2_tech_cost" value="7500" step="500"></div>
+      <div><label>QI / Manager Salary/mo</label><input type="number" id="c2_qi" value="14000" step="1000"></div>
+      <div><label>CSR + Overhead/mo</label><input type="number" id="c2_overhead" value="8000" step="500"></div>
+      <div><label>Monthly Marketing Spend</label><input type="number" id="c2_mkt" value="6000" step="500"></div>
+      <div><label>Revenue/tech/month (productive)</label><input type="number" id="c2_rev" value="35000" step="2500"></div>
+      <div><label>Gross Margin %</label><input type="number" id="c2_gm" value="50" step="5"></div>
+    </div>
+    <div class="output" id="c2_out"></div>
+  </div>
+
+  <div class="calc">
+    <h3>3 · LTV:CAC for Recurring-Revenue Trades</h3>
+    <p class="muted" style="font-size:12px;margin-bottom:12px">Pest control, pool service, lawn — where recurring economics drive valuation.</p>
+    <div class="inputs">
+      <div><label>Monthly Revenue per Customer</label><input type="number" id="c3_mrr" value="85" step="5"></div>
+      <div><label>Gross Margin %</label><input type="number" id="c3_gm" value="60" step="5"></div>
+      <div><label>Monthly Churn %</label><input type="number" id="c3_churn" value="1.5" step="0.25"></div>
+      <div><label>CAC (Customer Acquisition Cost)</label><input type="number" id="c3_cac" value="200" step="25"></div>
+    </div>
+    <div class="output" id="c3_out"></div>
+  </div>
+
+  <div class="calc">
+    <h3>4 · Marketing Lift → Enterprise Value Calculator</h3>
+    <p class="muted" style="font-size:12px;margin-bottom:12px">Quantify how much enterprise value your marketing edge creates on a single acquisition.</p>
+    <div class="inputs">
+      <div><label>Current Revenue</label><input type="number" id="c4_rev" value="3000000" step="250000"></div>
+      <div><label>Current Call Book Rate %</label><input type="number" id="c4_book1" value="46" step="1"></div>
+      <div><label>Target Book Rate %</label><input type="number" id="c4_book2" value="72" step="1"></div>
+      <div><label>Current LSA Close Rate %</label><input type="number" id="c4_close1" value="22" step="1"></div>
+      <div><label>Target LSA Close Rate %</label><input type="number" id="c4_close2" value="31" step="1"></div>
+      <div><label>Marginal EBITDA Margin % on Lift</label><input type="number" id="c4_margin" value="25" step="2"></div>
+      <div><label>Current EBITDA Multiple</label><input type="number" id="c4_mult1" value="5" step="0.5"></div>
+      <div><label>Exit Multiple at Scale</label><input type="number" id="c4_mult2" value="8" step="0.5"></div>
+    </div>
+    <div class="output" id="c4_out"></div>
+  </div>
+</section>
+
+<section class="tab" id="plan">
+  <h2>First 12 Months — Action Plan</h2>
+  <p class="muted" style="margin-bottom:16px">Concrete sequence assuming the acquisition path. Adjust timing if you choose startup or franchise.</p>
+
+  <div class="timeline">
+    <div class="phase"><div class="when">Weeks 1–4 · Orientation</div><div class="what">Pick trade + commit</div><div class="detail">Decide: HVAC or plumbing (safest) · electrical (highest upside) · pest (best recurring). Eliminate distractions. Read <em>Buy Then Build</em> (Deibel). Listen to Acquisitions Anonymous 2+ episodes/wk. Join SMB Twitter/X circle.</div></div>
+    <div class="phase"><div class="when">Weeks 4–8 · Capital &amp; Legal</div><div class="what">SBA pre-qual + attorney + accountant</div><div class="detail">Get pre-qualified with 2+ SBA lenders (Live Oak, Byline, Huntington, Newtek). Retain M&amp;A attorney experienced in home services ($350–500/hr, budget $25–40K for deal). Retain QoE CPA firm. Set up buyer entity (usually Delaware LLC + state operating LLC).</div></div>
+    <div class="phase"><div class="when">Weeks 8–12 · Deal Sourcing</div><div class="what">Build deal pipeline</div><div class="detail">Sign up for BizBuySell, Axial (gated, mid-market), Sunbelt Network brokers. Direct-mail campaign to owner-operators in target metros (2,500 letters · $5K · 1–3% response). Run a lead-gen partnership or two to generate intel.</div></div>
+    <div class="phase"><div class="when">Weeks 12–20 · Deep Diligence</div><div class="what">3–5 active targets · 1 LOI</div><div class="detail">Sign NDAs. Review P&amp;Ls, tax returns, CC statements. Tech scorecards. Customer concentration. QI commitments. QoE on #1 target. Submit LOI at 4–5× SDE with seller note + standby structure.</div></div>
+    <div class="phase"><div class="when">Weeks 20–30 · Close</div><div class="what">Sign, fund, take the keys</div><div class="detail">SBA approval 30–60 days. Key employee retention agreements BEFORE close. Transfer license/QI paperwork. Payroll/banking Day 1. Insurance binders. Don't change uniforms, trucks, or comp plans.</div></div>
+    <div class="phase"><div class="when">Weeks 30–38 · Listen &amp; Measure</div><div class="what">First 60 days post-close</div><div class="detail">1:1 with every employee. Ride-along with every tech. Install silent scorecards. Do NOT publish numbers yet. Understand real booking rate, real close rate, real callback rate, real membership attach.</div></div>
+    <div class="phase"><div class="when">Weeks 38–48 · Marketing Deploy</div><div class="what">Day 60–90 rollout</div><div class="detail">Update website + call tracking (CallRail/CTM). LSA onboarding + aggressive dispute management. Review velocity automation (Podium/NiceJob). CSR scripts + training. Dormant customer reactivation campaign (usually finds $50–200K in first 90 days).</div></div>
+    <div class="phase"><div class="when">Weeks 48–52 · Scale Capacity</div><div class="what">Ops catches up to marketing</div><div class="detail">Hire CSR #2 before tech #3. Monitor callback rate weekly. Promote lead tech to field supervisor ($75–95K). If month-12 revenue is +25–40%, you've hit the thesis.</div></div>
+  </div>
+
+  <div class="card" style="margin-top:20px">
+    <h3>Month-by-Month Capital Requirements (Acquisition Path, $3M deal)</h3>
+    <table>
+      <thead><tr><th>Month</th><th>Activity</th><th>Cash Out</th><th>Running Total</th></tr></thead>
+      <tbody>
+        <tr><td>1–2</td><td>Legal retainer + accountant</td><td>$15,000</td><td>$15,000</td></tr>
+        <tr><td>3–4</td><td>Deal sourcing · direct mail · travel</td><td>$8,000</td><td>$23,000</td></tr>
+        <tr><td>5–6</td><td>QoE on 2 targets</td><td>$45,000</td><td>$68,000</td></tr>
+        <tr><td>7</td><td>M&amp;A attorney diligence + structuring</td><td>$35,000</td><td>$103,000</td></tr>
+        <tr><td>8</td><td>Buyer equity at close</td><td>$150,000</td><td>$253,000</td></tr>
+        <tr><td>8</td><td>SBA closing fees + working capital reserve</td><td>$80,000</td><td>$333,000</td></tr>
+        <tr><td>9–12</td><td>Marketing rollout + retention bonuses</td><td>$60,000</td><td>$393,000</td></tr>
+        <tr><td><strong>Total Year 1 Cash Outlay</strong></td><td></td><td colspan="2"><strong>$393,000 (for $3M acquisition)</strong></td></tr>
+      </tbody>
+    </table>
+    <div class="alert info" style="margin-top:12px">Add 20–30% buffer. Real-world outlay for a $3M acquisition tends to land $450–525K all-in. Hold 3–6 months operating reserve beyond that. <strong>Realistic total cash needed: $500–650K.</strong></div>
+  </div>
+</section>
+
+<section class="tab" id="risks">
+  <h2>Risks, Pitfalls &amp; How Marketers Destroy Trade Businesses</h2>
+  <p class="muted" style="margin-bottom:16px">The honest catalog of what goes wrong. Every plan survives first contact with these moments — or doesn't.</p>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3 style="margin-top:0;color:var(--danger)">The #1 Way Marketers Destroy Trade Businesses</h3>
+      <p><strong>Doubling ad spend before CSR/dispatch/install capacity catches up.</strong> Marketing volume without operational capacity destroys reputation fast. Your new leads bounce, book-but-no-show, or get poor service, and Google reviews crater. By month 6 your LSA rank has dropped because your review score tanked.</p>
+      <div class="alert danger" style="margin-top:10px"><strong>Rule:</strong> Hire the CSR BEFORE the next ad channel. Hire the dispatcher BEFORE the next tech. Install capacity is the governor on marketing volume.</div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">Qualifier / Master Risk</h3>
+      <p>Losing the licensed QI can instantly invalidate your business license until you replace them. Single biggest structural risk for non-trade owner.</p>
+      <h4 style="margin-top:12px">Mitigations</h4>
+      <ul class="bullets">
+        <li>Cross-qualify at least 2 Masters on the license</li>
+        <li>Equity + long notice requirement in QI employment agreement</li>
+        <li>Pre-identify backfill candidates (relationship with state board, recruiters)</li>
+        <li>Pay above-market + profit share (15–25% of EBITDA as ceiling)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">Labor Turnover</h3>
+      <p>Replacement cost of a fired/quit tech: <strong>$30–60K</strong> (recruiting, training, ride-along time, lost productivity). Industry is running 20–30% annual turnover.</p>
+      <h4 style="margin-top:12px">Common Mistakes</h4>
+      <ul class="bullets warn">
+        <li>Paying hourly without spiff/commission mix</li>
+        <li>No scorecards published weekly</li>
+        <li>Promoting best tech to manager (losing top producer, getting mediocre manager)</li>
+        <li>Skipping drug testing (insurance compliance issue)</li>
+        <li>Wage compression — last year's new-hire rate exceeds long-tenured loyal tech's rate</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">Cash Flow / AR Trap</h3>
+      <p>Especially in insurance-paid trades (restoration 60–120 day AR; roofing insurance 90+ days; commercial plumbing net 45–75). You can look profitable on accrual with $400K+ of uncollected Xactimate claims on the books.</p>
+      <h4 style="margin-top:12px">Mitigations</h4>
+      <ul class="bullets">
+        <li>Line of credit against AR (60–75% advance, Prime + 2–4%)</li>
+        <li>Point-of-service payment processing on residential</li>
+        <li>Deposits required on all installs (non-negotiable)</li>
+        <li>Dedicated Xactimate/billing specialist (adds 2–5 pts collected revenue)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">Callback / Warranty Work = Hidden Margin Leak</h3>
+      <p>A 90-day warranty callback = non-billable truck roll = $200–350 per callback. Typical shop: 8% callback rate × 3,000 calls = 240 callbacks × $275 = <strong>$66K pure margin leak</strong>.</p>
+      <div class="alert info" style="margin-top:10px">Chase callback rate from 8% down to 3% in year 1. You'll find $40K+ of EBITDA before changing anything else.</div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">Key Person Dependency on Seller</h3>
+      <p>Common in owner-operator HVAC: previous owner was closing all the big install jobs personally. You discover this 90 days in when install revenue craters.</p>
+      <h4 style="margin-top:12px">Mitigations</h4>
+      <ul class="bullets">
+        <li>Earnout tied to 12-24 month EBITDA retention</li>
+        <li>Seller contractual commitment to close deals + introduce relationships for 6 mo</li>
+        <li>Seller rollover equity (5–10%) keeps them motivated</li>
+        <li>Aggressive marketing lift in months 1–6 to replace owner-driven pipeline</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">PE Multiple Compression</h3>
+      <p>Platform multiples at cyclical highs (10–18×). If rates stay higher longer or macro softens, exit multiples could compress 1–3 turns over 5 years.</p>
+      <div class="alert warn" style="margin-top:10px">Buy at 4–5× SDE (safe floor), don't underwrite exit at 10×+. Assume 7–8× for downside case. Your edge is multiple arbitrage + organic growth, not betting on multiple expansion.</div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">Cultural Collision</h3>
+      <p>Tradespeople can sniff a spreadsheet jockey at 50 paces. If they think you don't respect the craft, they'll leave or undermine.</p>
+      <h4 style="margin-top:12px">Mitigations</h4>
+      <ul class="bullets">
+        <li>Ride-along with every tech in first 30 days (learn the work)</li>
+        <li>Don't change uniforms, trucks, or comp plans in first 60 days</li>
+        <li>Publicly credit the existing team for wins</li>
+        <li>Promote from within for field leadership roles</li>
+        <li>Field supervisor ($75–95K) who was one of them — auditing quality</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">Immigration Enforcement (Roofing / Siding / Landscape)</h3>
+      <p>60–75% of exterior trade labor is Hispanic immigrant. 2025 ICE enforcement uptick is materially disruptive. Operators with documented W-2 crews get premium at exit.</p>
+      <h4 style="margin-top:12px">Mitigations</h4>
+      <ul class="bullets">
+        <li>W-2 transition from 1099 subcontractor 'bread crumbs' model</li>
+        <li>Rigorous I-9 compliance + E-Verify</li>
+        <li>Build crew leader relationships (they hold the crew)</li>
+        <li>Stable scheduling + benefits = retention moat vs competitors</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">AI / Robotics Disruption Watch List</h3>
+      <ul class="bullets">
+        <li><strong>Landscaping mowing:</strong> Scythe M.52 (150+ deployed), Husqvarna Automower 540, Honda ProZision 2026. 30–50% crew reduction commercial. 2028–2031 inflection.</li>
+        <li><strong>Rooftop shingle:</strong> Renovate Robotics 'Rufus' 50% faster than human, shipping with Beacon PA/NJ. 5–10 yrs to share.</li>
+        <li><strong>Gutter cleaning:</strong> iRobot Looj, drone systems. Emerging.</li>
+        <li><strong>Commercial pressure washing:</strong> Lucid Bots high-rise drones. 2027+.</li>
+        <li><strong>CSR/booking AI:</strong> Avoca, Rilla, Trellus — penetrating after-hours triage. Productivity gain for adopters, threat to laggards.</li>
+        <li><strong>Everything else:</strong> Physical work in variable environments stays safe 15–20+ years.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="tab" id="resources">
+  <h2>Operator Resources</h2>
+  <p class="muted" style="margin-bottom:16px">Books, podcasts, communities, and events that compound your knowledge advantage.</p>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3 style="margin-top:0">Books · Read These First</h3>
+      <ul class="bullets">
+        <li><strong>Buy Then Build</strong> — Walker Deibel. The ETA bible. Read before you do anything else.</li>
+        <li><strong>HVAC Spells Wealth</strong> — Ron Smith (now 3rd ed. <em>More &amp; New HVAC Spells Wealth</em>). The operator-ops playbook.</li>
+        <li><strong>8 Figure Exit Strategy for HVAC and Plumbing Contractors</strong> — Walter Bergeron &amp; Mike Layton. Exit positioning.</li>
+        <li><strong>Built to Sell</strong> and <strong>The Automatic Customer</strong> — John Warrillow. Recurring revenue = multiple expansion.</li>
+        <li><strong>Good to Great</strong> — Jim Collins. Leadership framework.</li>
+        <li><strong>The Advantage</strong> — Patrick Lencioni. Culture is fragile in trades.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">Podcasts · Weekly Rotation</h3>
+      <ul class="bullets">
+        <li><strong>Acquisitions Anonymous</strong> — Bill D'Alessandro, Mills Snell, Heather Endresen, Michael Girdley. Weekly live deal roasts. Endresen (ex-Live Oak Bank) is gold on SBA mechanics.</li>
+        <li><strong>Roofing Success Podcast</strong> — Jim Ahlin. Weekly large-roofer interviews.</li>
+        <li><strong>ServiceTitan Toolbox for the Trades</strong> — operator + vendor interviews.</li>
+        <li><strong>Profiles in Prosperity</strong> — Service Nation (Jim Hinshaw).</li>
+        <li><strong>The Sweaty Startup</strong> — Nick Huber. Operator mindset, philosophical counterweight to VC orthodoxy.</li>
+        <li><strong>Built to Sell Radio</strong> — John Warrillow. Exit-oriented.</li>
+        <li><strong>My First Million</strong> — Sam Parr, Shaan Puri. Broad SMB + occasional trade deep dives.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">People / Content Creators</h3>
+      <ul class="bullets">
+        <li><strong>Codie Sanchez</strong> (@codiesanchez) — boring businesses framework. Contrarian Academy paid. June 18–20, 2026 "Fast Track to Business Ownership" live event.</li>
+        <li><strong>Nick Huber</strong> (@sweatystartup) — brass-tacks service + real estate operator. Storage Squad, Bolt Storage, Somewhere.</li>
+        <li><strong>Roland Frasier</strong> — EPIC Business Buying Blueprint. Creative acquisition structures (skim with skepticism).</li>
+        <li><strong>Jon Stoddard</strong> — YouTube + acquisition courses. Shorter-form than Deibel.</li>
+        <li><strong>Moran Pober / Acquisitions.com</strong> — 100+ transactions; community-driven.</li>
+        <li><strong>Walker Deibel</strong> — beyond the book: Acquirer's Advisor paid community.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">Trade Communities &amp; Events</h3>
+      <ul class="bullets">
+        <li><strong>Nexstar Network</strong> — 800+ member HVAC/plumbing/electrical coaching. Selective gating. Best benchmarking data in trades. $20–40K/yr.</li>
+        <li><strong>Service Nation / Service Roundtable</strong> — broader, more accessible alternative.</li>
+        <li><strong>Service World Expo</strong> — Nov 9–12, 2026, Las Vegas. Biggest operator-focused expo.</li>
+        <li><strong>AHR Expo</strong> — biggest equipment/manufacturer expo.</li>
+        <li><strong>ServiceTitan Pantheon</strong> — top-shop data integration conference.</li>
+        <li><strong>ACHR News (The News)</strong> — HVACR trade press of record.</li>
+        <li><strong>Roofing Contractor magazine + IRE</strong> — roofing equivalent.</li>
+        <li><strong>PHCC</strong> — national plumbing-heating-cooling association.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">SBA Lenders (Home Services Specialists)</h3>
+      <ul class="bullets">
+        <li><strong>Live Oak Bank</strong> — largest SBA 7(a) lender; home-services specialists</li>
+        <li><strong>Byline Bank</strong> — aggressive on trades</li>
+        <li><strong>Huntington National Bank</strong> — preferred lender · midwest strength</li>
+        <li><strong>Newtek</strong> — fast processing · creative structures</li>
+        <li><strong>Pursuit Lending</strong> — northeast</li>
+        <li><strong>First Home Bank</strong> — Florida-strong</li>
+      </ul>
+      <div class="alert info" style="margin-top:10px">Get pre-qualified with 2+ lenders for negotiating leverage. Rates within 0.5–1% range; structure flexibility varies more than rate.</div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">Deal Listing Sites</h3>
+      <ul class="bullets">
+        <li><strong>BizBuySell</strong> — retail tier; every $500K–$5M deal eventually lands here</li>
+        <li><strong>BizQuest</strong> — secondary aggregator</li>
+        <li><strong>Axial</strong> — mid-market ($5M+) gated platform; membership required</li>
+        <li><strong>Sunbelt Business Brokers</strong> — national network of 200+ offices</li>
+        <li><strong>Transworld Business Advisors</strong> — similar national network</li>
+        <li><strong>Direct outreach</strong> — 2,500-letter campaign to owner-operators in target MSA ($5K cost · 1–3% response · highest-quality deal flow)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">Software &amp; Tools</h3>
+      <ul class="bullets">
+        <li><strong>ServiceTitan</strong> — dominant FSM $2M+ HVAC/plumbing/electrical ($400–650/user/mo + $10–50K setup)</li>
+        <li><strong>Housecall Pro</strong> — sub-$2M-shop workhorse ($49–499/mo)</li>
+        <li><strong>Jobber</strong> — small ops ($29–199/mo)</li>
+        <li><strong>AccuLynx / JobNimbus / Roofr</strong> — roofing</li>
+        <li><strong>PestPac / FieldRoutes / GorillaDesk</strong> — pest</li>
+        <li><strong>ServiceCore</strong> — septic &amp; porta potty</li>
+        <li><strong>Skimmer</strong> — pool service (30K+ users)</li>
+        <li><strong>ArboStar / SingleOps</strong> — tree</li>
+        <li><strong>CallRail / CallTrackingMetrics</strong> — call tracking + scoring</li>
+        <li><strong>Podium / NiceJob / Birdeye</strong> — review automation</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">X / SMB Twitter Follow List</h3>
+      <ul class="bullets">
+        <li>@sweatystartup (Nick Huber)</li>
+        <li>@codiesanchez (Codie Sanchez)</li>
+        <li>@MichaelGirdley</li>
+        <li>@billda (Bill D'Alessandro)</li>
+        <li>@HeatherEndresen (SBA wizard)</li>
+        <li>@WalkerDeibel</li>
+        <li>@AyrKnTwt (Ayr Knight)</li>
+        <li>@MillsSnell</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="modal-bg" id="modalBg"><div class="modal" id="modal"><button class="close" id="modalClose">×</button><div id="modalBody"></div></div></div>
+
+<script>
+// ==================== INDUSTRY DATA ====================
+const INDUSTRIES = [
+{name:"HVAC",tier:1,fit:93,tagline:"Biggest PE rollup wave; best recurring-plan playbook; marketing-optimized shops win the metro.",marketSize:"$130–140B",marketBn:135,cagr:"6–7% CAGR",avgTicket:"$89–$30K (replace $8–15K avg)",ticketHigh:15000,grossMargin:"45–55% blended",ebitdaMargin:"15–20% top quartile",recurring:"high",recurringDetail:"30–50% of base on maintenance plans at well-run shops; $150–$300/yr/customer; members convert to replacements at 3–5×",seasonality:"high",seasonalityDetail:"Peak June–Aug (AC) &amp; Dec–Feb (heat); shoulders April/October",startupLean:"$35–75K (solo, 1 truck)",startupSerious:"$250–500K (2–3 trucks, 4–6 employees)",startupLow:35000,capBucket:"high",sdeMultiple:"2.5–4× SDE (small)",ebitdaMultipleMid:"5–8.5× EBITDA",ebitdaMultipleMidHigh:8.5,multipleHigh:18.5,platformMultiple:"10–18.5× (Champions/Blackstone Feb '26)",licensing:"high",licensingDetail:"Strict in CA/TX/FL/WA/OR/NV/NC/GA/VA; EPA 608 mandatory federally; some Midwest/PA are municipal-only",qiWorkaround:"YES — FL/CA/TX/NC/GA/TN/SC/VA/AZ all permit Qualifying Agent/RME. Pay master $120–180K + phantom equity.",laborShortage:"severe",laborDetail:"50K+ annual openings vs 25K graduates; sign-on bonuses $5–15K common; retention is the core operating challenge",techPay:"Apprentice $35–45K · Journeyman $70–110K · Comfort Advisor $120–250K (commission)",lsaCpl:"$40–120 per lead; $80–250 per customer",channels:"Google LSA, SEO, referrals, branded search PPC, Nextdoor, direct mail to plan expiries",closeRate:"30–45% replacement; 70–85% service",software:"ServiceTitan (dominant $2M+), Housecall Pro (mid), Jobber (small), FieldEdge, Sera",aiThreat:"low",aiDetail:"AI voice agents penetrating call booking (Avoca, Rilla); dispatch already automated. Physical install in attics/crawls/rooftops untouchable for 20+ years. Regulatory capture (EPA 608) = moat. Net: AI is a tailwind for well-run shops.",peActivity:"extreme",peDetail:"Apex Service Partners (Alpine/Partners Group) 107 brands $1.3B rev; Wrench Group (Leonard Green) 25 brands $1.2B; Champions Group → Blackstone $2.5B @ 18.5× (Feb 2026); Sila → Goldman $1.7B @ ~17–20×; Redwood Services, Legacy Service Partners, Sila.",franchises:"One Hour Heating &amp; Air ($42.5K fee, 6% royalty, $121–411K total) · Aire Serv ($40K, 5–7%, $87–255K) · Authority Brands umbrella permits combining with Ben Franklin + Mister Sparky for HVAC+Plumbing+Electrical",marketingLeverage:"veryhigh",drivers:["Refrigerant transition (R-410A phased Jan 2025) driving replacement wave","DOE 2023 SEER2 standards raising equipment prices 15–25%","IRA heat pump credits up to $2K federal + $8K HEEHRA state rebates","Median US home age 43 yrs — systems from early 2000s failing","Record heat years driving emergency installs in historically cool markets"],mktEdges:["Google LSA undermanaged at 90% of shops — daily bid+dispute can yield +30–50% lead volume","Review velocity: typical shop has &lt;100 reviews at 4.3★; systematic automation can hit 500+ at 4.8★","CSR booking: industry 46% avg; top-quartile 77–85% = direct 30%+ revenue lift","Dormant DB reactivation: 5,000+ customers sitting in ServiceTitan unemailed","Maintenance plan attach: 20% → 40% doubles recurring base in 18 months"],risks:["Qualifier risk: losing master license holder can shutter business — lock in with equity + long notice","Labor inflation 8–15% YoY compressing margins if pricing doesn't keep pace","PE multiples at cyclical highs — could compress 1–3 turns over 5yrs if rates stay high","Seasonal cashflow troughs in shoulder months","Capacity ceiling: doubling leads without dispatch/install capacity destroys reputation"],bottomLine:"Highest marketing leverage × highest PE multiples × proven playbook. Best single acquisition target for a marketing-led operator. Target: $2–4M revenue shop, owner retiring, weak digital, strong qualifier. Expect 25–40% year-1 revenue growth on marketing alone."},
+
+{name:"Plumbing",tier:1,fit:90,tagline:"Smoothest revenue curve; highest service-margin mix; emergency SEO is gold; less-sophisticated local marketing means faster wins.",marketSize:"$130–140B",marketBn:135,cagr:"4–6% CAGR",avgTicket:"$50–$25K (sewer $7.5–25K)",ticketHigh:25000,grossMargin:"55–70% service / 35–50% install",ebitdaMargin:"12–20% typical; 20%+ top",recurring:"med",recurringDetail:"15–30% on maintenance plans ($100–$250/yr); water softener/filter subscriptions $200–500/yr; commercial backflow testing recurring",seasonality:"low",seasonalityDetail:"Much flatter than HVAC; winter freeze spikes; holiday drain emergencies",startupLean:"$25–60K",startupSerious:"$200–450K (3 trucks)",startupLow:25000,capBucket:"high",sdeMultiple:"2.0–3.5× SDE (small)",ebitdaMultipleMid:"6–11× EBITDA",multipleHigh:20,platformMultiple:"17–20× (Sila/Goldman)",licensing:"high",licensingDetail:"Most-regulated trade; tiered apprentice→journeyman→master→contractor; IL/MA/CA/FL/TX/NJ notoriously strict",qiWorkaround:"YES — Master Plumber as QI. Master scarcer than HVAC qualifier: $130–220K+ + often equity",laborShortage:"severe",laborDetail:"Average plumber ~50 yrs old; low apprentice pipeline; 5–7 years to Master from scratch",techPay:"Journeyman $60–95K · Master $95–160K · Service Plumber commission $150–250K",lsaCpl:"$45–130 per lead; emergency premium",channels:"LSA, emergency SEO, referrals (realtors + supply houses), Nextdoor, property manager contracts",closeRate:"60–80% emergency book; 80–90% on-site conversion",software:"ServiceTitan, Housecall Pro, Jobber; RIDGID SeeSnake reporting",aiThreat:"verylow",aiDetail:"Leak-detection IoT creates MORE service calls. AI sewer scoping assists tech, doesn't replace. Slab leak diagnostics in crawl spaces are untouchable. Safest of the three mechanical trades.",peActivity:"extreme",peDetail:"Wrench Group plumbing brands; Apex combining plumbing+HVAC; Redwood Services; Leaf Home Water Solutions; Roto-Rooter (corporate + franchise). Combined HVAC+plumbing+electrical platforms command premium multiples vs single-trade.",franchises:"Benjamin Franklin Plumbing ($45K fee, 6%, $101–323K) · Mr. Rooter ($44K, 7% declining, $112–265K) · Roto-Rooter Services",marketingLeverage:"veryhigh",drivers:["Lead pipe replacement (EPA LCRR/LCRI) driving awareness","Cast iron + galvanized pipes in pre-1970 homes failing","Tankless water heater conversion 25–35% of replacements","Slab leaks in Sunbelt (TX/FL/AZ) — huge underpriced market","Water leak IoT sensors creating service calls"],mktEdges:["Emergency SEO (\"water heater replacement [city]\") is wide open — thin competition + high-intent","YouTube authority content: nobody doing local-level well","Cross-sell to HVAC customer base if you own both","Real estate agent referral networks poorly worked","Property manager contracts: $50–500K/yr per PM — most plumbers don't pursue"],risks:["Master plumber retention is existential risk","Commercial AR drift (net 45–75 common)","Licensing pain slows geographic expansion","CAP-EX on trenchless equipment is lumpy"],bottomLine:"Cash-flow ballast. Smoother than HVAC, higher service-margin mix, less marketing sophistication at local level = faster displacement of incumbents. Best for risk-averse operator wanting predictable cash."},
+
+{name:"Electrical",tier:1,fit:92,tagline:"Electrification tailwind (EV/solar/heat-pump panel upgrades) is a 20–30 year wave. Multiples still compressing upward.",marketSize:"$60–75B residential ($220B total)",marketBn:68,cagr:"7–9% CAGR (highest of trades)",avgTicket:"$200–$45K (panel $3.5–12K · EV $900–5K · generator $9–18K)",ticketHigh:45000,grossMargin:"40–55% service",ebitdaMargin:"12–18%",recurring:"med",recurringDetail:"Generator maintenance $250–600/yr (required for warranty, sticky); electrical safety inspections $99–250/yr (underpenetrated); solar monitoring $10–30/mo",seasonality:"low",seasonalityDetail:"Smoothest curve of the three mechanical trades; minor storm-driven generator spikes",startupLean:"$30–70K",startupSerious:"$225–475K",startupLow:30000,capBucket:"high",sdeMultiple:"2.5–4× SDE",ebitdaMultipleMid:"6–9× EBITDA",multipleHigh:14,platformMultiple:"10–14× (as add-ons to HVAC platforms)",licensing:"high",licensingDetail:"Most regulated trade — every state licenses. Master electrician exam after 2+ yrs journeyman",qiWorkaround:"YES — Master Electrician as QI. Highest premium: $140–250K+ + often equity",laborShortage:"severe",laborDetail:"80K+ annual openings vs 25K grads; data center demand siphoning talent; 6–8 yrs to Master from scratch",techPay:"Journeyman $65–105K · Master $95–160K (or $120–250K commission)",lsaCpl:"$50–150 per lead",channels:"LSA, SEO, solar company partnerships, EV dealer referrals (Tesla/Rivian), utility approved-contractor lists, home inspectors",closeRate:"50–70% EV/panel; 20–40% generator (considered)",software:"ServiceTitan, Housecall Pro; Kedge/Knowify for commercial; ConnectWise for low-voltage",aiThreat:"low",aiDetail:"AI compliance checking + load calcs already software-driven. Smart panels (Span/Lumin) create service opportunities. Physical wire-pulls/panel installs untouchable. 30-year growth story dwarfs automation risk.",peActivity:"extreme",peDetail:"PE roll-up is BEHIND HVAC/plumbing by 6–12 months — which means multiples still compressing upward = better buy point today. Apex, Wrench, Redwood all adding electrical brands. Rising Star Electric, Bearing Electrical (Riverside), Service Logic, Qualus are platforms. 'Electrical gold rush' predicted 2025–2027.",franchises:"Mister Sparky ($45K, 6%, $116–306K) · Mr. Electric ($40K, 4–7%, $107–289K). Authority Brands co-brand with Ben Franklin + One Hour is the platform play.",marketingLeverage:"veryhigh",drivers:["EV charger install: $1–3.5K per home × millions of EVs coming","Panel upgrades 100→200A or 400A for EV+heat pump+induction — MASSIVE wave","Solar + battery storage ($15–40K per install)","IRA incentives: $4K panel upgrade credit, $840 induction stove","Generator installs growing with grid-reliability concerns","Knob-and-tube + aluminum wiring replacement in older homes"],mktEdges:["EV charger install marketing is NASCENT — position as 'THE EV installer' in metro + Tesla/Rivian partnerships can own 40–50% of segment","Generator lead nurturing primitive — 6–12 month email/SMS sequences can 3× conversion","Panel upgrade category creation via 'free panel assessment' campaigns","Solar installer partnerships: hand-off electrical work = 50–150 referred jobs/yr","Least-sophisticated marketing landscape of the 3 mechanical trades"],risks:["Master electrician is hardest qualifier to retain","Commercial new-construction electrical (low margin) can drag if mixed in","Long apprenticeship means hiring takes years from scratch"],bottomLine:"Best long-term growth story. Marketing competitors are weakest here. Multiples still expanding. Highest upside of the three mechanical trades for a patient operator — slightly harder licensing is the tradeoff."},
+
+{name:"Pest Control",tier:1,fit:95,tagline:"Recurring-revenue crown jewel. 70–85% recurring. LTV:CAC 10–25:1. Best exit multiples in trades.",marketSize:"$29.7B (2026)",marketBn:30,cagr:"3.4% hist / 5.7% forward",avgTicket:"Quarterly $90–150 · Monthly $40–80 · Termite $1.2–3.5K + $250–400/yr renewal",ticketHigh:3500,grossMargin:"50–70%",ebitdaMargin:"25–35% (industry-leading)",recurring:"high",recurringDetail:"70–85% recurring at well-run operators. Residential LTV $2.5–5.7K at 1.5% monthly churn. Commercial contracts $30K+ LTV. Termite renewals = perpetual annuity at 92% retention (Sentricon).",seasonality:"low",seasonalityDetail:"Year-round in South; summer mosquito spike; termite swarms spring; commercial steady",startupLean:"$30–80K (residential gen pest)",startupSerious:"$150–300K (multi-route)",startupLow:30000,capBucket:"med",sdeMultiple:"3–4× SDE (recurring premium)",ebitdaMultipleMid:"8–12× EBITDA",multipleHigh:18,platformMultiple:"14–18× (Rollins ~30× P/E public)",licensing:"med",licensingDetail:"State commercial applicator license required in ALL states. Categories: 7A gen pest, 7B termite, 3A lawn, etc. Cost $35–$250; exam 100-question general + 50-question category",qiWorkaround:"YES — hire licensed applicator; lighter than mechanical trades. 2–4 week tech training (vs 2–4 yrs for HVAC)",laborShortage:"severe",laborDetail:"Retention is #1 problem. Avg pest tech ~$44K lags HVAC/plumbing/electrical causing chronic poaching. Fix with tiered paths + $5K sign-ons",techPay:"$16–24/hr entry · $22–32/hr exp · $65K+ commercial",lsaCpl:"$35–65 per lead",channels:"D2D (Moxie/Aptive/Edge model — $500M+ summer sales machine), LSA, SEO/PPC, Meta retargeting, referral programs (15–25% conversion), automated retention comms",closeRate:"35–55% on LSA; D2D high-volume but high-churn",software:"PestPac (WorkWave, legacy enterprise) · FieldRoutes (ServiceTitan, modern challenger) · GorillaDesk (SMB $49+/mo) · BriosTrack · Coalmarch (Reno)",aiThreat:"verylow",aiDetail:"Pest ID AI helps techs; doesn't replace spray truck. Anticimex SMART IoT rodent traps enable remote monitoring = productivity gain, not substitution. Very safe.",peActivity:"extreme",peDetail:"MOST ACTIVE PE category. Rollins (Orkin/HomeTeam/Trutech) $3.3B rev — organic growth beating Rentokil post-integration. Rentokil (Terminix, $6.7B Oct 2022 merger, still bumpy). Anticimex (EQT) 500K+ SMART devices 2025. Aruza (Concentric Equity), Arrow, Cook's, HomeTeam, Certus, Modern Pest, Anthony Pest, Pestmaster (BayPine). PE ~60% of pest M&amp;A in 2025, up 35% YoY.",franchises:"Mosquito Joe ($42.5K fee, 10%, $151–193K · 88% recurring 2022) · Mosquito Squad ($35–45K, 20% declining, $108–167K) · Joshua Tree ($49K, 6%, $125–225K) · Pestmaster ($45K, 7%, $65–225K)",marketingLeverage:"veryhigh",drivers:["Vector-borne disease surge (mosquitoes moving north)","Climate-driven range expansion (termites, rodents)","Urbanization / housing density","Regulatory mandates in commercial food service/healthcare","LTV:CAC best in trades — unit economics only work at scale with marketing"],mktEdges:["LTV:CAC 10–25:1 — marketing literally compounds into enterprise value","Retention marketing: automated text/email moves 60% → 88% annual retention","Route density is marketing problem: ZIP-level cluster campaigns vs city-wide","Up-sell stack: gen pest → mosquito → termite → wildlife (20–40% ARR lift each)","Exit multiple arbitrage: buy 3× SDE, rebuild recurring 40→75%, exit 5×"],risks:["D2D regulatory pressure (several states limiting unlicensed solicitation)","Chemical regulation changes (neonics, glyphosate)","Tech retention chronic — need to outspend competitors on career paths"],bottomLine:"Single highest-return trade for a marketing operator. Recurring revenue converts marketing skill directly into enterprise value at the highest multiple in trades. If you only pick one, pick this."},
+
+{name:"Water/Fire Restoration",tier:1,fit:88,tagline:"Insurance-funded tickets $3–30K+. 70–80% gross margins on water mitigation. Emergency SEO/LSA moat.",marketSize:"$7.1B narrow / $210–234B broad property restoration",marketBn:100,cagr:"3–5% narrow; climate-driven spikes",avgTicket:"Water $3–7.5K std · $10–30K multi-room · Fire $25–150K · Commercial $250K–2M+",ticketHigh:2000000,grossMargin:"70–80% on water mitigation",ebitdaMargin:"&lt;$1M: 50% · Mid: 10–20% · $50M+: ~6%",recurring:"low",recurringDetail:"Project-based; NO recurring revenue. Repeat is plumber/insurance referral rather than customer",seasonality:"low",seasonalityDetail:"Surprisingly flat — water/mold year-round; CAT spikes Aug–Oct hurricanes + polar vortex",startupLean:"$75–250K",startupSerious:"$250K+ for credible 3-crew op",startupLow:75000,capBucket:"high",sdeMultiple:"3–5× SDE",ebitdaMultipleMid:"6–10× EBITDA",multipleHigh:14,platformMultiple:"10–14× (BELFOR 2019 ~9–10×)",licensing:"med",licensingDetail:"IICRC WRT/ASD/FSRT/AMRT certifications are de facto industry standard. FL/LA/TX/NY require dedicated mold remediation license. Firm cert $300–500/yr.",qiWorkaround:"YES — hire IICRC-certified lead. Faster to qualify than mechanical trades",laborShortage:"severe",laborDetail:"20–30% annual turnover; physically grueling + middle-of-night deployment; pay 15–20% above market + on-call stipends + cert reimbursement",techPay:"$18–28/hr · Certified leads $55–75K",lsaCpl:"$80–180 per lead (one of most expensive)",channels:"TPA preferred vendor programs (Alacrity/Contractor Connection/MadSky/Code Blue), Managed Repair Programs (USAA CCG, State Farm Premier, Allstate Good Hands), plumber/HVAC referrals, emergency SEO, LSA",closeRate:"Emergency intent = very high book rate; 60–80% once on site",software:"Xactimate (mandatory insurance billing $200/mo/seat) · XactAnalysis · DASH (Cotality) · Encircle (AI-powered scoping 2025–26) · Matterport/DocuSketch 3D · Albi · PSA",aiThreat:"low",aiDetail:"AI scopes from Encircle flip estimator role to 'reviewer' = productivity gain. Physical PPE work cutting drywall in wet conditions untouchable. AI threatens back-office (claims coding) not field service.",peActivity:"extreme",peDetail:"BELFOR (Goldman + American Securities, recap'd 2019, $3B+ rev) · BluSky (Partners Group + Kohlberg Oct 2021, 900 emp, 40 branches, 10+ tuck-ins 2021–23) · ATI Restoration (aggressive tuck-ins) · Cotton Holdings · BlueTeam · Interstate Restoration · DKI · BMS Cat. Platform targets typically $5–10M EBITDA minimum.",franchises:"Servpro ($50–60K fee, 3%, $241–302K, ~2,000 locations — preferred vendor for multiple carriers) · PuroClean ($59K, 5%, $101–262K, 500+) · Paul Davis ($55K, 4%, $215–496K) · 1-800-WATER-DAMAGE ($45K, 6–7%, starts $103K) · Rainbow International ($50K, 7%, $175–260K)",marketingLeverage:"high",drivers:["Climate intensification (hurricanes, wildfires, atmospheric-river flooding)","Aging housing stock (median 43 yrs)","Tighter insurance carrier documentation requirements","2025 IICRC certification requirements tightened","90%+ insurance-paid = no retail price elasticity issues"],mktEdges:["TPA onboarding flywheel (Alacrity/Contractor Connection/MadSky/Code Blue) = steady baseline","Plumber/HVAC/roofer referral programs — 20–40% of direct-billed work","Emergency LSA + Google Guaranteed = 2–3 weeks to rank","Review automation flywheel — industry avg 8–15; top 200+","Balance 40–60% TPA baseline + 40–60% direct/referred for margin preservation"],risks:["Insurance AR 60–120 days typical; Xactimate supplementing is painful","TPA margin compression 7–20% vs retail","Carrier consolidation (USAA/State Farm) = pricing power against you","Turnover chronic and demoralizing","CAT-driven lumpy revenue can hide ops problems"],bottomLine:"Highest-cash-flow single play. Insurance checks are large and reliable once relationships are built. Ideal for operator comfortable with regulatory complexity. Not recurring — reorder your mental model."},
+
+{name:"Roofing",tier:1,fit:87,tagline:"Most fragmented big market (101K contractors, top 3 &lt;4%). Most PE activity. A marketing business dressed as construction.",marketSize:"$30–33B",marketBn:32,cagr:"6–7% CAGR",avgTicket:"Residential re-roof $20–25K std · premium $30–60K · commercial $50K–$5M",ticketHigh:60000,grossMargin:"25–40% (residential higher)",ebitdaMargin:"6–15% typical / 12–15% top",recurring:"low",recurringDetail:"Residential purely transactional (15–25 yr cycle). Commercial maintenance contracts $0.10–0.25/sf/yr at premium multiples.",seasonality:"high",seasonalityDetail:"Peak spring/summer/fall; slow Nov–Mar in cold climates; hurricane belt July–Nov spike",startupLean:"$10–30K (subcontract crews)",startupSerious:"$150–400K (platform-ready)",startupLow:10000,capBucket:"med",sdeMultiple:"1.5–3× SDE (residential small)",ebitdaMultipleMid:"4–9× EBITDA",multipleHigh:12,platformMultiple:"7–12× for commercial",licensing:"med",licensingDetail:"27 states require licensing; 13 register; TX/CO/IN have no state license (major storm-chaser magnets). CA/FL strictest.",qiWorkaround:"Most states allow qualifier model. Lead-safe RRP cert required pre-1978 homes.",laborShortage:"severe",laborDetail:"1099 subcontractor 'bread crumbs' model dominant — 60–75% Hispanic immigrant labor. ICE enforcement cycles disrupt crews. W-2 trend among PE-backed/larger shops.",techPay:"Laborer $20–30/hr · Crew chief $40–75/square · Sales rep $60–200K OTE",lsaCpl:"$50–120 per lead; CPA $200–400",channels:"D2D canvassing ($800–2K CPA · core of storm-chaser model), LSA, PPC, SEO, insurance adjuster partnerships, home shows, referrals",closeRate:"25–45% field estimator; 55–65% top reps; 80%+ insurance-approved",software:"AccuLynx (enterprise $100–200/user/mo) · JobNimbus (mid $25–75/user/mo) · Roofr (modern for sub-$5M) · CompanyCam (photo docs essentially mandatory) · EagleView drone ($25–75/report) · Hover 3D · Leap (in-home sales)",aiThreat:"low",aiDetail:"EagleView Assess (autonomous drone + AI anomaly detection) compresses inspection but doesn't replace sales/install. Rufus (Renovate Robotics) 50% faster than humans on shingle laying, launching PA/NJ with Beacon partnership — adoption 5–10 yrs out for share. Tear-off + complex geometry stay human.",peActivity:"extreme",peDetail:"56 active PE-backed roofing platforms March 2025 (vs 17 two years prior). One platform acquired every 48 hrs mid-2025. 134 deals projected for 2025. Top platforms: Tecta America (Leonard Green, 110+ locs, exploring sale) · CentiMark · Centerline Roofing Group (Bow River) · Peak Roofing Partners (Exuma, 2024 launch, bought Skymark Jul 2025) · Erie Home (Gridiron, merged with Leaf Home Sept 2025, 100 locs) · Aligned Exteriors · Eskola · Nations Roof.",franchises:"Mighty Dog Roofing ($47K, 6%, $165–265K) · 1-800-Hansons hybrid · Roof Maxx (restoration-focused). Less franchise-native than other trades.",marketingLeverage:"veryhigh",drivers:["Median home age 43 yrs; 48% pre-1980 = re-roof wave","$31B insurance claims 2024 (+30% vs 2022); hail avg $9K/claim","Insurance tightening roof-age limits in FL/TX/CO/LA forcing replacements","Metal roofing +35% YoY 2024→25 on durability angle","Storm chasing = real, ethical operators are legitimate"],mktEdges:["101K fragmented shops mostly terrible at digital — LSA/SEO/creative unclaimed","30–40% GM funds 10–15% of revenue back to marketing = defensible CAC","PE exit at 7–9× = every $100K marketing-driven EBITDA = $700–900K enterprise value","Brand + trust equity scarce (most shops have terrible reviews, ugly sites)","Commercial maintenance ($0.10–0.25/sf recurring) under-sold"],risks:["1099 classification risk (IRS/DOL + CA AB-5/MA/NJ)","ICE enforcement cycles disrupting Hispanic immigrant crews","Storm-chaser ethics perception (LA Act 389 cracked down 2025)","Sales rep turnover 60–100% in storm shops","Material volatility (2025 steel tariffs drove 15–20% price increases)","Insurance ACV vs RCV shift compressing retail margins"],bottomLine:"Biggest upside if you execute. Biggest operational complexity. Build in storm-adjacent Tier-2 metro (Dallas/KC/OKC/Nashville/Tampa/Charlotte). D2D + LSA + SEO + referral stack. Hybrid retail+insurance. Target $10M rev / $1.2–1.5M EBITDA in 3 yrs, exit at 7–8×."},
+
+{name:"Foundation Repair",tier:1,fit:86,tagline:"Trust/anxiety-driven sale — marketing authority wins. Groundworks/KKR direct exit buyer at premium multiples. 45–60% gross margins.",marketSize:"$8–12B (foundation + waterproofing)",marketBn:10,cagr:"4.4% foundation / 7.1% waterproofing",avgTicket:"$5,100 avg · $4.5–5.5K typical · $15–50K+ full underpinning",ticketHigh:50000,grossMargin:"45–60%",ebitdaMargin:"15–25%",recurring:"low",recurringDetail:"Annual inspection plans $100–300/yr nascent but growing",seasonality:"med",seasonalityDetail:"Wet seasons drive waterproofing; dry periods bring settlement spikes in TX/OK",startupLean:"$30–50K subcontract model",startupSerious:"$150–300K (push pier/helical equipment)",startupLow:30000,capBucket:"high",sdeMultiple:"3.5–5× SDE",ebitdaMultipleMid:"5–7× EBITDA",multipleHigh:10,platformMultiple:"7–10× (Groundworks-quality 10×+)",licensing:"med",licensingDetail:"GC or specialty foundation license in most states; FL/CA/TX/AZ require engineer stamp &gt;threshold. PE partnership typical.",qiWorkaround:"YES — structural engineer on retainer, licensed GC as qualifier",laborShortage:"med",laborDetail:"3–4 person W-2 crews (more W-2 than roofing due to insurance); better retention than roofing — specialized skills",techPay:"Laborers $18–25/hr · Techs $20–28/hr · Foremen $50–95K",lsaCpl:"$50–150 per lead",channels:"Google search/SEO (dominant, $30–80 CPC), LSA, direct mail to past-job neighborhoods, home shows (30–50% of leads), realtor/plumber/inspector referrals",closeRate:"30–50% in-home; 60%+ top reps. Financing attach drives +15–25%",software:"ServiceTitan increasingly · Supportworks CRM for dealers · JobNimbus · Measure Square/Bluebeam · CompanyCam",aiThreat:"verylow",aiDetail:"Underground excavation work with highly variable site conditions. AI crack-pattern diagnostics help sales, not labor. Smart ground-movement sensors = service opportunity. 15–20 years safe.",peActivity:"extreme",peDetail:"Groundworks (Cortec Group Jan 2020 + KKR added Nov 2025) is dominant. 4,000 emp, 33 states, 15+ acquisitions. Core brands: AFS/Indiana Foundation/JES/Olshan/Ohio Basement/Frontier. Latest: WTX Foundation Feb 2026. Regional: Ram Jack, Acculevel, US Waterproofing.",franchises:"Basement Systems/Supportworks (Thrasher, ~100 dealers, NO royalty but mandatory product purchases $50–250K) · Basement Repair Specialists · Everdry · Ram Jack (helical pile specialist) · Perma-Pier/Dalworth/DryZone regional",marketingLeverage:"veryhigh",drivers:["Aging housing stock — foundations from pre-1980 far more failure-prone","Climate rainfall patterns intensifying","Clay soil regions (TX/OK/MO) seeing more heave","Real estate transactions — foundation issues are deal-killers = urgency","HELOC access enabling $5–50K repair spend","INSURANCE MINIMAL (&lt;10%) — no pricing pressure"],mktEdges:["High-anxiety sale = authority marketing (engineer-on-staff, drone docs, long warranties) wins","Local SEO + reviews massively undervalued","Direct mail + geotargeted Meta to clay-soil/flood-prone ZIPs outperforms generic","Financing attach (GreenSky/Service Finance/Synchrony) is #1 lever","Groundworks is direct exit buyer at 7–9×"],risks:["Engineer partnership dependency","Equipment-heavy capex ($100–500K rigs)","Single-job variability can wreck quarterly EBITDA","Long sales cycle for large jobs"],bottomLine:"Best margin profile in exterior trades. Perfect for operator who likes high-consideration marketing (financing, authority, trust). Groundworks is the direct exit at 7–10× EBITDA. Target: $2–5M revenue regional waterproofer, weak digital, clay-soil metro."},
+
+{name:"Windows & Doors",tier:2,fit:78,tagline:"Classic high-ticket in-home sale. Power HRG built $1.4B on marketing alone. Capital-intensive but proven playbook.",marketSize:"$15–20B services (W&amp;D combined)",marketBn:18,cagr:"6–7% CAGR",avgTicket:"$11K avg whole-home · $8–30K range · premium $15–25K",ticketHigh:30000,grossMargin:"35–50% retail",ebitdaMargin:"8–15% · Power HRG 15–20%+",recurring:"low",recurringDetail:"15–25 yr replacement cycle — essentially none",seasonality:"low",seasonalityDetail:"Flatter than roofing — indoor work possible year-round. Q4 slowest.",startupLean:"$25–50K brokered/subcontract",startupSerious:"$150–500K (showroom, in-home reps)",startupLow:25000,capBucket:"high",sdeMultiple:"3–4.5× SDE",ebitdaMultipleMid:"4.5–6× EBITDA",multipleHigh:10,platformMultiple:"7–10× (RbA affiliates trade premium)",licensing:"low",licensingDetail:"Contractor license in most states; RRP lead-safe cert pre-1978. Lower risk profile than roofing.",qiWorkaround:"Contractor license qualifier standard",laborShortage:"med",laborDetail:"2–3 person install crews. Sales reps are critical role — top reps $200–400K/yr full-commission",techPay:"Apprentice $20–30/hr · Journeyman $30–45 · Master $50–80 · Piecework $75–150/window",lsaCpl:"$75–200 per lead",channels:"TV (core for Power/RbA/Window World · $150–400 cost per appointment), direct mail, LSA, home shows (20–30% of leads), D2D, Costco/Sam's/HD referrals, Meta",closeRate:"15–20% untrained · 35–45% trained · 50–70% referrals",software:"MarketSharp (home-improvement CRM leader) · Leap (in-home + contract + financing) · i360Mobile/Paradigm · Improveit 360 · GreenSky/Service Finance",aiThreat:"verylow",aiDetail:"Hand-installed in highly variable openings. AI helps with virtual staging/measuring/lead qual — augments, doesn't replace. Safest exterior trade from automation.",peActivity:"strong",peDetail:"Power Home Remodeling (private, $1.4B rev, 4,000 emp, founders still control) — exemplar. Leaf Home + Erie Home merged Sept 2025 (Gridiron+Ares, 300+ field offices, 48 states+Canada, 3,100 sales, 2,400 installers). Esler Companies (largest RbA affiliate, $500M+). West Shore Home, Great Day Improvements (Champion Windows).",franchises:"Renewal by Andersen ($45–60K fee, 5–7%, $300K–$1M) — gold standard, dealers do $10M–$500M+ · Window World ($45K, 12%, $122–329K — high royalty) · Champion Windows · Pella Dealer · Andersen Dealer",marketingLeverage:"veryhigh",drivers:["43-yr median home age (original 30-yr single-pane windows)","IRA extended 25C efficiency credit $600/yr for windows through 2032","Storm/impact mandates FL/TX coastal","Garage door replacement highest ROI reno (194% Cost vs Value 2025)","Home appreciation making reno spend feel justified"],mktEdges:["Power HRG thesis proved marketing alone = $1.4B","TV+direct mail+digital stack expensive ($500K–2M/yr min) but defensible","In-home close rate optimization bigger lever than most marketing","Financing attach 60%+ of jobs — integration matters","RbA dealership is the branded-path shortcut if $1M+ capital"],risks:["Capital intensity (showroom, inventory, reps)","Heavy TV commitment for scale","Sales rep recruitment/retention is core operating challenge","Home improvement is deferrable in recession"],bottomLine:"Proven marketing playbook but capital-heavy. Best path: buy/join RbA affiliate territory, or build Power HRG-style in underserved mid-market. Franchise de-risks significantly."},
+
+{name:"Garage Door",tier:2,fit:82,tagline:"Best LSA economics in home services ($25–40 CPL). Emergency demand + review flywheel = print money.",marketSize:"$1.7B service / $4B NA overhead door",marketBn:2,cagr:"3.85% NA / 5.9% global service",avgTicket:"Repair ~$500 · Replace ~$4K · Opener $400–700",ticketHigh:4000,grossMargin:"30–50% typical · 55–65% healthy",ebitdaMargin:"15–20% healthy · 10–15% avg · 25%+ top",recurring:"low",recurringDetail:"Mostly one-shot (7–9 yr cycle); preventive maintenance plans can recur",seasonality:"med",seasonalityDetail:"Spring/fall peaks; winter emergency spike",startupLean:"$50–100K independent",startupSerious:"$164–360K (Precision franchise)",startupLow:50000,capBucket:"med",sdeMultiple:"2.5–3.5× SDE",ebitdaMultipleMid:"4–7× EBITDA",multipleHigh:12,platformMultiple:"6–12× (PE emerging — Wheelhouse/GarageCo)",licensing:"low",licensingDetail:"GC or specialty license in some states (CA/FL); $500–2K typical",qiWorkaround:"Easy — GC qualifier model",laborShortage:"med",laborDetail:"2-person crews; tech pay $22–35/hr; experienced lead $60–85K. Low unionization.",techPay:"$22–35/hr · Lead $60–85K",lsaCpl:"$25–40 (LOWEST in home services)",channels:"Google LSA DOMINANT (emergency intent), SEO, direct mail to 10–15yr neighborhoods, review velocity (Precision wins on 100K+ reviews)",closeRate:"High — emergency calls book well",software:"ServiceTitan enterprise · Housecall Pro $59–149 · Jobber",aiThreat:"verylow",aiDetail:"Physical install/spring replacement requires hands. Safe for 10+ years.",peActivity:"strong",peDetail:"Wheelhouse (Trivest, launched 2026 unified brand) · GarageCo (Gridiron, 2024–25) · A1 Garage Door (PE-backed). 17–20× mega-deals emerging (Blackstone/Champions precedent in adjacent category).",franchises:"Precision Garage Door (Neighborly, category killer, $5.2M avg gross 2022, $164–360K all-in, $75–150K fee, $250K net worth req) · Overhead Door Co · Clopay dealers",marketingLeverage:"veryhigh",drivers:["100M+ US residential garages; 15–30yr lifespan","Aging door inventory","2025 steel tariffs drove 15–20% price increases","Emergency/broken-door demand price-inelastic","Spring replacement cycle (7–9 yrs)"],mktEdges:["Best LSA economics = predictable CAC","5-star review flywheel is category-defining competitive moat","Emergency response time (30 min) is marketing","Buy retiring shop $800K rev, rebuild Google profile + LSA, double in 18 months","Codie Sanchez-ideal: boring, fragmented, Google-dominable"],risks:["One-shot jobs = no recurring (offset with maintenance plans)","Precision's review moat is real in markets they dominate","Supply chain on springs/openers (offshore component)"],bottomLine:"Arguably HIGHEST-ROI marketing play on this list. Low capital, predictable LSA CAC, emergency demand. Ideal starter or bolt-on."},
+
+{name:"Pool Service",tier:2,fit:80,tagline:"Best recurring revenue math outside pest control. Route density = 30–40% labor cost advantage. Sunbelt year-round.",marketSize:"$8.8B service (construction $24.8B separate)",marketBn:9,cagr:"4.2% revenue / 2.9% business count",avgTicket:"$150–250/mo residential · $1,700/yr avg household · commercial $2K+/yr",ticketHigh:250,grossMargin:"50–65% on service routes",ebitdaMargin:"15–25% well-run · top 25–30%",recurring:"high",recurringDetail:"Weekly/biweekly recurring contracts — ~$1,000 annual rev per customer · Route acquisition rule of thumb: 8–12 months gross revenue per account",seasonality:"low",seasonalityDetail:"Sunbelt year-round · Northern May–Oct peak",startupLean:"$15–40K solo",startupSerious:"$100–200K franchise/multi-tech",startupLow:15000,capBucket:"low",sdeMultiple:"2–3.5× SDE (small) · 3–5× EBITDA mid",ebitdaMultipleMid:"6–9× EBITDA",multipleHigh:13,platformMultiple:"10–13× (Poolwerx 2023 $760K/franchisee gross profit)",licensing:"med",licensingDetail:"25+ states require CPO for commercial pools. Chemical handling permits. Residential: GC/contractor license.",qiWorkaround:"Easy — CPO cert is 5-year validity",laborShortage:"med",laborDetail:"Route tech $18–28/hr · exp CPO lead $50–65K. Moderate turnover (lower than landscape).",techPay:"$18–28/hr",lsaCpl:"Low — primarily route-density marketing",channels:"Neighborhood saturation, door hangers, referral programs, Google Maps/SEO, Facebook neighborhood groups, route acquisitions from retirees",closeRate:"High on inbound — customers actively seeking",software:"Skimmer (market leader, 30K+ users, 700K pools monthly, partner to Poolwerx) · Pool Brain (30+ trucks) · Pool Office Manager · ServiceTitan",aiThreat:"low",aiDetail:"Robotic cleaners (Polaris/Dolphin/Aiper) are additive — customers still need chemical balance, equipment diagnostics, repairs. 20-year coexistence.",peActivity:"strong",peDetail:"Poolwerx (Aquila Capital, 60 US / 400 global) · ASP-America's Swimming Pool Co (Authority Brands, ~400 locs) · Pool Scouts · Pinch A Penny · Leslie's closed 80 stores 2025–26 after $180.7M goodwill impairment (failed rollup).",franchises:"Pool Scouts ($50K fee, 8%, $103–153K) · ASP ($40K, 5–7%, $84–210K) · Poolwerx ($765K–$1.4M retail+mobile, $760K avg gross profit/franchisee 2023)",marketingLeverage:"high",drivers:["120K+ new pools/year during COVID boom now aging","Aging Sunbelt infrastructure driving high-margin repair (motors/heaters/automation)","DIY-to-outsource shift (labor-scarce households)","10.4M residential pools in US"],mktEdges:["Route of 250 customers × $180/mo = $540K ARR at 60%+ GM","Acquire 2–3 small routes from retirees, apply modern marketing + Skimmer, double density","Classic Codie Sanchez boring-business play","Multi-gen sellers = often 2.5–3.5× SDE going in, 5× on exit","FL/TX/AZ/CA densest markets"],risks:["Regulatory (chemicals, CPO)","Northern seasonality severe","Equipment repair is higher margin but more skilled labor"],bottomLine:"Best recurring-revenue math outside pest. Perfect for acquisition play in Sunbelt metros. $100–300K buy-in for small routes can become $3M+ operation in 3–5 years."},
+
+{name:"Septic Services",tier:2,fit:79,tagline:"'Boring = moat.' Local SEO wide open. Wind River (Gryphon) buying 100+ operators. Zero AI risk.",marketSize:"$8.1B",marketBn:8,cagr:"3.6% CAGR",avgTicket:"Pump $300–650 · Inspect $250–500 · Field repair $600–3K · Drain field $3–15K · New install $3.5–30K",ticketHigh:30000,grossMargin:"40–60% pumping · 30–45% install",ebitdaMargin:"15–25%",recurring:"med",recurringDetail:"Every 3–5 yrs per household pumping cycle — sticky and price-inelastic · Commercial grease traps recurring",seasonality:"low",seasonalityDetail:"Modest; real estate transaction inspections drive spring/summer; frozen ground Q1 cold climates",startupLean:"$80–150K",startupSerious:"$150–250K",startupLow:80000,capBucket:"high",sdeMultiple:"2.5–3.5× SDE",ebitdaMultipleMid:"4–6× EBITDA",multipleHigh:9,platformMultiple:"6–9× (Wind River paying premium)",licensing:"med",licensingDetail:"60% of states require septage hauler license. MA Title V, OR DEQ, SC DES, TN SSDS. $100–500 licensing. Disposal permit = LOCAL MOAT — municipalities limit hauler permits.",qiWorkaround:"CDL required; state septage license not person-bound",laborShortage:"med",laborDetail:"Dirty but well-paid; CDL + license creates stickiness. Drivers $22–32/hr · Installers $25–38/hr · Foreman $55–85K",techPay:"Drivers $22–32 · Installers $25–38",lsaCpl:"Low — SEO dominant",channels:"Google local SEO (significantly underexploited), realtor + home inspector referrals (Title V), 3–5 yr automated reminder cadence, Facebook/Nextdoor rural",closeRate:"High on repeat customers; 40–60% on reminder re-book",software:"ServiceCore (dominant septic-specific) · ServiceTitan moving in · Curbwaste",aiThreat:"verylow",aiDetail:"LITERALLY the safest trade from AI/robotics. Nobody automating pump trucks.",peActivity:"med",peDetail:"Wind River Environmental (Gryphon Investors) has acquired 100+ septic/waste companies and actively buying 2025–26 (Felix Septic, Eastern Pipe, Fenkner, M&amp;S, Brockwell's). Apex Service Partners expanding. Regional roll-up opportunity Southeast/Midwest/TX.",franchises:"Minimal dedicated franchises · Mr. Rooter overlap · Roto-Rooter sewer-focused",marketingLeverage:"high",drivers:["~20% US households depend on septic (60M Americans) — immovable base","Aging systems from 1970s–80s at end-of-life","EPA wastewater tightening","Rural/suburban expansion beyond sewer","State point-of-sale inspection regimes (MA Title V etc.)"],mktEdges:["Thin competition + high-intent queries + good ticket = rank top-3 in 6–9 months","Pump-reminder automation: 40–60% re-book rate with CRM + text/email","Realtor/Title V relationships lock $200K+/yr recurring","Roll-up: buy 3–5 local operators at 3×, unify marketing, exit to Wind River at 5–7×"],risks:["CDL driver shortage","Disposal facility relationship is existential (single-point-of-failure)","Environmental liability if contamination","Capital-heavy on vac trucks ($50–225K)"],bottomLine:"'Boring = moat' category. Incumbents are 3rd-gen family operators who don't advertise. Best structurally attractive rollup in trades today. Low-risk, long-runway play."},
+
+{name:"Porta Potty Rental",tier:2,fit:77,tagline:"Recurring construction contracts + asset moat. Explicitly 'AI-proof.' CNBC profiled 31-yr-old at $4.3M/yr.",marketSize:"$3.3B (2026) → $5.35B by 2030",marketBn:3.3,cagr:"6.9% CAGR",avgTicket:"Construction $80–150/mo · Event $100–250/day · Luxury trailer $500–5K/day",ticketHigh:5000,grossMargin:"55–70%",ebitdaMargin:"20–25% avg · 25–35% mature",recurring:"high",recurringDetail:"Construction sites = multi-month contracts (50% of revenue). 200 units = ~$3M revenue with 25–35% net",seasonality:"low",seasonalityDetail:"Modest; event season adds Q2–Q3",startupLean:"$50–75K scrappy (10–15 used units + used vac truck)",startupSerious:"$160–350K typical",startupLow:50000,capBucket:"high",sdeMultiple:"3–4× SDE (asset premium)",ebitdaMultipleMid:"5–7× EBITDA",multipleHigh:10,platformMultiple:"7–10× (United Site Services is category leader)",licensing:"low",licensingDetail:"CDL Class B for vacuum truck · state/local waste disposal permits · OSHA · low regulatory barrier",qiWorkaround:"CDL driver is the gate",laborShortage:"med",laborDetail:"Service tech $18–28/hr · CDL driver $55–70K · One tech services 25–35 units/day",techPay:"$18–28/hr tech · $55–70K driver",lsaCpl:"Low — mostly B2B relationship-driven",channels:"B2B construction sales, event planners, municipalities, Google SEO for events, construction-site walking reps",closeRate:"Construction = relationship + reliability based; long-cycle B2B",software:"ServiceCore (dominant portable sanitation) · Docket Waste Software (unified dumpster+porta) · QuickBooks",aiThreat:"verylow",aiDetail:"Pumping/servicing requires physical labor. Industry explicitly positioned as AI-proof (CNBC 2026).",peActivity:"strong",peDetail:"United Site Services (PE-owned, category leader) · ServPro Portable Toilets · Texas Outhouse · On Site Companies. Most markets have 2–4 regional dominants + small players.",franchises:"redbox+ Dumpsters (Dwyer/Neighborly) combines dumpster + porta — strong combo",marketingLeverage:"med",drivers:["Construction ~50% of revenue (stable long-term contracts)","Events/festivals (rising per-attendee ratios)","Disaster response","ADA + luxury unit upsells growing","Handwash station upsells post-COVID"],mktEdges:["Boring + fragmented + recurring + asset moat = Codie Sanchez unicorn","Construction PMs pick on relationship + reliability, not price","Modern CRM + on-time service reputation scales rapidly","Trade show presence huge","CNBC $4.3M example proves playbook"],risks:["Asset-heavy ($300–500K capex barrier)","CDL shortage","Disposal permitting is local-moat but also single-point-of-failure","Not for bootstrappers"],bottomLine:"Classic boring-business cash machine. Recurring B2B contracts + asset moat + explicitly AI-proof. $150–350K in, $3M+ achievable in 5–7 years."},
+
+{name:"Dumpster Rental",tier:2,fit:76,tagline:"Asset moat + Google dominance + commercial recurring contracts. Waste Connections acquired LoadUp 2024.",marketSize:"$1.6B roll-off (2024) → $2.3B by 2033 · Commercial dumpster $4.5B→$7B",marketBn:2.3,cagr:"6.8% CAGR roll-off",avgTicket:"Residential $300–800/rental · Commercial front-load $150–600/mo recurring",ticketHigh:800,grossMargin:"40–70% (higher commercial)",ebitdaMargin:"20–25% typical · 25–40% well-run · 40%+ top",recurring:"med",recurringDetail:"Commercial front-load = excellent recurring · Roll-off transactional but repeat · Per-dumpster $1,248 annual profit at 90% util / $11,200+ top operators",seasonality:"med",seasonalityDetail:"Spring/summer peak · November uplift · Feb slowest",startupLean:"$150–250K (partial inventory)",startupSerious:"$200–500K full",startupLow:150000,capBucket:"high",sdeMultiple:"2.5–3.5× SDE",ebitdaMultipleMid:"4–6× EBITDA",multipleHigh:10,platformMultiple:"6–10× (asset+contract premium)",licensing:"low",licensingDetail:"CDL · DOT/FMCSA · municipal permits · state waste hauler permits",qiWorkaround:"CDL driver is the gate",laborShortage:"severe",laborDetail:"Driver pay $55–80K w/OT · CDL shortage acute · Generally 1 person/truck",techPay:"$55–80K CDL driver",lsaCpl:"Residential: Google SEO+LSA dominant",channels:"Google SEO + LSA for residential ('dumpster rental near me'), B2B commercial (contractors, roofers, PMs), repeat-customer CRM",closeRate:"Online booking = high conversion",software:"Docket (1,500+ haulers, rebranded Docket Waste Software March 2026) · ServiceCore · Dumpster Rental Systems · CurbWaste · Quipli",aiThreat:"low",aiDetail:"Automated side/front-load for municipal exists; roll-off requires human placement judgment. Moderate dispatch optimization pressure.",peActivity:"strong",peDetail:"Waste Management + Republic Services dabble but not focused · Dumpsters.com aggregator · Budget Dumpster · College Hunks combining junk+dumpster · Waste Connections acquired LoadUp 2024.",franchises:"Bin There Dump That ($29–45K fee, residential mini-bin, $116–235K, $350K net worth, $75K liquid) · redbox+ Dumpsters (Dwyer/Neighborly, porta combo)",marketingLeverage:"high",drivers:["Construction/renovation activity","DIY home projects","Commercial waste consolidation","Junk removal overlap"],mktEdges:["Asset base = moat: $300–500K capex deters competitors","Local SEO underexploited in most markets","Buy retiring operator 15 dumpsters+truck at 3× SDE, modernize online booking, expand into commercial recurring","Asset base supports loan financing"],risks:["Capital intensive ($120–200K/truck + $3–5K/dumpster × 10–30)","CDL driver supply is chronic","Disposal facility relationships necessary","Not for bootstrappers"],bottomLine:"Codie Sanchez darling. High asset base = moat, Google dominance = predictable CAC. Best for operator with $200K+ available and preference for commercial-recurring mix."},
+
+{name:"Gutters",tier:2,fit:75,tagline:"Low barrier + recurring cleaning + guard upgrade cross-sell. Best 'starter' recurring business.",marketSize:"~$2B combined",marketBn:2,cagr:"4% install / 12.5% services 2025–2034",avgTicket:"Install $1.5–3.5K · Cleaning $150–400/visit · Guard retrofit $5–12K",ticketHigh:12000,grossMargin:"25–45% (guards 35–45%)",ebitdaMargin:"15–25%",recurring:"high",recurringDetail:"Cleaning contracts ($150–400 × 2–4/yr) are one of BEST recurring opportunities in exterior · 3–10 yr LTV",seasonality:"med",seasonalityDetail:"Cleaning peaks late fall + spring · Install peaks spring/summer/fall",startupLean:"$10–30K cleaning-only",startupSerious:"$30–50K install+cleaning",startupLow:10000,capBucket:"low",sdeMultiple:"2–4× SDE (small) · 4–6× EBITDA mid",ebitdaMultipleMid:"5–8× EBITDA",multipleHigh:9,platformMultiple:"6–9× with strong recurring book",licensing:"low",licensingDetail:"Generally no specific license · GC or handyman categories · OSHA ladder/fall safety",qiWorkaround:"Easy — low regulatory barrier",laborShortage:"med",laborDetail:"2–3 person crews · installers $18–30/hr · piecework $0.75–1.50/LF · Better retention than roofing",techPay:"$18–30/hr",lsaCpl:"$30–100",channels:"LSA, hyper-local/Nextdoor (best for cleaning), postcards ($15–40 CPL), roofer referrals, recurring contract retention",closeRate:"Cleaning 60%+ · guard in-home 25–40%",software:"Jobber · Housecall Pro · ServiceTitan (install-focused) · JobNimbus · AccuLynx",aiThreat:"med",aiDetail:"Robotic gutter cleaning (iRobot Looj, drones) emerging — 45% efficiency improvement in some accounts. Install stays manual. Moderate threat on cleaning over 10–15 yrs.",peActivity:"strong",peDetail:"Leaf Home / LeafFilter (Gridiron + Ares preferred 2025, now merged with Erie Home Sept 2025, 200+ locs company-owned, $1B+ rev) dominant at gutter-guard end · Gutter Helmet/Englert LeafGuard · Groundworks adds gutter · Exterior-combo players",franchises:"The Brothers That Just Do Gutters (largest, $49.5K fee, 6% or $125/wk/territory min, 3% marketing, $143–217K, 100 locs 35 states 2025 FDD) · Ned Stevens regional · LeafFilter NOT franchised",marketingLeverage:"high",drivers:["Aging homes need refresh every 20–30 yrs","Severe weather replacements","Preventive maintenance trend (52% of homeowners)","Leaf protection/guard category growing fast","Natural roofing attach"],mktEdges:["Lowest startup capital + high margin + recurring = ideal cash machine","Tuck-in to existing roofing/exterior for cross-sell ($1.5–3.5K attach)","LSA + local SEO cheap and effective","Gutter guard upgrade from cleaning customers = hidden unit economic gem","Brothers franchise viable if want proven playbook"],risks:["Ladder/fall liability","Robotic cleaning threat emerging","Winter seasonality in cold markets"],bottomLine:"Best 'recurring revenue + low capital' starter business. Or ideal bolt-on to roofing. Both paths generate healthy ROI fast."},
+
+{name:"Tree Service",tier:3,fit:70,tagline:"Last great local SEO play in trades. $39.5B market, 175K operators, no dominant franchise. Emerging PE rollup.",marketSize:"$39.5B",marketBn:40,cagr:"6.1% hist / 2.1% forward (labor drag)",avgTicket:"Removal $200–2K avg $750 · extreme $5K+ · Trim $270–1.8K · Stump $100–400 · Emergency +40–50% premium",ticketHigh:5000,grossMargin:"30–60% equipment-dependent",ebitdaMargin:"18–30% well-managed",recurring:"low",recurringDetail:"Plant health care (deep-root fert, EAB treatment) = $400–1.2K/yr recurring opportunity · Storm-driven episodic",seasonality:"high",seasonalityDetail:"Strong spring/summer (Apr–Sep) · Storm spikes · Winter slump (diversify into snow/lighting)",startupLean:"$20–50K bootstrap",startupSerious:"$150–250K (bucket truck + chipper + stump)",startupLow:20000,capBucket:"high",sdeMultiple:"2–3× SDE",ebitdaMultipleMid:"3–5× EBITDA",multipleHigh:8,platformMultiple:"5–8× (few platform transactions)",licensing:"low",licensingDetail:"Most states no dedicated license (CT/MD/LA exceptions). ISA Certified Arborist voluntary but marketing-valuable. TCIA accreditation. Pesticide applicator for PHC.",qiWorkaround:"Very low regulatory barrier · insurance is the moat",laborShortage:"severe",laborDetail:"Groundsmen $15–22/hr · Climbers $22–35/hr · ISA arborists +20% premium · One of HIGHEST fatality trades (WC 15–30% of payroll) · Certified arborists scarce and poached",techPay:"Climbers $22–35/hr",lsaCpl:"$35–65",channels:"LSA + local SEO (still beatable most markets), storm-response SMS/Facebook geo-targeting, neighborhood canvassing postcards (3–5% conv), Nextdoor (arborists dominate), realtor pre-listing",closeRate:"Emergency high · quoted work 30–50%",software:"ArboStar (arborist-specific, growing) · Arborgold $129+ · SingleOps · TreePlotter · RouteOptics/Upper",aiThreat:"verylow",aiDetail:"Heights + variable terrain + chainsaws + dynamic loads. Drone PHC diagnostics emerging but don't replace climber. 15+ yr horizon.",peActivity:"low",peDetail:"LATE-EARLY consolidation — 3–5 years behind pest. Soundcore's TreeServe (Dave Leonard Tree Specialists, JL Tree acquired Sept 2025) · BrightView public · Asplundh ($5.7B private utility-focused) · Davey ($1.8B ESOP) · SavATree ($479M) · Bartlett ($526M). Top 4 &lt;20% market share.",franchises:"Monster Tree Service ($50K fee, 8%, $120–200K) — primary franchise. No dominant system.",marketingLeverage:"veryhigh",drivers:["Climate-driven storm severity","Aging tree stock in suburbs planted 1960s–80s","EAB and tree diseases driving removals","Utility line clearance bleed-over pricing pressure","Real estate transactions"],mktEdges:["LAST GREAT LOCAL SEO PLAY — incumbents with bad websites","Rank LSA + organic in 4–8 months in top-50 metros","Storm response playbook = repeatable asset (SMS/email + rapid crew + postcards w/in 48hrs)","PHC upsell converts one-time → $400–1.2K/yr relationship","Platform potential: buy 3–5 regional operators, unify, exit TreeServe/PE at 5–7×"],risks:["HIGHEST fatality rate of these trades","Insurance is #1 hidden cost ($8–25K/yr)","Workers comp 15–30% of payroll","Weather-exposed retention challenges","Asplundh/Davey don't sell (utility-focused)"],bottomLine:"Best trade for marketing-led entrant wanting to build first-mover rollup. Underserved local SEO + emerging PE interest + no franchise leader. High insurance + labor risk."},
+
+{name:"Siding",tier:3,fit:68,tagline:"Best played as complement to roofing, not standalone. Natural insurance-claim bundle.",marketSize:"$12–15B service · $7.6B fiber cement alone",marketBn:13,cagr:"4–6% · fiber cement 6–8%",avgTicket:"Vinyl $12–25K · Fiber cement $20–45K · Wood $35–75K",ticketHigh:75000,grossMargin:"25–35%",ebitdaMargin:"8–15%",recurring:"low",recurringDetail:"Very limited · power-washing/maintenance plans nascent",seasonality:"high",seasonalityDetail:"Peak spring/summer/fall · winter slow in cold climates",startupLean:"$15–40K",startupSerious:"$75–200K",startupLow:15000,capBucket:"med",sdeMultiple:"3–5× SDE",ebitdaMultipleMid:"4–6× EBITDA",multipleHigh:9,platformMultiple:"6–9× with roofing combination",licensing:"med",licensingDetail:"Similar to roofing · James Hardie installer cert confers credibility/warranty",qiWorkaround:"Standard GC qualifier",laborShortage:"severe",laborDetail:"3–4 person crews · 60–75% Hispanic immigrant labor · WC class 5645 similar to roofing · Lead $25–40/hr · Laborer $18–25/hr · Piecework $2–5/sf",techPay:"$18–40/hr",lsaCpl:"$75–200",channels:"Insurance claims overlap with roofing, LSA, home shows, direct mail post-storm, TV for larger branded players",closeRate:"25–40% in-home · 45–60% insurance",software:"AccuLynx, JobNimbus, Roofr · Xactimate insurance · EagleView · Hover visualization",aiThreat:"low",aiDetail:"Site-variable manual work · prefab panels growing 4.72% CAGR (modest reduction) · Color visualization AI helps sales. Safer than roofing.",peActivity:"med",peDetail:"James Hardie + AZEK combined $8.75B July 2025 = dominant materials platform. Elite Preferred Contractor quasi-franchise. Leaf Home + Erie Home combined $3B+ platform includes siding. Most PE targets roofing+siding combined operators.",franchises:"James Hardie Elite Preferred Contractor (training + referrals + warranty, no royalty) · Leaf Home / West Shore Home / Power HRG / Erie Home dealer-network equivalents",marketingLeverage:"high",drivers:["Fire resistance codes (CA/CO/AZ/OR) driving fiber cement","Wildfire-prone zones forcing non-combustible","Hail damage cycles in Midwest creating replacement","Energy efficiency + insulation combos","James Hardie AZEK merger"],mktEdges:["Most siding operators WORSE at digital than roofers","Roofing+siding bundle is winning play (same customer, same insurance event, higher ticket)","James Hardie Elite cert + aggressive local SEO = moat","Insurance claims expertise crosses naturally"],risks:["Pure-play siding hard to scale vs combined","Labor immigration dynamics","Weather-dependent seasonality"],bottomLine:"NOT standalone. Best as complement to roofing operator. James Hardie Elite + marketing + roofing attach = winning combo."},
+
+{name:"Painting",tier:3,fit:62,tagline:"Sales process is the differentiator. Low barrier, labor management is the real challenge.",marketSize:"$49B broad · $28.2B house painting",marketBn:28,cagr:"3.7% residential",avgTicket:"Room $300–800 · Interior $3.5–8K · Exterior $4–12K (20–50% premium)",ticketHigh:12000,grossMargin:"30–50%",ebitdaMargin:"8–14% avg · 20–25% top (Labor 70–85% of cost)",recurring:"low",recurringDetail:"Commercial maintenance contracts recur · residential low",seasonality:"high",seasonalityDetail:"Exterior highly seasonal (Apr–Oct) · interior year-round",startupLean:"$10–30K",startupSerious:"$50–80K",startupLow:10000,capBucket:"low",sdeMultiple:"2–2.5× SDE",ebitdaMultipleMid:"3–5× EBITDA",multipleHigh:8,platformMultiple:"5–8×",licensing:"low",licensingDetail:"Very low barrier · GC license in most states · EPA RRP cert for pre-1978 · Commercial often requires bonding",qiWorkaround:"Very easy",laborShortage:"severe",laborDetail:"Painter $20–32/hr lead · $15–22 helpers · Extreme reliance on immigrant labor · Seasonal workforce expansion/contraction",techPay:"$15–32/hr",lsaCpl:"$40–80",channels:"Door hangers (still effective), LSA, direct mail + before/after photos, Angi/Thumbtack/HomeAdvisor (quality variable)",closeRate:"Good with structured presentation + same-day digital proposals",software:"Jobber · Housecall Pro · PaintScout · Estimate Rocket",aiThreat:"low",aiDetail:"Residential very safe. Spray automation (PaintJet/Okibo) entering commercial/industrial exterior. 10+ yrs.",peActivity:"strong",peDetail:"CertaPro (~350 locs), Fresh Coat, 360° Painting, Five Star Painting, WOW 1 DAY Painting · PE activity limited but growing",franchises:"CertaPro ($65K fee, 6% declining, 2% mkt, $85/mo tech, $171–302K) · 360° Painting ($65K, $101–145K) · Five Star Painting ($45K, 6%, $77–185K)",marketingLeverage:"high",drivers:["Repaint cycle (interior 5–8 yrs · exterior 7–10)","Housing turnover (pre-sale painting)","Commercial office reconfiguration post-COVID","Industrial maintenance contracts"],mktEdges:["Sales process is differentiator — most give verbal driveway estimates","Modern operator: PaintScout + same-day digital proposals + financing","Strong for marketing-savvy but LABOR is real challenge","Franchise path viable"],risks:["Labor management is single hardest part","Immigrant labor dependency","Low-barrier = low moat","Seasonal exterior volatility"],bottomLine:"Decent income but lower enterprise value vs top tiers. Labor management is the real challenge, not marketing. Franchise (CertaPro) de-risks."},
+
+{name:"Junk Removal",tier:3,fit:66,tagline:"Most marketing-native trade. Franchise-vs-indie arbitrage = direct marketing dollars.",marketSize:"$13–15B · Franchise $2.65B (2026) → $6.71B by 2035",marketBn:14,cagr:"9.6% franchise CAGR",avgTicket:"Residential $200–400 AOV $250 · Commercial $400–600 AOV $450 · Estate cleanouts $1–5K+",ticketHigh:5000,grossMargin:"40–60%",ebitdaMargin:"10–15% well-managed · 20%+ disciplined",recurring:"low",recurringDetail:"No recurring · contractor accounts repeat",seasonality:"med",seasonalityDetail:"Spring/summer peak · November uplift · Feb slowest",startupLean:"$10–40K independent",startupSerious:"$165–258K 1-800-GOT-JUNK",startupLow:10000,capBucket:"low",sdeMultiple:"1.5–2.5× SDE",ebitdaMultipleMid:"3–4× EBITDA",multipleHigh:6,platformMultiple:"4–6× (LoadUp → Waste Connections 2024)",licensing:"low",licensingDetail:"Basic business + commercial auto + DOT · some states waste hauler permit $100–500",qiWorkaround:"None needed",laborShortage:"severe",laborDetail:"Haulers $15–22/hr entry · Leads $22–28 · Poor retention — physical and modest pay. Best use profit-sharing + tip pools.",techPay:"$15–28/hr",lsaCpl:"$35–75",channels:"Heavy SEO+SEM, LSA, franchise marketing muscle, same-day booking, Nextdoor+Yelp extremely influential",closeRate:"High with same-day booking + online scheduling",software:"1-800-GOT-JUNK proprietary (franchise) · College Hunks HUNKware (franchise) · Independents: ServiceTitan/Housecall Pro/Jobber/Curbwaste",aiThreat:"med",aiDetail:"Physical heavy-lifting not automatable. Threat more from dispatch optimization + dynamic pricing AI squeezing non-adopters.",peActivity:"strong",peDetail:"Waste Connections acquired LoadUp 2024 · 1-800-GOT-JUNK 160+ locs $2.56M avg rev/loc 12% US share · College Hunks 200+ · Junk King 100+",franchises:"1-800-GOT-JUNK ($65K min · 8% royalty + 8% SMT fee + up to 5% branding = 21% of revenue to franchise fees · $2.56M avg rev · $165–258K) · College Hunks ($55K, 7% + 8% mkt, $250–480K) · Junk King ($41K, 6–7%, 7%, $164–268K)",marketingLeverage:"veryhigh",drivers:["Housing turnover","Downsizing boomers (demographic wave)","Estate cleanouts","Home renovation","Garage/storage-unit purges"],mktEdges:["Most marketing-native trade — marketing-skilled operator outperforms franchisees at equivalent cost","Own digital 100% vs franchise 21% revenue drag","Indie 20%+ net vs franchise 8–12% post-royalty","Commercial specialization (estate/foreclosure/fixture removals) = $1K+ tickets","Dynamic pricing + same-day booking = tech differentiation"],risks:["Low barrier = churn","Indie requires building brand from zero","Labor turnover chronic","Dump fees variable $50–150/ton"],bottomLine:"Franchise-vs-indie is a marketing arbitrage. Buy the brand (franchise) if you can't build one; build your own if marketing is core competency. Either path cash-flows fast."},
+
+{name:"Landscaping / Lawn Care",tier:3,fit:60,tagline:"Strong recurring revenue — BUT autonomous mower threat is real 2027–2030 inflection.",marketSize:"$188.8B landscaping · $60–62B lawn care",marketBn:62,cagr:"~5% lawn · 7% global",avgTicket:"Mowing $40–80/visit · $100–300/mo recurring · Design-build $5–50K+",ticketHigh:50000,grossMargin:"45–50%",ebitdaMargin:"10–15% lawn · 25–40% design-build",recurring:"high",recurringDetail:"60–75% maintenance contracts for resilient ops · Route density in 5–10 mile clusters",seasonality:"high",seasonalityDetail:"Northern Apr–Nov · Southern year-round",startupLean:"$5–15K solo used equipment",startupSerious:"$25–50K professional",startupLow:5000,capBucket:"low",sdeMultiple:"1.5–2.5× solo · 3–5× established",ebitdaMultipleMid:"5–8× EBITDA",multipleHigh:12,platformMultiple:"8–12× (BrightView 6.9× public Apr '26)",licensing:"med",licensingDetail:"Pesticide applicator required all 50 states for chemical · Landscape contractor license CA/OR/AZ/TN/TX · Irrigation contractor separate",qiWorkaround:"Pesticide applicator cert required but short path",laborShortage:"severe",laborDetail:"Crew lead $20–28 · Helpers $15–20 · Massive H-2B visa reliance for seasonal",techPay:"$15–28/hr",lsaCpl:"Low — route-density marketing",channels:"Route-density targeting, door hangers + yard signs, LSA + SEO for premium, Nextdoor/Facebook, referral bonuses",closeRate:"Neighborhood-cluster driven",software:"Service Autopilot (lawn-specialized, integrates with Deep Lawn AI estimating) · Jobber · ServiceTitan · Aspire · LMN · Real Green",aiThreat:"med",aiDetail:"Scythe Robotics M.52 autonomous mower (150+ deployed early 2026, rental/subscription) · Husqvarna Automower 540 EPOS 8,000m² · Honda ProZision 60\" autonomous ZTR $33K launching 2026 · 58% property managers predict robotic majority 2029–2031 · 30–50% crew labor reduction on mowing-heavy commercial · Residential lagging",peActivity:"strong",peDetail:"BrightView $3.2B public · Yellowstone · Juniper · Davey · SavATree · Aspen Grove (PE-backed acquired James River, Reliable Property, T R Gear) · TruGreen (MSP) · Weed Man · Lawn Doctor · Heritage Landscape Supply",franchises:"Lawn Doctor ($45K, 10%, $133–149K) · Weed Man ($24.6K, 5.5%, $70–87K) · U.S. Lawns ($24–34K, 4–6%, $53–81K, $150K net worth)",marketingLeverage:"high",drivers:["Outdoor living remodel trend","Commercial PM demand (HOAs, campuses)","Water regulations driving irrigation retrofits","Aging-in-place 65+ outsourcing"],mktEdges:["Excellent recurring + route density play","Buy retiring solo 100 accounts at 1.5–2× SDE (~$100–200K)","Double density via referrals + door hangers","Classic Codie Sanchez fit — BUT","Strategic position toward design/install/enhancement which remains human-dependent"],risks:["Autonomous mower threat is REAL 2027–2030 inflection","Mowing-heavy commercial most exposed","Immigrant labor dependency","Heavy seasonality in North"],bottomLine:"Good recurring math NOW. AI risk real within 5 years. Best strategy: buy recurring base BUT pivot toward design-build and enhancement. Not a 10-year hold."},
+
+{name:"Fencing",tier:4,fit:55,tagline:"Fragmented, underserved marketing — but one-shot tickets and labor-heavy execution.",marketSize:"$10.36B · $24.7B broader fence construction",marketBn:11,cagr:"5.3% CAGR",avgTicket:"$3–8K residential (100–200 LF) · $10–30/LF",ticketHigh:8000,grossMargin:"30–40% target · 40–50% elite",ebitdaMargin:"8–15%",recurring:"low",recurringDetail:"Mostly one-shot · repair/reset creates repeat",seasonality:"high",seasonalityDetail:"New housing starts dependency · storm-replacement Gulf/SE · wood 15–20 yr replacement cycle",startupLean:"$25–80K",startupSerious:"$80–150K (mini-ex, post driver)",startupLow:25000,capBucket:"med",sdeMultiple:"2–3× SDE",ebitdaMultipleMid:"3–5× EBITDA",multipleHigh:7,platformMultiple:"PE platforms emerging (Watchtower Capital Fence Builders, Green Hill Fence 2024)",licensing:"low",licensingDetail:"GC in most states · FL/CA/NV specialty · low regulatory barrier",qiWorkaround:"Easy",laborShortage:"med",laborDetail:"2–3 person crew · Lead $22–30/hr · Helpers $16–22 · Significant immigrant labor",techPay:"$16–30/hr",lsaCpl:"$40–80",channels:"Referrals + Google (organic + LSA), Angi/Thumbtack, HOA referrals, yard signs during jobs",closeRate:"Quote-driven",software:"Jobber · Housecall Pro · FieldCamp · JobNimbus",aiThreat:"verylow",aiDetail:"Digging, cutting, aligning posts all manual. Safe indefinitely.",peActivity:"low",peDetail:"Hyperfragmented · no dominant national brand · Watchtower Capital building regional platforms · Home Depot/Menards/Lowe's/SiteOne suppliers dominant",franchises:"No dominant franchise",marketingLeverage:"med",drivers:["New housing starts","Privacy/security demand","Storm replacement Gulf/SE","Wood fence replacement cycle"],mktEdges:["Most fencing contractors terrible at marketing","Modern website + LSA + referral program dominates mid-size markets","Hurricane markets (FL/TX/NC) offer storm-surge revenue"],risks:["One-shot tickets = no recurring","Highly weather-exposed","Labor is the bottleneck","New construction dependent"],bottomLine:"Underrated marketing opportunity but lower multiples and one-shot tickets cap enterprise value. Better as bolt-on than standalone."},
+
+{name:"Concrete / Epoxy Flooring",tier:4,fit:58,tagline:"Epoxy garage floor niche is hot on TikTok. Visual sale, premium margins, underbuilt category.",marketSize:"$110.5B concrete · $40B masonry",marketBn:150,cagr:"0.5% masonry · 5.6% CMU",avgTicket:"Epoxy garage $1.5–5K · Decorative $8–25/sf · Masonry repair $500–5K",ticketHigh:5000,grossMargin:"35% epoxy std · 60%+ metallic · 50–100% decorative",ebitdaMargin:"8–14%",recurring:"low",recurringDetail:"Sealing/restoration every 3–5 yrs",seasonality:"med",seasonalityDetail:"Weather-dependent exterior; interior year-round",startupLean:"$50–100K epoxy (grinder $15K+)",startupSerious:"$150–300K",startupLow:50000,capBucket:"med",sdeMultiple:"2.5–4× SDE",ebitdaMultipleMid:"3–5× EBITDA",multipleHigh:8,platformMultiple:"5–8× commercial concrete",licensing:"med",licensingDetail:"State contractor required most states · OSHA silica/hazmat training",qiWorkaround:"Standard GC",laborShortage:"severe",laborDetail:"Concrete finisher $22–35/hr · Heavy immigrant labor · Physical/skilled shortage",techPay:"$22–35/hr",lsaCpl:"$50–90",channels:"Instagram/TikTok (visual transformations extremely effective), LSA, home/garden shows, HOA cluster marketing",closeRate:"Visual sale converts well",software:"Jobber · Housecall Pro · Buildertrend · JobNimbus",aiThreat:"low",aiDetail:"Robotic screeding emerging for commercial · residential artistic work very safe",peActivity:"med",peDetail:"Extremely fragmented · Epoxy consolidating: Garage Kings · Granite Garage Floors · GarageExperts · Garage Living · Commercial: Baker/Brasfield/Lithko",franchises:"Granite Garage Floors ($227–390K, 6.5%, 2% mkt) · Garage Kings ($150–300K)",marketingLeverage:"high",drivers:["TikTok-driven visual demand","High ticket visually compelling","Single-day installs","80M+ US garages, &lt;10% coated"],mktEdges:["Visually compelling (Insta/TikTok ready)","Premium margins on decorative","Single-day installs high velocity","Upgrade-anxiety marketing works","Huge untapped TAM"],risks:["Single-shot per customer (decade cycle)","Labor shortage acute","Equipment investment significant","Physical installation difficulty"],bottomLine:"Epoxy is the hot sub-niche. Social-media-native marketing opportunity. Decent but capped enterprise value unless scaled to commercial."},
+
+{name:"Pressure Washing",tier:4,fit:52,tagline:"Lowest capital. TikTok virality. Commoditized in residential — needs commercial or content-creator angle.",marketSize:"$12.5B exterior cleaning",marketBn:13,cagr:"4.4% equipment",avgTicket:"Residential $150–400 · Commercial $500–5K+",ticketHigh:5000,grossMargin:"50–70% residential",ebitdaMargin:"40–50% solo · 20–30% crews",recurring:"med",recurringDetail:"Annual/bi-annual house washes viable · commercial year-round",seasonality:"high",seasonalityDetail:"Strong spring/summer · commercial year-round",startupLean:"$1–5K absolute minimum (electric)",startupSerious:"$30–50K full truck",startupLow:1000,capBucket:"low",sdeMultiple:"1.5–2.5× SDE",ebitdaMultipleMid:"3–4× EBITDA",multipleHigh:5,platformMultiple:"3–5× small ops",licensing:"low",licensingDetail:"Very low barrier · wastewater runoff regs in some municipalities · SoftWash chemical handling valuable",qiWorkaround:"None needed",laborShortage:"low",laborDetail:"Solo-operator friendly · Helpers $15–22/hr",techPay:"$15–22/hr",lsaCpl:"$30–60 (lowest)",channels:"TIKTOK MASSIVE (satisfying before/after goes viral — some operators built $500K+ on TikTok alone), LSA, Nextdoor, before/after photo marketing",closeRate:"High on visual proof",software:"Jobber · Housecall Pro · ResponsiBid",aiThreat:"med",aiDetail:"Lucid Bots making drone pressure washers for commercial high-rise · ground-level residential safe near-term · commercial building-wash automation emerging 2027+",peActivity:"low",peDetail:"Fragmented, low barrier = lots of churn · Rolling Suds (PE-backed fastest-growing) · Sparkle Wash (90+) · SoftWash Systems · Firehouse · Perfect Power Wash (PE-backed)",franchises:"Rolling Suds ($150–300K) · Sparkle Wash ($60–85K) · Firehouse Pressure Washing",marketingLeverage:"veryhigh",drivers:["TikTok-driven homeowner awareness","Commercial property appearance standards","Gutter/solar cleaning complementary","HOA compliance"],mktEdges:["TikTok-native business on this list","Lowest capital requirement, highest social virality","$20–50 CAC achievable residential","Someone with digital skills goes 0 → $250K in 12–18 months"],risks:["Crushed competition","Price commoditization residential","Requires differentiation (soft wash spec, commercial, content-creator angle)","Low barrier = low moat"],bottomLine:"Great zero-to-$250K play for a digital-native solo. Ceiling is low without pivot to commercial or content-creator model. Not a primary vehicle."},
+
+{name:"Mold Remediation",tier:4,fit:45,tagline:"Bolt-on to restoration only. Insurance sub-limits cap ticket size. Not a standalone vehicle.",marketSize:"~$2B US",marketBn:2,cagr:"3–6%",avgTicket:"$500–30K · blended $1,200–3,750",ticketHigh:30000,grossMargin:"55–70%",ebitdaMargin:"10–20%",recurring:"low",recurringDetail:"Project-based, very limited recurring",seasonality:"med",seasonalityDetail:"Slight summer humidity skew · RE transaction driven",startupLean:"$40–120K (bolt-on)",startupSerious:"As standalone: challenging",startupLow:40000,capBucket:"med",sdeMultiple:"2–4× SDE",ebitdaMultipleMid:"3–5× EBITDA",multipleHigh:7,platformMultiple:"Higher when bundled with restoration",licensing:"med",licensingDetail:"State-variable: FL/LA/TX/NY require dedicated license · IICRC AMRT de facto standard · ACAC CMRC alt",qiWorkaround:"IICRC AMRT cert",laborShortage:"med",laborDetail:"Overlaps with restoration techs · $18–25/hr · Hygienists $65–95K",techPay:"$18–25/hr",lsaCpl:"$60–140",channels:"Realtor + home inspector referrals (transaction-driven), local SEO, adjuster referrals on water events",closeRate:"Good — driven by disclosure requirements",software:"DASH, Encircle, Xactimate · Specialized testing labs EMSL/EMLab P&amp;K",aiThreat:"low",aiDetail:"Same as restoration — physical PPE work in variable conditions",peActivity:"med",peDetail:"Extremely fragmented · Green Home Solutions franchise · MoldPro · Mold Medics smaller systems",franchises:"Green Home Solutions (~$100–180K, 7%)",marketingLeverage:"med",drivers:["Climate-driven moisture events","Tighter building envelopes producing condensation mold","Real estate disclosure requirements","Health consciousness"],mktEdges:["Niche SEO 'mold inspection' + 'mold remediation' + [city]","Realtor relationships + disclosure transaction flow","Best integrated with water restoration operator"],risks:["Insurance $1–10K sub-limits cap ticket","Not recurring","Standalone caps at $3–5M"],bottomLine:"Bolt-on ONLY. Not a primary vehicle. Add to restoration operation for $500K–3M adjacent revenue."},
+
+{name:"Solar Installation",tier:5,fit:38,tagline:"Policy risk from ITC expiration Jan 2026. Distressed acquisitions possible. Not a greenfield play.",marketSize:"~$20B (contracting)",marketBn:20,cagr:"-18% 2026 forecast / 7% recovery 2027–30",avgTicket:"7–8kW system $20–30K gross · Installer nets $3–6K",ticketHigh:30000,grossMargin:"20–30% full-stack · 8–12% EPC",ebitdaMargin:"8–12% well-run installers",recurring:"low",recurringDetail:"O&amp;M contracts $150–300/yr · low",seasonality:"low",seasonalityDetail:"Year-round · policy-driven volatility",startupLean:"$50–150K pure installer",startupSerious:"$500K–$2M full-stack",startupLow:50000,capBucket:"high",sdeMultiple:"2–3× SDE",ebitdaMultipleMid:"4–7× EBITDA (compressed)",multipleHigh:10,platformMultiple:"4–7× now (was 6–10× pre-ITC change)",licensing:"high",licensingDetail:"NABCEP PV Installation Pro ($400, 3-yr recert) · State solar contractor in CA/FL/AZ/HI/LA/NV/OR · Most states electrical contractor for grid-tied",qiWorkaround:"NABCEP + electrical qualifier",laborShortage:"high",laborDetail:"Highly volatile 2025–26 due to ITC · Major Sunrun/Sunnova layoffs · Installer median $48,800 BLS · NABCEP +10–20%",techPay:"$40–60K",lsaCpl:"$75–150",channels:"D2D historically (now shifting), dealer affiliate (Sunrun/Freedom Forever), LSA emerging",closeRate:"Variable · compressed since ITC expiration",software:"Aurora Solar · Solargraf · OpenSolar · Enphase · Enerflo · SiteCapture",aiThreat:"med",aiDetail:"Robotic mounting (AES/Luminous) for ground-mount utility · residential rooftop still manual · 5–7 yr horizon residential",peActivity:"med",peDetail:"Distressed acquisitions abundant 2025–26 · Sunnova assets sold to Solaris · Multiple bankruptcies · Sunrun/Freedom Forever/ADT Solar (exited)/Solaris/Tesla Energy/Palmetto · Top 10 = 30% installs",franchises:"Limited meaningful franchise options",marketingLeverage:"med",drivers:["HEADWIND: Section 25D terminated Jan 1, 2026 new residential (OBBBA July 2025)","TAILWIND for TPO/lease: Section 48E commercial ITC active through Dec 31, 2027","Rising retail electric rates 7–10% annually","Battery storage attachment at record highs","Commercial solar has 6–12 months of tailwind"],mktEdges:["2026 dip creates FIRE-SALE acquisitions of distressed installers","Pivot to O&amp;M + battery retrofit focus","Commercial solar through July 4, 2026 ITC deadline has tailwind","NOT a boring-business play — too policy-sensitive"],risks:["Policy risk is existential","Labor volatility","Financing customer CAC crushed post-ITC","Tariff-exposed supply chain"],bottomLine:"AVOID as greenfield. ONLY play: opportunistic acquisition of distressed installer for O&amp;M/battery retrofit or commercial focus. Not a primary vehicle."}
+];
+
+window.INDUSTRIES=INDUSTRIES;
+
+// ==================== TAB LOGIC ====================
+document.querySelectorAll('nav.tabs button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('nav.tabs button').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('section.tab').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    document.getElementById(b.dataset.tab).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+
+// ==================== INDUSTRY RENDERING ====================
+function fmt(v){return v==null?'—':v}
+function pill(txt,cls){return `<span class="pill ${cls||''}">${txt}</span>`}
+function fitClass(score){if(score>=90)return 'fit-95';if(score>=80)return 'fit-85';if(score>=70)return 'fit-75';if(score>=60)return 'fit-65';if(score>=45)return 'fit-50';return 'fit-35'}
+function renderIndustry(i){
+  const pills = [];
+  if(i.recurring==='high')pills.push(pill('Recurring','good'));
+  if(i.aiThreat==='verylow'||i.aiThreat==='low')pills.push(pill('AI-Safe','good'));
+  if(i.peActivity==='extreme')pills.push(pill('PE Hot','warn'));
+  if(i.marketingLeverage==='veryhigh')pills.push(pill('Mktg Edge','good'));
+  if(i.seasonality==='high')pills.push(pill('Seasonal','warn'));
+  if(i.laborShortage==='severe')pills.push(pill('Labor Tight','warn'));
+  if(i.licensing==='high')pills.push(pill('Licensed','warn'));
+  return `<div class="industry" data-name="${i.name}">
+    <div class="ind-head">
+      <div>
+        <div class="ind-name">${i.name}</div>
+        <span class="badge tier${i.tier}" style="margin-top:4px">Tier ${i.tier}</span>
+      </div>
+      <div class="fit-score ${fitClass(i.fit)}">${i.fit}</div>
+    </div>
+    <div class="tagline">${i.tagline}</div>
+    <div class="mini-stats">
+      <div class="mini-stat"><div class="k">Market</div><div class="v">${i.marketSize}</div></div>
+      <div class="mini-stat"><div class="k">Avg Ticket</div><div class="v">${i.avgTicket}</div></div>
+      <div class="mini-stat"><div class="k">EBITDA</div><div class="v">${i.ebitdaMargin}</div></div>
+      <div class="mini-stat"><div class="k">Exit Mult</div><div class="v">${i.ebitdaMultipleMid}</div></div>
+    </div>
+    <div class="pills">${pills.join('')}</div>
+  </div>`;
+}
+function renderGrid(){
+  const tier=document.getElementById('fTier').value;
+  const rec=document.getElementById('fRecurring').value;
+  const cap=document.getElementById('fCapital').value;
+  const ai=document.getElementById('fAI').value;
+  const sort=document.getElementById('fSort').value;
+  const search=document.getElementById('fSearch').value.toLowerCase();
+  let list=INDUSTRIES.filter(i=>{
+    if(tier && String(i.tier)!==tier)return false;
+    if(rec && i.recurring!==rec)return false;
+    if(cap && i.capBucket!==cap)return false;
+    if(ai && i.aiThreat!==ai)return false;
+    if(search && !i.name.toLowerCase().includes(search) && !i.tagline.toLowerCase().includes(search))return false;
+    return true;
+  });
+  if(sort==='fit')list.sort((a,b)=>b.fit-a.fit);
+  if(sort==='market')list.sort((a,b)=>b.marketBn-a.marketBn);
+  if(sort==='ticket')list.sort((a,b)=>b.ticketHigh-a.ticketHigh);
+  if(sort==='multiple')list.sort((a,b)=>b.multipleHigh-a.multipleHigh);
+  if(sort==='startup')list.sort((a,b)=>a.startupLow-b.startupLow);
+  document.getElementById('industryGrid').innerHTML=list.map(renderIndustry).join('');
+  document.querySelectorAll('.industry').forEach(el=>{
+    el.addEventListener('click',()=>openModal(el.dataset.name));
+  });
+}
+['fTier','fRecurring','fCapital','fAI','fSort','fSearch'].forEach(id=>document.getElementById(id).addEventListener('input',renderGrid));
+document.getElementById('fReset').addEventListener('click',()=>{
+  ['fTier','fRecurring','fCapital','fAI'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('fSort').value='fit';
+  document.getElementById('fSearch').value='';
+  renderGrid();
+});
+
+// ==================== MODAL ====================
+function openModal(name){
+  const i=INDUSTRIES.find(x=>x.name===name);
+  if(!i)return;
+  document.getElementById('modalBody').innerHTML=renderModal(i);
+  document.getElementById('modalBg').classList.add('open');
+}
+document.getElementById('modalClose').addEventListener('click',()=>document.getElementById('modalBg').classList.remove('open'));
+document.getElementById('modalBg').addEventListener('click',e=>{if(e.target.id==='modalBg')document.getElementById('modalBg').classList.remove('open')});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('modalBg').classList.remove('open')});
+
+function renderModal(i){
+  const drivers=(i.drivers||[]).map(d=>`<li>${d}</li>`).join('');
+  const edges=(i.mktEdges||[]).map(d=>`<li>${d}</li>`).join('');
+  const risks=(i.risks||[]).map(d=>`<li>${d}</li>`).join('');
+  return `
+    <span class="badge tier${i.tier}">Tier ${i.tier}</span>
+    <span class="badge ${i.recurring==='high'?'low':i.recurring==='med'?'med':'high'}" style="margin-left:4px">Recurring: ${i.recurring}</span>
+    <span class="fit-score ${fitClass(i.fit)}" style="margin-left:8px;padding:4px 10px;border-radius:6px;font-weight:700">Fit ${i.fit}/100</span>
+    <h2 style="margin-top:8px">${i.name}</h2>
+    <div class="tagline">${i.tagline}</div>
+    <div class="section">
+      <h4>Snapshot</h4>
+      <div class="kv">
+        <div class="k">US Market Size</div><div class="v">${i.marketSize}</div>
+        <div class="k">Growth / CAGR</div><div class="v">${i.cagr}</div>
+        <div class="k">Average Ticket</div><div class="v">${i.avgTicket}</div>
+        <div class="k">Gross Margin</div><div class="v">${i.grossMargin}</div>
+        <div class="k">EBITDA Margin</div><div class="v">${i.ebitdaMargin}</div>
+        <div class="k">Recurring Revenue</div><div class="v">${i.recurringDetail||i.recurring}</div>
+        <div class="k">Seasonality</div><div class="v">${i.seasonalityDetail||i.seasonality}</div>
+      </div>
+    </div>
+    <div class="section">
+      <h4>Capital &amp; Economics</h4>
+      <div class="kv">
+        <div class="k">Startup (lean)</div><div class="v">${i.startupLean}</div>
+        <div class="k">Startup (serious)</div><div class="v">${i.startupSerious}</div>
+        <div class="k">Acquisition SDE mult</div><div class="v">${i.sdeMultiple}</div>
+        <div class="k">Acquisition EBITDA mult</div><div class="v">${i.ebitdaMultipleMid}</div>
+        <div class="k">PE Platform mult</div><div class="v">${i.platformMultiple}</div>
+        <div class="k">SBA 7(a) eligible</div><div class="v">Yes — up to $5M, 10% down, ~9.25–9.75%</div>
+      </div>
+    </div>
+    <div class="section">
+      <h4>Licensing &amp; Labor</h4>
+      <div class="kv">
+        <div class="k">Licensing</div><div class="v">${i.licensingDetail}</div>
+        <div class="k">QI workaround</div><div class="v">${i.qiWorkaround}</div>
+        <div class="k">Labor market</div><div class="v">${i.laborDetail}</div>
+        <div class="k">Tech pay range</div><div class="v">${i.techPay||'—'}</div>
+      </div>
+    </div>
+    <div class="section">
+      <h4>Marketing &amp; CAC</h4>
+      <div class="kv">
+        <div class="k">Google LSA CPL</div><div class="v">${i.lsaCpl||'—'}</div>
+        <div class="k">Best channels</div><div class="v">${i.channels||'—'}</div>
+        <div class="k">Close rate</div><div class="v">${i.closeRate||'—'}</div>
+        <div class="k">FSM software</div><div class="v">${i.software||'—'}</div>
+      </div>
+    </div>
+    <div class="section">
+      <h4>Demand Drivers</h4>
+      <ul class="bullets">${drivers}</ul>
+    </div>
+    <div class="section">
+      <h4>PE Activity / Competitive Dynamics</h4>
+      <p>${i.peDetail}</p>
+      ${i.franchises?`<p style="margin-top:8px"><strong>Franchise options:</strong> ${i.franchises}</p>`:''}
+    </div>
+    <div class="section">
+      <h4>AI / Robotics Threat</h4>
+      <span class="badge ${i.aiThreat==='verylow'||i.aiThreat==='low'?'low':i.aiThreat==='med'?'med':'high'}" style="margin-bottom:8px">${i.aiThreat.toUpperCase()}</span>
+      <p style="margin-top:8px">${i.aiDetail}</p>
+    </div>
+    <div class="section">
+      <h4>Marketing-Led Operator Edge</h4>
+      <ul class="bullets">${edges}</ul>
+    </div>
+    <div class="section">
+      <h4>Risks to Underwrite</h4>
+      <ul class="bullets warn">${risks}</ul>
+    </div>
+    <div class="section">
+      <h4>Bottom Line</h4>
+      <p><strong>${i.bottomLine}</strong></p>
+    </div>
+  `;
+}
+
+function renderTopPicks(){
+  const top=INDUSTRIES.slice().sort((a,b)=>b.fit-a.fit).slice(0,7);
+  document.getElementById('topPicks').innerHTML=top.map(i=>`
+    <div class="card" style="cursor:pointer" onclick="openModal('${i.name}')">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <strong style="font-size:16px">${i.name}</strong>
+        <span class="fit-score ${fitClass(i.fit)}">${i.fit}</span>
+      </div>
+      <p class="muted" style="font-size:12px;margin-bottom:10px">${i.tagline}</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px">
+        <div><span class="dim">Market</span> <strong>${i.marketSize}</strong></div>
+        <div><span class="dim">Ticket</span> <strong>${i.avgTicket}</strong></div>
+        <div><span class="dim">EBITDA</span> <strong>${i.ebitdaMargin}</strong></div>
+        <div><span class="dim">Exit</span> <strong>${i.ebitdaMultipleMid}</strong></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ==================== CALCULATORS ====================
+function dollar(n){return '$'+Math.round(n).toLocaleString()}
+function pct(n){return (n*100).toFixed(1)+'%'}
+
+// Calc 1: Acquisition ROI
+function calc1(){
+  const price=+document.getElementById('c1_price').value;
+  const ebitda=+document.getElementById('c1_ebitda').value;
+  const mult=+document.getElementById('c1_mult').value;
+  const eqPct=+document.getElementById('c1_equity').value/100;
+  const rate=+document.getElementById('c1_rate').value/100;
+  const g1=+document.getElementById('c1_growth').value/100;
+  const g2=+document.getElementById('c1_growth2').value/100;
+  const exitMult=+document.getElementById('c1_exitmult').value;
+  const hold=+document.getElementById('c1_hold').value;
+  const equity=price*eqPct;
+  const debt=price-equity;
+  const monthlyRate=rate/12;
+  const termM=120;
+  const monthlyPmt=debt*monthlyRate/(1-Math.pow(1+monthlyRate,-termM));
+  const annualDebt=monthlyPmt*12;
+  // simulate
+  const ebitdaMargin=ebitda/(ebitda/0.15); // assume 15% margin current
+  let rev=ebitda/0.15; // back out
+  let currentEBITDA=ebitda;
+  let rows=[];
+  for(let y=1;y<=hold;y++){
+    const growth=(y===1?g1:g2);
+    rev=rev*(1+growth);
+    // EBITDA margin expands slightly with scale up to 22%
+    const targetMargin=Math.min(0.22,0.15+0.01*y);
+    currentEBITDA=rev*targetMargin;
+    const fcf=currentEBITDA-annualDebt;
+    rows.push({y,rev,ebitda:currentEBITDA,fcf});
+  }
+  const exitEV=currentEBITDA*exitMult;
+  // remaining debt at exit
+  const paidMonths=hold*12;
+  let rem=debt;
+  for(let m=0;m<paidMonths;m++){
+    const interest=rem*monthlyRate;
+    const principal=monthlyPmt-interest;
+    rem-=principal;
+  }
+  const exitProceeds=exitEV-rem;
+  const totalFCF=rows.reduce((a,r)=>a+r.fcf,0);
+  const totalReturn=exitProceeds+totalFCF;
+  const moic=totalReturn/equity;
+  const irr=Math.pow(totalReturn/equity,1/hold)-1;
+  document.getElementById('c1_out').innerHTML=`
+    <div class="big">${dollar(exitEV)} Exit EV</div>
+    <div class="small" style="margin-bottom:12px">Enterprise value at exit (Year ${hold}, ${exitMult}× EBITDA of ${dollar(currentEBITDA)})</div>
+    <table>
+      <thead><tr><th>Year</th><th>Revenue</th><th>EBITDA</th><th>Free Cash Flow (after debt)</th></tr></thead>
+      <tbody>${rows.map(r=>`<tr><td>Y${r.y}</td><td>${dollar(r.rev)}</td><td>${dollar(r.ebitda)}</td><td style="color:${r.fcf>0?'var(--accent)':'var(--danger)'}">${dollar(r.fcf)}</td></tr>`).join('')}</tbody>
+    </table>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px">
+      <div class="stat"><div class="label">Equity Invested</div><div class="value">${dollar(equity)}</div></div>
+      <div class="stat"><div class="label">Cumulative FCF</div><div class="value">${dollar(totalFCF)}</div></div>
+      <div class="stat"><div class="label">Exit Proceeds (net debt)</div><div class="value">${dollar(exitProceeds)}</div></div>
+      <div class="stat"><div class="label">Total Return</div><div class="value">${dollar(totalReturn)}</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px">
+      <div class="stat"><div class="label">MOIC (Multiple on Invested Capital)</div><div class="value" style="color:var(--accent)">${moic.toFixed(2)}×</div></div>
+      <div class="stat"><div class="label">Approx. Annualized Return (IRR proxy)</div><div class="value" style="color:var(--accent)">${pct(irr)}</div></div>
+    </div>
+  `;
+}
+
+// Calc 2: Startup Burn
+function calc2(){
+  const trucks=+document.getElementById('c2_trucks').value;
+  const truckCost=+document.getElementById('c2_truck_cost').value;
+  const techs=+document.getElementById('c2_techs').value;
+  const techMo=+document.getElementById('c2_tech_cost').value;
+  const qi=+document.getElementById('c2_qi').value;
+  const overhead=+document.getElementById('c2_overhead').value;
+  const mkt=+document.getElementById('c2_mkt').value;
+  const revTech=+document.getElementById('c2_rev').value;
+  const gm=+document.getElementById('c2_gm').value/100;
+  const capex=trucks*truckCost;
+  const monthlyFixed=techs*techMo+qi+overhead+mkt;
+  // revenue ramps: 30% productive month 1, +15%/mo to 100%
+  let rows=[];
+  let cashPosition=-capex;
+  let breakeven=null;
+  for(let m=1;m<=24;m++){
+    const productivity=Math.min(1,0.30+0.06*(m-1));
+    const rev=techs*revTech*productivity;
+    const grossProfit=rev*gm;
+    const monthlyNet=grossProfit-monthlyFixed;
+    cashPosition+=monthlyNet;
+    if(breakeven===null&&monthlyNet>0)breakeven=m;
+    if(m%3===0||m===1||m===6||m===12||m===18||m===24)rows.push({m,rev,monthlyNet,cash:cashPosition});
+  }
+  const maxBurn=Math.min(...rows.map(r=>r.cash));
+  document.getElementById('c2_out').innerHTML=`
+    <div class="big">${dollar(capex+Math.abs(Math.min(0,maxBurn)))} Total Capital Needed</div>
+    <div class="small" style="margin-bottom:12px">CapEx (${dollar(capex)}) + max cash burn during ramp</div>
+    <table>
+      <thead><tr><th>Month</th><th>Revenue/mo</th><th>Net Income/mo</th><th>Cumulative Cash Position</th></tr></thead>
+      <tbody>${rows.map(r=>`<tr><td>M${r.m}</td><td>${dollar(r.rev)}</td><td style="color:${r.monthlyNet>0?'var(--accent)':'var(--danger)'}">${dollar(r.monthlyNet)}</td><td style="color:${r.cash>0?'var(--accent)':'var(--danger)'}">${dollar(r.cash)}</td></tr>`).join('')}</tbody>
+    </table>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px">
+      <div class="stat"><div class="label">Monthly Burn (fixed)</div><div class="value">${dollar(monthlyFixed)}</div></div>
+      <div class="stat"><div class="label">Breakeven Month</div><div class="value">${breakeven?'M'+breakeven:'24+ mo'}</div></div>
+      <div class="stat"><div class="label">Max Negative Cash</div><div class="value" style="color:var(--danger)">${dollar(maxBurn)}</div></div>
+    </div>
+  `;
+}
+
+// Calc 3: LTV:CAC
+function calc3(){
+  const mrr=+document.getElementById('c3_mrr').value;
+  const gm=+document.getElementById('c3_gm').value/100;
+  const churn=+document.getElementById('c3_churn').value/100;
+  const cac=+document.getElementById('c3_cac').value;
+  const avgLifetimeMonths=1/churn;
+  const ltvRev=mrr*avgLifetimeMonths;
+  const ltvGp=ltvRev*gm;
+  const ratio=ltvGp/cac;
+  const paybackMo=cac/(mrr*gm);
+  document.getElementById('c3_out').innerHTML=`
+    <div class="big">${ratio.toFixed(1)}:1 LTV:CAC</div>
+    <div class="small" style="margin-bottom:12px">${ratio>=10?'🏆 World-class recurring unit economics':ratio>=5?'✅ Healthy':ratio>=3?'⚠ Acceptable':'❌ Not working'} · Target ≥5:1</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+      <div class="stat"><div class="label">Avg Customer Lifetime</div><div class="value">${avgLifetimeMonths.toFixed(0)} mo</div></div>
+      <div class="stat"><div class="label">LTV (Revenue)</div><div class="value">${dollar(ltvRev)}</div></div>
+      <div class="stat"><div class="label">LTV (Gross Profit)</div><div class="value">${dollar(ltvGp)}</div></div>
+      <div class="stat"><div class="label">CAC Payback</div><div class="value">${paybackMo.toFixed(1)} mo</div></div>
+    </div>
+    <div class="alert ${ratio>=10?'success':ratio>=5?'info':ratio>=3?'warn':'danger'}" style="margin-top:12px">
+      <strong>At this economics:</strong> every $1 of CAC returns $${ratio.toFixed(2)} of gross profit over the customer's lifetime. Pest control benchmark: 10–25:1. HVAC maintenance plans: 4–8:1. Pool service: 6–12:1.
+    </div>
+  `;
+}
+
+// Calc 4: Marketing Lift → EV
+function calc4(){
+  const rev=+document.getElementById('c4_rev').value;
+  const book1=+document.getElementById('c4_book1').value/100;
+  const book2=+document.getElementById('c4_book2').value/100;
+  const close1=+document.getElementById('c4_close1').value/100;
+  const close2=+document.getElementById('c4_close2').value/100;
+  const margin=+document.getElementById('c4_margin').value/100;
+  const mult1=+document.getElementById('c4_mult1').value;
+  const mult2=+document.getElementById('c4_mult2').value;
+  // Combined conversion lift
+  const currentConv=book1*close1;
+  const targetConv=book2*close2;
+  const convLift=(targetConv/currentConv)-1;
+  // Apply to revenue (marketing-driven portion ~60% of revenue)
+  const mktDrivenPortion=0.6;
+  const revLift=rev*mktDrivenPortion*convLift;
+  const newRev=rev+revLift;
+  const currentEBITDA=rev*0.15;
+  const newEBITDA=currentEBITDA+revLift*margin;
+  const currentEV=currentEBITDA*mult1;
+  const newEV=newEBITDA*mult2;
+  const evCreated=newEV-currentEV;
+  document.getElementById('c4_out').innerHTML=`
+    <div class="big">${dollar(evCreated)} Enterprise Value Created</div>
+    <div class="small" style="margin-bottom:12px">From marketing optimization alone · no new trucks or techs</div>
+    <table>
+      <thead><tr><th>Metric</th><th>Current</th><th>After Mktg Lift</th><th>Change</th></tr></thead>
+      <tbody>
+        <tr><td>Combined conversion rate</td><td>${pct(currentConv)}</td><td>${pct(targetConv)}</td><td style="color:var(--accent)">+${pct(convLift)}</td></tr>
+        <tr><td>Revenue</td><td>${dollar(rev)}</td><td>${dollar(newRev)}</td><td style="color:var(--accent)">+${dollar(revLift)}</td></tr>
+        <tr><td>EBITDA</td><td>${dollar(currentEBITDA)}</td><td>${dollar(newEBITDA)}</td><td style="color:var(--accent)">+${dollar(newEBITDA-currentEBITDA)}</td></tr>
+        <tr><td>Enterprise Value</td><td>${dollar(currentEV)}</td><td>${dollar(newEV)}</td><td style="color:var(--accent)">+${dollar(evCreated)}</td></tr>
+      </tbody>
+    </table>
+    <div class="alert success" style="margin-top:12px"><strong>Your marketing edge = ${dollar(evCreated)} of enterprise value</strong> on this single acquisition. Multiple arbitrage: entry ${mult1}× → exit ${mult2}× (${((mult2/mult1-1)*100).toFixed(0)}% multiple expansion) + EBITDA growth of ${((newEBITDA/currentEBITDA-1)*100).toFixed(0)}% = compounded return.</div>
+  `;
+}
+
+// ==================== COMPARE VIEW ====================
+let cmpSelected=new Set(['Foundation Repair','Water/Fire Restoration','Roofing']);
+
+function renderCmpSelector(){
+  const el=document.getElementById('cmpSelector');
+  if(!el)return;
+  el.innerHTML=INDUSTRIES.map(i=>`
+    <label style="display:flex;align-items:center;gap:5px;padding:5px 10px;background:${cmpSelected.has(i.name)?'rgba(52,211,153,0.15)':'var(--panel2)'};border:1px solid ${cmpSelected.has(i.name)?'var(--accent)':'var(--line)'};border-radius:6px;cursor:pointer;font-size:11px;user-select:none;font-weight:600">
+      <input type="checkbox" data-name="${i.name.replace(/"/g,'&quot;')}" ${cmpSelected.has(i.name)?'checked':''} style="margin:0">
+      ${i.name}
+    </label>
+  `).join('');
+  el.querySelectorAll('input').forEach(cb=>{
+    cb.addEventListener('change',e=>{
+      const name=e.target.dataset.name;
+      if(e.target.checked){
+        if(cmpSelected.size>=5){alert('Maximum 5 industries for comparison readability');e.target.checked=false;return;}
+        cmpSelected.add(name);
+      }
+      else cmpSelected.delete(name);
+      renderCmpSelector();
+      renderCmpTable();
+    });
+  });
+}
+
+function cmpPreset(type){
+  cmpSelected.clear();
+  if(type==='topfit')['Pest Control','HVAC','Electrical','Plumbing','Water/Fire Restoration'].forEach(n=>cmpSelected.add(n));
+  if(type==='recurring')['Pest Control','Pool Service','Porta Potty Rental','Landscaping / Lawn Care','Gutters'].forEach(n=>cmpSelected.add(n));
+  if(type==='foundation')['Foundation Repair','Water/Fire Restoration','Roofing'].forEach(n=>cmpSelected.add(n));
+  if(type==='low-cap')['Junk Removal','Pressure Washing','Pest Control','Gutters','Painting'].forEach(n=>cmpSelected.add(n));
+  if(type==='mechanical')['HVAC','Plumbing','Electrical'].forEach(n=>cmpSelected.add(n));
+  renderCmpSelector();
+  renderCmpTable();
+}
+window.cmpPreset=cmpPreset;
+
+function renderCmpTable(){
+  const selected=INDUSTRIES.filter(i=>cmpSelected.has(i.name));
+  const el=document.getElementById('cmpTable');
+  if(!el)return;
+  if(selected.length===0){
+    el.innerHTML='<div class="alert info">Select 2–5 industries above to compare side-by-side, or use a preset button.</div>';
+    return;
+  }
+  const rowGroups=[
+    {header:'Overview',rows:[
+      {k:'Marketer Fit',f:i=>`<span class="fit-score ${fitClass(i.fit)}" style="font-size:13px;padding:4px 10px">${i.fit}/100</span>`},
+      {k:'Tier',f:i=>`<span class="badge tier${i.tier}">Tier ${i.tier}</span>`},
+      {k:'One-Liner',f:i=>`<span style="font-size:11px;color:var(--muted);line-height:1.5">${i.tagline}</span>`},
+    ]},
+    {header:'Market',rows:[
+      {k:'US Market Size',f:i=>i.marketSize},
+      {k:'Growth / CAGR',f:i=>i.cagr},
+      {k:'Average Ticket',f:i=>i.avgTicket},
+    ]},
+    {header:'Economics',rows:[
+      {k:'Gross Margin',f:i=>i.grossMargin},
+      {k:'EBITDA Margin',f:i=>i.ebitdaMargin},
+      {k:'Recurring Revenue',f:i=>{const l=i.recurring==='high'?'HIGH':i.recurring==='med'?'MEDIUM':'LOW';const c=i.recurring==='high'?'low':i.recurring==='med'?'med':'high';return `<span class="badge ${c}">${l}</span>`;}},
+      {k:'Recurring Detail',f:i=>`<span style="font-size:11px;color:var(--muted)">${i.recurringDetail||'—'}</span>`},
+      {k:'Seasonality',f:i=>i.seasonalityDetail||i.seasonality},
+    ]},
+    {header:'Capital',rows:[
+      {k:'Startup (Lean)',f:i=>i.startupLean},
+      {k:'Startup (Serious)',f:i=>i.startupSerious},
+      {k:'SDE Mult (Small)',f:i=>i.sdeMultiple},
+      {k:'EBITDA Mult (Mid)',f:i=>i.ebitdaMultipleMid},
+      {k:'Platform Mult (PE)',f:i=>i.platformMultiple},
+    ]},
+    {header:'Licensing & Labor',rows:[
+      {k:'Licensing',f:i=>`<span style="font-size:11px">${i.licensingDetail}</span>`},
+      {k:'QI/Qualifier Path',f:i=>`<span style="font-size:11px">${i.qiWorkaround}</span>`},
+      {k:'Labor Market',f:i=>`<span style="font-size:11px">${i.laborDetail}</span>`},
+      {k:'Tech Pay Range',f:i=>i.techPay||'—'},
+    ]},
+    {header:'Marketing',rows:[
+      {k:'Google LSA CPL',f:i=>i.lsaCpl||'—'},
+      {k:'Best Channels',f:i=>`<span style="font-size:11px">${i.channels||'—'}</span>`},
+      {k:'Close Rate',f:i=>i.closeRate||'—'},
+      {k:'FSM Software',f:i=>`<span style="font-size:11px">${i.software||'—'}</span>`},
+    ]},
+    {header:'Strategic',rows:[
+      {k:'AI/Robotics Threat',f:i=>{const c=i.aiThreat==='verylow'||i.aiThreat==='low'?'low':i.aiThreat==='med'?'med':'high';return `<span class="badge ${c}">${i.aiThreat.toUpperCase()}</span>`;}},
+      {k:'PE Activity',f:i=>`<span style="font-size:11px;font-weight:700">${i.peActivity.toUpperCase()}</span>`},
+      {k:'Franchise Options',f:i=>i.franchises?`<span style="font-size:11px;color:var(--muted)">${i.franchises}</span>`:'<span class="dim">None dominant</span>'},
+    ]},
+    {header:'Bottom Line',rows:[
+      {k:'Recommendation',f:i=>`<span style="font-size:11px;color:var(--text);font-weight:600;line-height:1.5">${i.bottomLine}</span>`},
+    ]},
+  ];
+  const colCount=selected.length+1;
+  let html='<div style="overflow-x:auto;border:1px solid var(--line);border-radius:10px"><table style="width:100%;min-width:'+(200+selected.length*260)+'px;border-collapse:collapse"><thead><tr>';
+  html+='<th style="min-width:180px;background:var(--panel2);position:sticky;left:0;z-index:10">Metric</th>';
+  selected.forEach(i=>{html+=`<th style="min-width:240px;color:var(--text);font-size:14px;font-weight:800;background:var(--panel2);border-left:1px solid var(--line)">${i.name}</th>`;});
+  html+='</tr></thead><tbody>';
+  rowGroups.forEach(g=>{
+    html+=`<tr><td colspan="${colCount}" style="background:rgba(52,211,153,0.08);color:var(--accent);font-size:10px;font-weight:800;letter-spacing:0.12em;padding:12px 14px;border-top:1px solid var(--line);text-transform:uppercase">${g.header}</td></tr>`;
+    g.rows.forEach(r=>{
+      html+=`<tr><td style="color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:0.04em;background:var(--panel);position:sticky;left:0">${r.k}</td>`;
+      selected.forEach(i=>{html+=`<td style="vertical-align:top;border-left:1px solid var(--line)">${r.f(i)}</td>`;});
+      html+='</tr>';
+    });
+  });
+  html+='</tbody></table></div>';
+  el.innerHTML=html;
+}
+
+function wireCalc(id,fn){
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.querySelectorAll('input').forEach(i=>i.addEventListener('input',fn));
+  fn();
+}
+
+// Initialize after data loads
+function init(){
+  renderGrid();
+  renderTopPicks();
+  wireCalc('c1_out',calc1);
+  wireCalc('c2_out',calc2);
+  wireCalc('c3_out',calc3);
+  wireCalc('c4_out',calc4);
+  // bind inputs directly since outputs are inside .calc cards
+  ['c1_price','c1_ebitda','c1_mult','c1_equity','c1_rate','c1_growth','c1_growth2','c1_exitmult','c1_hold'].forEach(i=>document.getElementById(i).addEventListener('input',calc1));
+  ['c2_trucks','c2_truck_cost','c2_techs','c2_tech_cost','c2_qi','c2_overhead','c2_mkt','c2_rev','c2_gm'].forEach(i=>document.getElementById(i).addEventListener('input',calc2));
+  ['c3_mrr','c3_gm','c3_churn','c3_cac'].forEach(i=>document.getElementById(i).addEventListener('input',calc3));
+  ['c4_rev','c4_book1','c4_book2','c4_close1','c4_close2','c4_margin','c4_mult1','c4_mult2'].forEach(i=>document.getElementById(i).addEventListener('input',calc4));
+  calc1();calc2();calc3();calc4();
+  renderCmpSelector();
+  renderCmpTable();
+}
+
+// Run init AFTER all variables (including let cmpSelected) have been initialized
+init();
+</script>
+</body>
+</html>
