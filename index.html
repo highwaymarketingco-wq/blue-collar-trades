@@ -5,246 +5,314 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Blue-Collar Diversification — Decision Tool</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,800;9..144,900&family=Inter:wght@400;500;600;700;800&display=swap');
+
 :root{
-  --bg:#0b0d12; --panel:#12151c; --panel2:#171b24; --line:#222836; --line2:#2d3547;
-  --text:#e8ecf3; --muted:#8a93a6; --dim:#5b6577;
-  --accent:#34d399; --accent2:#60a5fa; --warn:#fbbf24; --danger:#f87171; --gold:#fcd34d;
-  --tier1:#34d399; --tier2:#60a5fa; --tier3:#a78bfa; --tier4:#fbbf24; --tier5:#f87171;
+  --bg:#faf6ed;
+  --bg-warm:#f5efe1;
+  --panel:#ffffff;
+  --panel2:#fbf7ec;
+  --line:#e5dfd0;
+  --line2:#d4cdb8;
+  --line3:#bcb4a0;
+  --text:#1a1f1a;
+  --text-soft:#3d3f38;
+  --muted:#6a6d62;
+  --dim:#9b9d92;
+  --accent:#0d4f2c;
+  --accent-light:#22884f;
+  --accent-bg:rgba(13,79,44,0.07);
+  --secondary:#c2410c;
+  --secondary-light:#ea580c;
+  --secondary-bg:rgba(194,65,12,0.07);
+  --gold:#92400e;
+  --gold-light:#b45309;
+  --gold-bg:rgba(146,64,14,0.07);
+  --info:#1e40af;
+  --info-bg:rgba(30,64,175,0.06);
+  --warn:#92400e;
+  --warn-bg:rgba(146,64,14,0.06);
+  --danger:#991b1b;
+  --danger-bg:rgba(153,27,27,0.06);
+  --tier1:#0d4f2c;--tier2:#1e40af;--tier3:#7c3aed;--tier4:#c2410c;--tier5:#991b1b;
+  --shadow-sm:0 1px 2px rgba(26,31,26,0.04),0 1px 3px rgba(26,31,26,0.05);
+  --shadow-md:0 4px 6px -1px rgba(26,31,26,0.06),0 2px 4px -2px rgba(26,31,26,0.04);
+  --shadow-lg:0 10px 15px -3px rgba(26,31,26,0.07),0 4px 6px -4px rgba(26,31,26,0.04);
+  --shadow-xl:0 20px 30px -5px rgba(26,31,26,0.10),0 10px 10px -5px rgba(26,31,26,0.04);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
-a{color:var(--accent2);text-decoration:none}
-a:hover{text-decoration:underline}
+html,body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;font-feature-settings:'cv11','ss01','kern'}
+a{color:var(--accent);text-decoration:none;font-weight:500;border-bottom:1px solid transparent;transition:border-color 0.15s}
+a:hover{border-bottom-color:var(--accent)}
 .wrap{max-width:1400px;margin:0 auto;padding:24px}
-.hero{padding:40px 24px 24px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#0f1219 0%,#0b0d12 100%)}
-.hero h1{font-size:32px;font-weight:800;letter-spacing:-0.02em;margin-bottom:8px}
-.hero .sub{color:var(--muted);font-size:15px;max-width:900px}
-.hero .tag{display:inline-block;font-size:11px;padding:3px 9px;border-radius:999px;background:rgba(52,211,153,0.15);color:var(--accent);font-weight:600;letter-spacing:0.03em;text-transform:uppercase;margin-bottom:12px}
-nav.tabs{display:flex;gap:2px;padding:0 24px;border-bottom:1px solid var(--line);background:var(--panel);position:sticky;top:0;z-index:50;overflow-x:auto;scrollbar-width:none}
+
+.hero{padding:72px 36px 44px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,var(--bg-warm) 0%,var(--bg) 100%);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;top:0;right:0;width:55%;height:130%;background:radial-gradient(ellipse at 70% 30%,rgba(13,79,44,0.06) 0%,transparent 60%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:0;left:0;width:45%;height:90%;background:radial-gradient(ellipse at 20% 80%,rgba(194,65,12,0.04) 0%,transparent 65%);pointer-events:none}
+.hero h1{font-family:'Fraunces',Charter,Georgia,serif;font-size:60px;font-weight:700;letter-spacing:-0.03em;line-height:1.0;margin-bottom:18px;color:var(--text);position:relative;font-variation-settings:"opsz" 144, "SOFT" 50}
+.hero h1 em{font-style:italic;color:var(--accent);font-weight:600}
+.hero .sub{color:var(--text-soft);font-size:18px;max-width:780px;line-height:1.65;position:relative;font-weight:400}
+.hero .tag{display:inline-block;font-size:11px;padding:6px 14px;border-radius:100px;background:var(--accent-bg);color:var(--accent);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:22px;border:1px solid rgba(13,79,44,0.15)}
+
+nav.tabs{display:flex;gap:0;padding:0 28px;border-bottom:1px solid var(--line);background:var(--panel);position:sticky;top:0;z-index:50;overflow-x:auto;scrollbar-width:none;box-shadow:var(--shadow-sm)}
 nav.tabs::-webkit-scrollbar{display:none}
-nav.tabs button{background:none;border:none;color:var(--muted);padding:14px 18px;font-size:13px;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;font-family:inherit}
+nav.tabs button{background:none;border:none;color:var(--muted);padding:20px 24px;font-size:14px;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;font-family:inherit;transition:color 0.15s;letter-spacing:-0.005em}
 nav.tabs button:hover{color:var(--text)}
 nav.tabs button.active{color:var(--accent);border-bottom-color:var(--accent)}
-section.tab{display:none;padding:24px}
-section.tab.active{display:block}
-h2{font-size:22px;font-weight:700;margin-bottom:8px;letter-spacing:-0.01em}
-h3{font-size:16px;font-weight:700;margin:20px 0 10px;color:var(--text)}
-h4{font-size:13px;font-weight:700;margin-bottom:8px;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em}
-p{color:#c5ccd9;margin-bottom:10px}
+
+section.tab{display:none;padding:36px 28px}
+section.tab.active{display:block;animation:tabFade .35s ease}
+@keyframes tabFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+h1,h2,h3,h4{font-family:'Fraunces',Charter,Georgia,serif;color:var(--text);letter-spacing:-0.02em}
+h2{font-size:36px;font-weight:700;margin-bottom:14px;line-height:1.1}
+h3{font-size:24px;font-weight:700;margin:28px 0 16px;line-height:1.2}
+h4{font-family:'Inter',sans-serif;font-size:12px;font-weight:700;margin-bottom:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em}
+p{color:var(--text-soft);margin-bottom:14px}
 .muted{color:var(--muted)}
 .dim{color:var(--dim)}
-.grid{display:grid;gap:16px}
+
+.grid{display:grid;gap:18px}
 .grid-2{grid-template-columns:repeat(auto-fit,minmax(420px,1fr))}
 .grid-3{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
 .grid-4{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px}
-.card.accent{border-color:rgba(52,211,153,0.35)}
-.stat{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:12px}
-.stat .label{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;font-weight:600}
-.stat .value{font-size:18px;font-weight:700;color:var(--text)}
-.stat .sub{font-size:11px;color:var(--dim);margin-top:2px}
-.badge{display:inline-block;font-size:10px;padding:2px 7px;border-radius:6px;font-weight:700;letter-spacing:0.03em;text-transform:uppercase}
-.badge.tier1{background:rgba(52,211,153,0.15);color:var(--tier1)}
-.badge.tier2{background:rgba(96,165,250,0.15);color:var(--tier2)}
-.badge.tier3{background:rgba(167,139,250,0.15);color:var(--tier3)}
-.badge.tier4{background:rgba(251,191,36,0.15);color:var(--tier4)}
-.badge.tier5{background:rgba(248,113,113,0.15);color:var(--tier5)}
-.badge.low{background:rgba(52,211,153,0.12);color:var(--tier1)}
-.badge.med{background:rgba(251,191,36,0.12);color:var(--tier4)}
-.badge.high{background:rgba(248,113,113,0.12);color:var(--tier5)}
-.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;padding:14px;background:var(--panel);border:1px solid var(--line);border-radius:10px;align-items:center}
-.filters label{font-size:11px;color:var(--muted);margin-right:4px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em}
-.filters select,.filters input{background:var(--panel2);border:1px solid var(--line2);color:var(--text);padding:7px 10px;border-radius:6px;font-size:13px;font-family:inherit}
-.filters input[type=search]{min-width:200px}
-.filters button{background:var(--panel2);border:1px solid var(--line2);color:var(--text);padding:7px 12px;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit;font-weight:600}
-.filters button:hover{border-color:var(--accent)}
-.filters button.active{background:rgba(52,211,153,0.15);border-color:var(--accent);color:var(--accent)}
-.industry-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
-.industry{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;cursor:pointer;transition:transform .12s,border-color .12s;position:relative;overflow:hidden}
-.industry:hover{border-color:var(--accent);transform:translateY(-2px)}
-.industry .ind-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px;gap:8px}
-.industry .ind-name{font-size:15px;font-weight:700;letter-spacing:-0.01em}
-.industry .fit-score{font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;white-space:nowrap}
-.fit-95{background:rgba(52,211,153,0.2);color:var(--tier1)}
-.fit-85{background:rgba(52,211,153,0.15);color:var(--tier1)}
-.fit-75{background:rgba(96,165,250,0.15);color:var(--tier2)}
-.fit-65{background:rgba(167,139,250,0.15);color:var(--tier3)}
-.fit-50{background:rgba(251,191,36,0.15);color:var(--tier4)}
-.fit-35{background:rgba(248,113,113,0.15);color:var(--tier5)}
-.industry .tagline{font-size:12px;color:var(--muted);margin-bottom:12px;min-height:32px}
-.industry .mini-stats{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
-.industry .mini-stat{font-size:11px}
-.industry .mini-stat .k{color:var(--dim);text-transform:uppercase;letter-spacing:0.04em;font-weight:600;font-size:10px}
-.industry .mini-stat .v{color:var(--text);font-weight:600;margin-top:1px}
-.industry .pills{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
-.pill{font-size:9px;padding:2px 6px;border-radius:4px;background:var(--line);color:var(--muted);font-weight:600;letter-spacing:0.03em;text-transform:uppercase}
-.pill.good{background:rgba(52,211,153,0.12);color:var(--tier1)}
-.pill.warn{background:rgba(251,191,36,0.12);color:var(--tier4)}
-.pill.bad{background:rgba(248,113,113,0.12);color:var(--tier5)}
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);display:none;z-index:200;overflow-y:auto;padding:40px 20px}
-.modal-bg.open{display:block}
-.modal{max-width:1000px;margin:0 auto;background:var(--panel);border:1px solid var(--line2);border-radius:12px;padding:28px;position:relative}
-.modal .close{position:absolute;top:12px;right:12px;background:var(--panel2);border:1px solid var(--line2);color:var(--muted);width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:18px}
-.modal .close:hover{color:var(--text)}
-.modal h2{font-size:26px;margin-bottom:4px}
-.modal .tagline{color:var(--muted);margin-bottom:20px;font-size:14px}
-.modal .section{margin:24px 0;padding-top:16px;border-top:1px solid var(--line)}
-.modal .section:first-of-type{border-top:none;padding-top:0}
-.kv{display:grid;grid-template-columns:180px 1fr;gap:8px 16px;margin:8px 0}
-.kv .k{color:var(--muted);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em}
-.kv .v{color:var(--text);font-size:13px}
-.bullets{list-style:none;padding-left:0}
-.bullets li{padding:6px 0 6px 20px;position:relative;color:#c5ccd9;font-size:13px}
-.bullets li:before{content:"→";position:absolute;left:0;color:var(--accent);font-weight:700}
-.bullets.warn li:before{content:"!";color:var(--warn)}
-.bullets.bad li:before{content:"×";color:var(--danger)}
-.tab-switcher{display:flex;gap:4px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:3px;margin-bottom:16px;width:fit-content}
-.tab-switcher button{background:none;border:none;color:var(--muted);padding:7px 14px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit}
-.tab-switcher button.active{background:var(--panel);color:var(--text)}
-.calc{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px;margin-bottom:16px}
-.calc h3{margin-top:0}
-.calc .inputs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:16px}
-.calc label{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:4px;font-weight:600}
-.calc input[type=number],.calc input[type=range],.calc select{width:100%;background:var(--panel2);border:1px solid var(--line2);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;font-family:inherit}
-.calc .range-val{font-size:16px;font-weight:700;color:var(--accent);margin-left:8px}
-.calc .output{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:16px;margin-top:12px}
-.calc .output .big{font-size:32px;font-weight:800;color:var(--accent);margin-bottom:4px;letter-spacing:-0.02em}
-.calc .output .small{color:var(--muted);font-size:12px}
-table{width:100%;border-collapse:collapse;font-size:12px;margin:8px 0}
-table th{text-align:left;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:0.04em;padding:8px 10px;border-bottom:1px solid var(--line2);font-weight:700}
-table td{padding:8px 10px;border-bottom:1px solid var(--line);color:#c5ccd9}
-table tr:hover td{background:var(--panel2)}
-.timeline{position:relative;padding-left:24px;margin:12px 0}
-.timeline:before{content:"";position:absolute;left:6px;top:4px;bottom:4px;width:2px;background:var(--line2)}
-.timeline .phase{position:relative;margin-bottom:18px}
-.timeline .phase:before{content:"";position:absolute;left:-22px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--accent)}
-.timeline .phase .when{font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px}
-.timeline .phase .what{font-size:14px;font-weight:600;margin-bottom:4px}
-.timeline .phase .detail{font-size:12px;color:var(--muted)}
-.alert{padding:14px 16px;border-radius:8px;margin:12px 0;font-size:13px;border-left:3px solid}
-.alert.info{background:rgba(96,165,250,0.08);border-color:var(--accent2);color:#c5d4ea}
-.alert.warn{background:rgba(251,191,36,0.08);border-color:var(--warn);color:#e8d99a}
-.alert.danger{background:rgba(248,113,113,0.08);border-color:var(--danger);color:#e9b7b7}
-.alert.success{background:rgba(52,211,153,0.08);border-color:var(--accent);color:#b7e9d3}
 
-/* === Studio (Industry Picker + Deep Dive) === */
-.studio-hero{padding:48px 32px;border-radius:20px;background:linear-gradient(135deg,#0f1219 0%,#1a1f2e 50%,#0f2027 100%);border:1px solid var(--line2);margin-bottom:28px;position:relative;overflow:hidden}
-.studio-hero::before{content:"";position:absolute;top:-50%;right:-20%;width:60%;height:200%;background:radial-gradient(circle,rgba(52,211,153,0.08) 0%,transparent 70%);pointer-events:none}
-.studio-hero h1{font-size:38px;font-weight:800;letter-spacing:-0.03em;margin-bottom:10px;line-height:1.05;background:linear-gradient(90deg,#e8ecf3 0%,#34d399 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.studio-hero p{font-size:16px;color:#c5ccd9;max-width:720px}
-.industry-picker{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:32px}
-.ind-pick{background:linear-gradient(180deg,var(--panel) 0%,var(--panel2) 100%);border:1px solid var(--line);border-radius:14px;padding:20px;cursor:pointer;transition:all .2s ease;position:relative;overflow:hidden}
-.ind-pick:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 24px rgba(52,211,153,0.12)}
-.ind-pick.selected{border-color:var(--accent);background:linear-gradient(180deg,rgba(52,211,153,0.08) 0%,var(--panel2) 100%);box-shadow:0 0 0 2px rgba(52,211,153,0.3)}
-.ind-pick .icon{font-size:32px;margin-bottom:10px;line-height:1}
-.ind-pick .name{font-size:17px;font-weight:700;letter-spacing:-0.01em;margin-bottom:4px}
-.ind-pick .pickfit{font-size:11px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:8px;display:inline-block;padding:3px 8px;border-radius:4px}
-.ind-pick .pickfit.best{background:rgba(52,211,153,0.2);color:var(--tier1)}
-.ind-pick .pickfit.strong{background:rgba(96,165,250,0.2);color:var(--tier2)}
-.ind-pick .pickfit.fair{background:rgba(251,191,36,0.2);color:var(--tier4)}
-.ind-pick .pickfit.weak{background:rgba(167,139,250,0.2);color:var(--tier3)}
-.ind-pick .blurb{font-size:12px;color:var(--muted);line-height:1.5}
-.ind-pick .ind-tags{margin-top:10px;display:flex;flex-wrap:wrap;gap:4px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px;box-shadow:var(--shadow-sm);transition:box-shadow 0.2s}
+.card:hover{box-shadow:var(--shadow-md)}
+.card.accent{border-color:var(--accent);background:linear-gradient(180deg,var(--accent-bg) 0%,var(--panel) 35%)}
+
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:var(--shadow-sm)}
+.stat .label{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;font-weight:700}
+.stat .value{font-family:'Fraunces',serif;font-size:32px;font-weight:700;color:var(--text);letter-spacing:-0.025em;line-height:1}
+.stat .sub{font-size:12px;color:var(--muted);margin-top:6px}
+
+.badge{display:inline-block;font-size:10px;padding:4px 10px;border-radius:6px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;border:1px solid transparent}
+.badge.tier1{background:var(--accent-bg);color:var(--tier1);border-color:rgba(13,79,44,0.2)}
+.badge.tier2{background:rgba(30,64,175,0.07);color:var(--tier2);border-color:rgba(30,64,175,0.2)}
+.badge.tier3{background:rgba(124,58,237,0.07);color:var(--tier3);border-color:rgba(124,58,237,0.2)}
+.badge.tier4{background:var(--secondary-bg);color:var(--tier4);border-color:rgba(194,65,12,0.2)}
+.badge.tier5{background:var(--danger-bg);color:var(--tier5);border-color:rgba(153,27,27,0.2)}
+.badge.low{background:var(--accent-bg);color:var(--accent)}
+.badge.med{background:var(--warn-bg);color:var(--warn)}
+.badge.high{background:var(--danger-bg);color:var(--danger)}
+
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;padding:18px;background:var(--panel);border:1px solid var(--line);border-radius:14px;align-items:center;box-shadow:var(--shadow-sm)}
+.filters label{font-size:11px;color:var(--muted);margin-right:4px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em}
+.filters select,.filters input{background:var(--panel);border:1px solid var(--line2);color:var(--text);padding:9px 12px;border-radius:8px;font-size:13px;font-family:inherit}
+.filters input[type=search]{min-width:220px}
+.filters button{background:var(--panel);border:1px solid var(--line2);color:var(--text);padding:9px 14px;border-radius:8px;font-size:12px;cursor:pointer;font-family:inherit;font-weight:600}
+.filters button:hover{border-color:var(--accent);color:var(--accent)}
+.filters button.active{background:var(--accent-bg);border-color:var(--accent);color:var(--accent)}
+
+.industry-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px}
+.industry{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease,border-color .15s;position:relative;overflow:hidden;box-shadow:var(--shadow-sm)}
+.industry:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.industry .ind-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;gap:10px}
+.industry .ind-name{font-family:'Fraunces',serif;font-size:19px;font-weight:700;letter-spacing:-0.015em;color:var(--text)}
+.industry .fit-score{font-size:12px;font-weight:700;padding:5px 11px;border-radius:7px;white-space:nowrap;font-family:'Inter',sans-serif}
+.fit-95{background:var(--accent-bg);color:var(--accent)}
+.fit-85{background:var(--accent-bg);color:var(--accent-light)}
+.fit-75{background:rgba(30,64,175,0.08);color:var(--info)}
+.fit-65{background:rgba(124,58,237,0.08);color:var(--tier3)}
+.fit-50{background:var(--secondary-bg);color:var(--secondary)}
+.fit-35{background:var(--danger-bg);color:var(--danger)}
+.industry .tagline{font-size:13px;color:var(--muted);margin-bottom:14px;min-height:36px;line-height:1.55}
+.industry .mini-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.industry .mini-stat{font-size:12px}
+.industry .mini-stat .k{color:var(--dim);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;font-size:10px}
+.industry .mini-stat .v{color:var(--text);font-weight:600;margin-top:3px;font-family:'Fraunces',serif;font-size:14px}
+.industry .pills{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}
+.pill{font-size:9px;padding:3px 8px;border-radius:5px;background:var(--panel2);color:var(--muted);font-weight:600;letter-spacing:0.05em;text-transform:uppercase;border:1px solid var(--line)}
+.pill.good{background:var(--accent-bg);color:var(--accent);border-color:rgba(13,79,44,0.18)}
+.pill.warn{background:var(--secondary-bg);color:var(--secondary);border-color:rgba(194,65,12,0.18)}
+.pill.bad{background:var(--danger-bg);color:var(--danger);border-color:rgba(153,27,27,0.18)}
+
+.modal-bg{position:fixed;inset:0;background:rgba(26,31,26,0.5);backdrop-filter:blur(10px);display:none;z-index:200;overflow-y:auto;padding:40px 20px}
+.modal-bg.open{display:block}
+.modal{max-width:1000px;margin:0 auto;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:36px;position:relative;box-shadow:var(--shadow-xl)}
+.modal .close{position:absolute;top:16px;right:16px;background:var(--panel2);border:1px solid var(--line);color:var(--muted);width:36px;height:36px;border-radius:10px;cursor:pointer;font-size:20px;font-family:inherit}
+.modal .close:hover{color:var(--text);background:var(--accent-bg)}
+.modal h2{font-size:32px;margin-bottom:8px}
+.modal .tagline{color:var(--muted);margin-bottom:24px;font-size:15px;line-height:1.6}
+.modal .section{margin:28px 0;padding-top:20px;border-top:1px solid var(--line)}
+.modal .section:first-of-type{border-top:none;padding-top:0}
+
+.kv{display:grid;grid-template-columns:200px 1fr;gap:10px 20px;margin:10px 0}
+.kv .k{color:var(--muted);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em}
+.kv .v{color:var(--text);font-size:14px;line-height:1.55}
+
+.bullets{list-style:none;padding-left:0}
+.bullets li{padding:7px 0 7px 24px;position:relative;color:var(--text-soft);font-size:14px;line-height:1.6}
+.bullets li:before{content:"→";position:absolute;left:0;color:var(--accent);font-weight:700}
+.bullets.warn li:before{content:"!";color:var(--secondary)}
+.bullets.bad li:before{content:"×";color:var(--danger)}
+
+.tab-switcher{display:flex;gap:4px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:4px;margin-bottom:18px;width:fit-content}
+.tab-switcher button{background:none;border:none;color:var(--muted);padding:9px 16px;border-radius:7px;cursor:pointer;font-size:13px;font-weight:600;font-family:inherit}
+.tab-switcher button.active{background:var(--panel);color:var(--text);box-shadow:var(--shadow-sm)}
+
+.calc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px;margin-bottom:18px;box-shadow:var(--shadow-sm)}
+.calc h3{margin-top:0}
+.calc .inputs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:18px}
+.calc label{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;font-weight:700}
+.calc input[type=number],.calc input[type=range],.calc select{width:100%;background:var(--panel);border:1px solid var(--line2);color:var(--text);padding:10px 14px;border-radius:8px;font-size:14px;font-family:inherit}
+.calc .output{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:22px;margin-top:14px}
+.calc .output .big{font-family:'Fraunces',serif;font-size:46px;font-weight:700;color:var(--accent);margin-bottom:8px;letter-spacing:-0.03em;line-height:1}
+.calc .output .small{color:var(--muted);font-size:13px}
+
+table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
+table th{text-align:left;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:0.06em;padding:12px 14px;border-bottom:2px solid var(--line2);font-weight:700}
+table td{padding:14px;border-bottom:1px solid var(--line);color:var(--text-soft);line-height:1.55}
+table tr:hover td{background:var(--panel2)}
+
+.timeline{position:relative;padding-left:30px;margin:14px 0}
+.timeline:before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:var(--line2)}
+.timeline .phase{position:relative;margin-bottom:20px}
+.timeline .phase:before{content:"";position:absolute;left:-26px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--bg)}
+.timeline .phase .when{font-size:11px;color:var(--accent);font-weight:800;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px}
+.timeline .phase .what{font-size:15px;font-weight:700;margin-bottom:5px}
+.timeline .phase .detail{font-size:13px;color:var(--text-soft);line-height:1.6}
+
+.alert{padding:16px 20px;border-radius:10px;margin:14px 0;font-size:14px;border-left:3px solid;line-height:1.6}
+.alert.info{background:var(--info-bg);border-color:var(--info);color:var(--text)}
+.alert.warn{background:var(--warn-bg);border-color:var(--warn);color:var(--text)}
+.alert.danger{background:var(--danger-bg);border-color:var(--danger);color:var(--text)}
+.alert.success{background:var(--accent-bg);border-color:var(--accent);color:var(--text)}
+
+.presetBtn{background:var(--panel);border:1px solid var(--line2);color:var(--text);padding:9px 16px;border-radius:8px;font-size:12px;cursor:pointer;font-family:inherit;font-weight:600;margin:4px 4px 0 0}
+.presetBtn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-bg)}
+
+#cmpTable table{font-size:13px}
+#cmpTable th,#cmpTable td{padding:12px 14px;vertical-align:top;border-bottom:1px solid var(--line)}
+#cmpTable tr:hover td{background:transparent}
+
+.studio-hero{padding:64px 44px;border-radius:24px;background:linear-gradient(135deg,var(--bg-warm) 0%,#fff8e8 50%,#f0e8d6 100%);border:1px solid var(--line2);margin-bottom:36px;position:relative;overflow:hidden;box-shadow:var(--shadow-md)}
+.studio-hero::before{content:"";position:absolute;top:-50%;right:-20%;width:60%;height:200%;background:radial-gradient(circle,rgba(13,79,44,0.10) 0%,transparent 70%);pointer-events:none}
+.studio-hero::after{content:"";position:absolute;bottom:-30%;left:-15%;width:50%;height:130%;background:radial-gradient(circle,rgba(194,65,12,0.07) 0%,transparent 65%);pointer-events:none}
+.studio-hero h1{font-family:'Fraunces',serif;font-size:54px;font-weight:700;letter-spacing:-0.035em;margin-bottom:16px;line-height:1.0;color:var(--text);position:relative}
+.studio-hero h1 em{font-style:italic;color:var(--accent);font-weight:600}
+.studio-hero p{font-size:18px;color:var(--text-soft);max-width:780px;line-height:1.65;position:relative}
+
+.industry-picker{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px;margin-bottom:36px}
+.ind-pick{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px;cursor:pointer;transition:all .2s ease;position:relative;overflow:hidden;box-shadow:var(--shadow-sm)}
+.ind-pick:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:var(--shadow-xl)}
+.ind-pick.selected{border-color:var(--accent);background:linear-gradient(180deg,var(--accent-bg) 0%,var(--panel) 50%);box-shadow:var(--shadow-md)}
+.ind-pick .icon{font-size:40px;margin-bottom:16px;line-height:1}
+.ind-pick .name{font-family:'Fraunces',serif;font-size:22px;font-weight:700;letter-spacing:-0.02em;margin-bottom:10px;color:var(--text);line-height:1.2}
+.ind-pick .pickfit{font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:14px;display:inline-block;padding:5px 12px;border-radius:7px;border:1px solid transparent}
+.ind-pick .pickfit.best{background:var(--accent-bg);color:var(--accent);border-color:rgba(13,79,44,0.2)}
+.ind-pick .pickfit.strong{background:rgba(30,64,175,0.08);color:var(--info);border-color:rgba(30,64,175,0.2)}
+.ind-pick .pickfit.fair{background:var(--secondary-bg);color:var(--secondary);border-color:rgba(194,65,12,0.2)}
+.ind-pick .pickfit.weak{background:rgba(124,58,237,0.08);color:var(--tier3);border-color:rgba(124,58,237,0.2)}
+.ind-pick .blurb{font-size:13px;color:var(--text-soft);line-height:1.6}
+.ind-pick .ind-tags{margin-top:14px;display:flex;flex-wrap:wrap;gap:5px}
 
 .studio-detail{display:none;animation:fadeIn .35s ease}
 .studio-detail.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.detail-hero{background:linear-gradient(135deg,#0f1219 0%,#1a2438 50%,#0f2027 100%);border:1px solid var(--line2);border-radius:18px;padding:36px;margin-bottom:24px;position:relative;overflow:hidden}
-.detail-hero .icon-big{font-size:64px;line-height:1;margin-bottom:8px}
-.detail-hero h2{font-size:34px;font-weight:800;letter-spacing:-0.02em;margin-bottom:8px}
-.detail-hero .subtitle{font-size:15px;color:var(--muted);max-width:680px;line-height:1.55}
-.detail-hero .quick-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:24px}
-.detail-hero .quick-stat{background:rgba(255,255,255,0.04);border:1px solid var(--line);border-radius:10px;padding:14px;backdrop-filter:blur(10px)}
-.detail-hero .quick-stat .qs-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;margin-bottom:4px}
-.detail-hero .quick-stat .qs-value{font-size:18px;font-weight:800;color:var(--text);letter-spacing:-0.01em}
+.detail-hero{background:linear-gradient(135deg,#fff8e8 0%,#f5edd5 50%,#e8dfc0 100%);border:1px solid var(--line2);border-radius:24px;padding:52px;margin-bottom:30px;position:relative;overflow:hidden;box-shadow:var(--shadow-md)}
+.detail-hero::before{content:"";position:absolute;top:-30%;right:-10%;width:50%;height:160%;background:radial-gradient(circle,rgba(13,79,44,0.12) 0%,transparent 70%);pointer-events:none}
+.detail-hero::after{content:"";position:absolute;bottom:-20%;left:-10%;width:40%;height:120%;background:radial-gradient(circle,rgba(194,65,12,0.10) 0%,transparent 65%);pointer-events:none}
+.detail-hero .icon-big{font-size:80px;line-height:1;margin-bottom:14px;position:relative}
+.detail-hero h2{font-family:'Fraunces',serif;font-size:48px;font-weight:700;letter-spacing:-0.03em;line-height:1.05;margin-bottom:14px;color:var(--text);position:relative}
+.detail-hero .subtitle{font-size:18px;color:var(--text-soft);max-width:740px;line-height:1.6;position:relative;font-weight:400}
+.detail-hero .quick-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-top:36px;position:relative}
+.detail-hero .quick-stat{background:rgba(255,255,255,0.75);border:1px solid var(--line);border-radius:14px;padding:18px;backdrop-filter:blur(10px)}
+.detail-hero .quick-stat .qs-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.09em;font-weight:700;margin-bottom:8px}
+.detail-hero .quick-stat .qs-value{font-family:'Fraunces',serif;font-size:24px;font-weight:700;color:var(--text);letter-spacing:-0.02em;line-height:1.1}
 
-.section-block{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px;margin-bottom:18px}
-.section-block h3{font-size:20px;font-weight:800;letter-spacing:-0.01em;margin-top:0;margin-bottom:14px;display:flex;align-items:center;gap:10px}
-.section-block h3 .num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;background:rgba(52,211,153,0.15);color:var(--accent);font-size:12px;font-weight:800}
+.section-block{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:32px;margin-bottom:22px;box-shadow:var(--shadow-sm)}
+.section-block h3{font-family:'Fraunces',serif;font-size:26px;font-weight:700;letter-spacing:-0.02em;margin-top:0;margin-bottom:20px;display:flex;align-items:center;gap:16px}
+.section-block h3 .num{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:11px;background:var(--accent);color:#fff;font-family:'Inter',sans-serif;font-size:15px;font-weight:800}
 
-.network-map{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:8px}
-.net-node{background:linear-gradient(180deg,rgba(96,165,250,0.06) 0%,var(--panel2) 100%);border:1px solid rgba(96,165,250,0.25);border-radius:12px;padding:16px}
-.net-node .nn-icon{font-size:24px;margin-bottom:6px}
-.net-node .nn-role{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
-.net-node .nn-impact{font-size:12px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px}
-.net-node .nn-action{font-size:12px;color:var(--muted);line-height:1.5}
+.network-map{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:10px}
+.net-node{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:14px;padding:20px;transition:transform .15s,box-shadow .15s}
+.net-node:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.net-node .nn-icon{font-size:28px;margin-bottom:10px}
+.net-node .nn-role{font-family:'Fraunces',serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:7px;letter-spacing:-0.01em}
+.net-node .nn-impact{font-size:11px;color:var(--accent);font-weight:800;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px}
+.net-node .nn-action{font-size:13px;color:var(--text-soft);line-height:1.6}
 
-.money-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-.money-card{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px}
-.money-card .mc-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;font-weight:700;margin-bottom:4px}
-.money-card .mc-amount{font-size:22px;font-weight:800;color:var(--text);letter-spacing:-0.01em;margin-bottom:6px}
-.money-card .mc-note{font-size:12px;color:var(--muted);line-height:1.5}
-.money-card.big{grid-column:1/-1;background:linear-gradient(135deg,rgba(52,211,153,0.08) 0%,var(--panel2) 100%);border-color:rgba(52,211,153,0.3)}
-.money-card.big .mc-amount{font-size:36px;color:var(--accent)}
+.money-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.money-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:var(--shadow-sm)}
+.money-card .mc-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;font-weight:700;margin-bottom:7px}
+.money-card .mc-amount{font-family:'Fraunces',serif;font-size:24px;font-weight:700;color:var(--text);letter-spacing:-0.02em;margin-bottom:6px;line-height:1.1}
+.money-card .mc-note{font-size:12px;color:var(--muted);line-height:1.55}
+.money-card.big{grid-column:1/-1;background:linear-gradient(135deg,var(--accent-bg) 0%,var(--panel) 75%);border-color:var(--accent)}
+.money-card.big .mc-amount{font-size:54px;color:var(--accent);letter-spacing:-0.035em}
 
-.income-curve{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px}
-.income-step{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:18px;position:relative}
-.income-step .is-year{font-size:12px;color:var(--accent);font-weight:800;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px}
-.income-step .is-rev{font-size:24px;font-weight:800;color:var(--text);letter-spacing:-0.01em}
-.income-step .is-detail{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5}
-.income-step .is-take{font-size:13px;font-weight:700;color:var(--accent);margin-top:8px}
+.income-curve{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:10px}
+.income-step{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;position:relative;box-shadow:var(--shadow-sm)}
+.income-step:nth-child(2){background:linear-gradient(180deg,var(--accent-bg) 0%,var(--panel) 100%);border-color:var(--accent-light)}
+.income-step:nth-child(3){background:linear-gradient(180deg,var(--gold-bg) 0%,var(--panel) 100%);border-color:var(--gold-light)}
+.income-step .is-year{font-size:11px;color:var(--accent);font-weight:800;letter-spacing:0.09em;text-transform:uppercase;margin-bottom:10px}
+.income-step:nth-child(3) .is-year{color:var(--gold)}
+.income-step .is-rev{font-family:'Fraunces',serif;font-size:34px;font-weight:700;color:var(--text);letter-spacing:-0.025em;line-height:1.0}
+.income-step .is-detail{font-size:13px;color:var(--text-soft);margin-top:10px;line-height:1.6}
+.income-step .is-take{font-size:14px;font-weight:700;color:var(--accent);margin-top:12px}
+.income-step:nth-child(3) .is-take{color:var(--gold)}
 
-.timeline-modern{position:relative;padding-left:32px;margin-top:8px}
-.timeline-modern::before{content:"";position:absolute;left:10px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--accent) 0%,var(--line2) 100%)}
-.timeline-modern .tm-step{position:relative;margin-bottom:20px;padding:14px 18px;background:var(--panel2);border:1px solid var(--line);border-radius:10px}
-.timeline-modern .tm-step::before{content:"";position:absolute;left:-26px;top:18px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--bg),0 0 0 4px var(--line2)}
-.timeline-modern .tm-when{font-size:11px;color:var(--accent);font-weight:800;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px}
-.timeline-modern .tm-what{font-size:14px;font-weight:700;margin-bottom:4px}
-.timeline-modern .tm-detail{font-size:13px;color:#c5ccd9;line-height:1.55}
+.timeline-modern{position:relative;padding-left:38px;margin-top:10px}
+.timeline-modern::before{content:"";position:absolute;left:13px;top:10px;bottom:10px;width:2px;background:linear-gradient(180deg,var(--accent) 0%,var(--line2) 100%)}
+.timeline-modern .tm-step{position:relative;margin-bottom:24px;padding:18px 22px;background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-sm)}
+.timeline-modern .tm-step::before{content:"";position:absolute;left:-32px;top:22px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--bg),0 0 0 4px var(--line2)}
+.timeline-modern .tm-when{font-size:11px;color:var(--accent);font-weight:800;letter-spacing:0.09em;text-transform:uppercase;margin-bottom:6px}
+.timeline-modern .tm-what{font-family:'Fraunces',serif;font-size:17px;font-weight:700;margin-bottom:6px;color:var(--text);letter-spacing:-0.01em}
+.timeline-modern .tm-detail{font-size:14px;color:var(--text-soft);line-height:1.65}
 
-.master-card{background:linear-gradient(135deg,rgba(167,139,250,0.06) 0%,var(--panel2) 100%);border:1px solid rgba(167,139,250,0.25);border-radius:14px;padding:20px}
-.master-card h4{font-size:15px;margin-bottom:8px;color:var(--tier3)}
+.master-card{background:linear-gradient(135deg,var(--accent-bg) 0%,var(--panel) 70%);border:1px solid var(--accent);border-radius:16px;padding:26px;box-shadow:var(--shadow-sm)}
+.master-card h4{font-family:'Fraunces',serif;font-size:20px;margin-bottom:12px;color:var(--accent);text-transform:none;letter-spacing:-0.015em}
 
-.risk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:8px}
-.risk-card{background:rgba(248,113,113,0.04);border:1px solid rgba(248,113,113,0.2);border-radius:12px;padding:16px}
-.risk-card .rc-title{font-size:14px;font-weight:700;color:var(--danger);margin-bottom:6px}
-.risk-card .rc-mit{font-size:13px;color:var(--text);margin-top:8px;padding-top:8px;border-top:1px solid rgba(248,113,113,0.15)}
-.risk-card .rc-mit strong{color:var(--accent)}
+.risk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:14px;margin-top:10px}
+.risk-card{background:var(--secondary-bg);border:1px solid var(--secondary);border-radius:14px;padding:20px}
+.risk-card .rc-title{font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--secondary);margin-bottom:10px;letter-spacing:-0.01em}
+.risk-card .rc-mit{font-size:13px;color:var(--text-soft);margin-top:10px;padding-top:10px;border-top:1px solid rgba(194,65,12,0.2);line-height:1.6}
+.risk-card .rc-mit strong{color:var(--accent);font-weight:700}
 
-.quote-block{background:rgba(96,165,250,0.04);border-left:3px solid var(--accent2);padding:14px 18px;border-radius:0 8px 8px 0;margin:10px 0;font-style:italic;font-size:13px;color:#c5ccd9;line-height:1.6}
-.quote-block .source{display:block;margin-top:8px;font-size:11px;color:var(--muted);font-style:normal;text-transform:uppercase;letter-spacing:0.05em;font-weight:700}
+.quote-block{background:var(--panel2);border-left:4px solid var(--accent);padding:20px 24px;border-radius:0 12px 12px 0;margin:14px 0;font-style:italic;font-size:15px;color:var(--text-soft);line-height:1.7;font-family:'Fraunces',serif}
+.quote-block .source{display:block;margin-top:12px;font-size:11px;color:var(--muted);font-style:normal;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;font-family:'Inter',sans-serif}
 
-.back-btn{background:var(--panel2);border:1px solid var(--line2);color:var(--muted);padding:8px 14px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:700;font-family:inherit;margin-bottom:18px;display:inline-flex;align-items:center;gap:6px}
-.back-btn:hover{color:var(--accent);border-color:var(--accent)}
+.back-btn{background:var(--panel);border:1px solid var(--line2);color:var(--muted);padding:11px 18px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:600;font-family:inherit;margin-bottom:24px;display:inline-flex;align-items:center;gap:8px;box-shadow:var(--shadow-sm)}
+.back-btn:hover{color:var(--accent);border-color:var(--accent);background:var(--accent-bg)}
 
-.presetBtn{background:var(--panel2);border:1px solid var(--line2);color:var(--text);padding:7px 12px;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit;font-weight:600;margin:4px 4px 0 0}
-.presetBtn:hover{border-color:var(--accent);color:var(--accent)}
-#cmpTable table{font-size:12px}
-#cmpTable th,#cmpTable td{padding:10px 12px;vertical-align:top;border-bottom:1px solid var(--line)}
-#cmpTable tr:hover td{background:transparent}
+.template-block{background:#fdf9eb;border:1px solid var(--gold-light);border-left:5px solid var(--gold);border-radius:0 14px 14px 0;padding:22px 26px;margin:16px 0;font-family:'SF Mono','Menlo',monospace;font-size:13px;line-height:1.75;color:var(--text);white-space:pre-wrap}
+.template-block .tlabel{display:block;font-family:'Inter',sans-serif;font-size:10px;color:var(--gold);font-weight:800;text-transform:uppercase;letter-spacing:0.09em;margin-bottom:12px}
+
+.contact-block{background:var(--info-bg);border:1px solid var(--info);border-radius:12px;padding:18px 22px;margin:12px 0}
+.contact-block .clabel{display:block;font-size:11px;color:var(--info);font-weight:800;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px}
+.contact-block .cname{font-family:'Fraunces',serif;font-size:17px;font-weight:700;margin-bottom:6px;color:var(--text)}
+.contact-block .cdetails{font-size:13px;color:var(--text-soft);line-height:1.7}
+.contact-block .cdetails a{color:var(--info)}
+
 @media (max-width:768px){
-  .hero h1{font-size:24px}
+  .hero h1{font-size:36px}
+  .studio-hero h1{font-size:34px}
+  .detail-hero h2{font-size:30px}
+  .detail-hero{padding:32px}
   .kv{grid-template-columns:1fr}
   .industry-grid{grid-template-columns:1fr}
+  .income-curve{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 
 <div class="hero">
-  <span class="tag">Decision Tool · April 2026</span>
-  <h1>Blue-Collar Diversification Playbook</h1>
-  <p class="sub">A marketing company's deep-research comparison of 24 trades — market size, economics, licensing, PE activity, AI/robotics risk, and the startup-vs-acquire path. Built to answer the question: <em>which trade converts our marketing edge into the biggest enterprise value?</em></p>
+  <span class="tag">Highway Marketing Co · South Carolina · 2026</span>
+  <h1>Pick a trade.<br>Get the <em>real</em> roadmap.</h1>
+  <p class="sub">Tailored startup playbooks for South Carolina — built around your network of GCs, engineers, architects, flippers, and realtors. Real money to start. Real SC salaries. Real first-90-day actions. Verbatim templates you can use Monday morning.</p>
 </div>
 
 <nav class="tabs" id="nav">
-  <button data-tab="overview" class="active">Overview</button>
-  <button data-tab="studio" style="color:var(--accent);font-weight:800">⚡ Industry Studio</button>
-  <button data-tab="industries">Industries (24)</button>
-  <button data-tab="compare">Compare</button>
+  <button data-tab="studio" class="active">⚡ Industry Studio</button>
+  <button data-tab="compare">Compare All Trades</button>
   <button data-tab="verdicts">Verdicts</button>
-  <button data-tab="ai-longevity">AI Longevity</button>
-  <button data-tab="master-hire">Hire the Master</button>
-  <button data-tab="real-cac">Real CAC</button>
   <button data-tab="sc-reality">SC Reality</button>
-  <button data-tab="startbuy">Start vs Acquire</button>
-  <button data-tab="calc">Calculators</button>
-  <button data-tab="plan">Action Plan</button>
-  <button data-tab="risks">Risks &amp; Pitfalls</button>
   <button data-tab="resources">Resources</button>
+  <button data-tab="overview" style="opacity:0.6">Overview</button>
 </nav>
 
-<section class="tab active" id="overview">
+<section class="tab" id="overview">
   <div class="grid grid-4" style="margin-bottom:20px">
     <div class="stat"><div class="label">Industries Analyzed</div><div class="value">24</div><div class="sub">Residential &amp; light commercial</div></div>
     <div class="stat"><div class="label">PE Deals in Home Svcs</div><div class="value">+88% YoY</div><div class="sub">Add-on activity mid-2025</div></div>
@@ -316,7 +384,7 @@ table tr:hover td{background:var(--panel2)}
   <div class="industry-grid" id="industryGrid"></div>
 </section>
 
-<section class="tab" id="studio">
+<section class="tab active" id="studio">
   <div id="studioPicker">
     <div class="studio-hero">
       <h1>Pick Your Trade. Get Your Roadmap.</h1>
@@ -2672,9 +2740,477 @@ function selectStudio(key){
         <h3><span class="num">10</span>SC License Path</h3>
         <div style="font-size:14px;line-height:1.7">${i.license}</div>
       </div>
+
+      <div class="section-block">
+        <h3><span class="num">11</span>Templates You Can Use Monday Morning</h3>
+        <p style="margin-bottom:14px;color:var(--muted);font-size:14px">Copy/paste, edit the brackets, send. These are battle-tested across PE-backed home-service platforms.</p>
+        ${renderTemplates(i.key)}
+      </div>
+
+      <div class="section-block">
+        <h3><span class="num">12</span>SC Contacts &amp; Real Numbers</h3>
+        <p style="margin-bottom:14px;color:var(--muted);font-size:14px">Concrete phone numbers, application fees, and offices for SC-specific actions.</p>
+        ${renderContacts(i.key)}
+      </div>
     </div>
   `;
   window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderTemplates(key){
+  const T={
+    foundation:[
+      {label:'Master Crew Lead Recruitment Email',body:`Subject: A different kind of foundation company in [Greenville/Charleston]
+
+Hey [name],
+
+[Mutual GC contact] mentioned you\'re one of the best foundation crew leads in the area — and that you might be open to something different.
+
+Quick context: I run a marketing company. My family includes a structural engineer (PE stamps in-house). I\'ve got 15+ active GC relationships, dozens of realtors and flippers on speed-dial, and capital ready to deploy. What I don\'t have is your craft.
+
+I\'m not building another \"old guy with a truck\" foundation shop. I\'m building a real operation: ServiceTitan from day one, modern marketing that fills your calendar (so you stop chasing leads), engineer-on-staff for instant authority, and a path to equity for the right partner.
+
+Three quick questions:
+1. Are you happy where you are?
+2. Would you ever consider being a crew lead with profit share + equity, where I run sales/marketing/finance?
+3. Coffee this week?
+
+No pressure if it\'s not the right fit. — [Your Name], [phone]`},
+      {label:'Realtor Referral Program One-Pager (the message)',body:`[Your Brand] — Foundation &amp; Waterproofing
+SC Licensed GC · Engineer-on-Staff · Same-Day Inspections
+
+WHY REFER US:
+• Free 30-min foundation/crawl space inspection for your listings
+• Engineer-stamped reports your buyers and lenders accept
+• Same-week scheduling on emergency pre-closing fixes
+• Direct cell number to me — you never get stuck in a call tree
+
+REFERRAL FEE STRUCTURE:
+• $300 per booked inspection that becomes a paid job
+• $500 if job exceeds $15,000
+• Paid via Venmo within 5 days of customer payment
+• RESPA-compliant co-marketing, not direct kickback
+
+WHAT TO TELL YOUR CLIENT:
+"I work with [Brand] — they\'re local, they have an engineer on staff, and they\'ll come out fast. Their report tells you exactly what\'s wrong and what it costs."
+
+[Your Name] · [phone] · [email] · [website]`},
+      {label:'GC Partnership Email (cold to warm)',body:`Subject: Foundation sub for [Project Name] — and beyond
+
+[Name],
+
+Saw your latest project on [Builder Mag / FB / Instagram]. Beautiful work.
+
+Quick intro: I run [Brand] — foundation repair + crawl space + waterproofing in [your metro]. We focus exclusively on residential structural and have a PE on staff for stamped repairs. We turn around inspection reports in 48 hours and have schedule capacity within a week.
+
+Three offers for GCs we work with regularly:
+1. 5% spiff on referred jobs OR co-bidding on your projects
+2. Priority scheduling for your active clients (we move you to top of queue)
+3. White-label inspection reports under YOUR brand if you prefer
+
+When\'s a good 15 minutes for coffee or a phone call? I\'ll bring you a sample inspection report so you see the quality.
+
+[Your Name] · [phone]`},
+    ],
+    restoration:[
+      {label:'Plumber Referral Program — The Conversation',body:`(Use this verbatim when meeting plumbers face-to-face)
+
+"[Plumber name], I\'ll be straight with you — restoration is the highest-margin work that crosses your truck every week, and most plumbers leave that money on the table by handing it to ServPro.
+
+Here\'s what I\'m offering:
+- $750 to your pocket for every water-damage referral that books
+- Same-day response, your customer keeps your number, not mine
+- I\'ll work UNDER your relationship — when I show up, I tell the homeowner \'[Plumber] sent me\'
+- You get a co-branded yard sign during the job — your customers see you brought in the right pro
+
+I\'m looking for 3 plumbers in [metro] to be my preferred partners. Not 30. If you\'re interested, I\'ll send you my onboarding sheet and we can do a coffee next week."
+
+[For follow-up text]: Hey [name], here\'s the spiff agreement we discussed. Sign &amp; return and I\'ll get you a starter kit (lockbox, magnets, yard signs) by Friday. — [Your Name]`},
+      {label:'Emergency CSR Phone Script (24/7)',body:`(Train your CSR or answering service on this exactly)
+
+"[Brand], this is [name], how can I help you?"
+[They describe water damage]
+"I\'m so sorry — that\'s scary. Let me help. Your home is the priority right now. A few quick questions while I get a tech dispatched:"
+
+1. "Where in the home is the water? [bathroom/kitchen/basement]"
+2. "Is the water still flowing or is it stopped?"  → If flowing: "Do you know where the main shutoff is?"
+3. "How long ago did this start?"
+4. "What\'s your address?"
+5. "I\'m dispatching [tech name] right now — they\'ll call you within 10 minutes and be at your door within [actual timeframe]. While you wait: turn off any electricity to the affected area, move valuables to higher ground if possible. We\'ll handle the rest. Stay on the line if you have any other questions."
+
+[Confirm contact info, get insurance carrier name, end call.]
+[Text customer immediately with tech name + ETA + photo of tech\'s ID badge.]`},
+      {label:'Insurance Adjuster Coffee Outreach',body:`Subject: Quick coffee — [Brand] water mitigation in [metro]
+
+[Adjuster name],
+
+Quick hello from a new [carrier] preferred contractor in [metro]. I\'m not asking for a referral — I\'m asking for 20 minutes of your time to:
+
+1. Show you our scope process (Encircle + Xactimate + photo doc within 4 hrs)
+2. Hear what\'s frustrating you about contractors right now
+3. Trade business cards in case my speed/documentation could help your closure timelines
+
+I respect your time and the rules — no gifts, just coffee and 20 minutes.
+
+Open dates: [3 specific dates]. Where works for you?
+
+[Your Name] · IICRC WRT/ASD certified · [phone]`},
+    ],
+    pest:[
+      {label:'Realtor Lunch-and-Learn Pitch',body:`(15-minute presentation at brokerage office over lunch)
+
+SLIDE 1: "Every closing creates a pest opportunity — and you can monetize it"
+SLIDE 2: "What we do that nobody else does:
+- CL-100 termite letters at-cost ($35) for any listing where we have a service relationship
+- 24-hr turnaround on letters when you\'re under contract
+- Move-in pest treatment baked into every closing gift basket
+- Direct cell number to me — you never deal with a call tree"
+
+SLIDE 3: "Referral fee structure:
+- $75 for every recurring service customer that signs up
+- $25 for every move-in treatment
+- Venmo\'d within 5 days of customer payment
+- RESPA-compliant co-marketing"
+
+SLIDE 4: "What I need from you today:
+- 5 minutes to add me to your preferred-vendor list
+- One referral this month to test our service
+- Your email for our quarterly market update on SC pest pressure"
+
+[End with: "Lunch is on me. Who has questions?"]`},
+      {label:'Customer Retention Text Sequence',body:`(Automated via FieldRoutes/PestPac — runs every recurring service)
+
+Day-of (after service complete):
+"Hey [name] — [tech] just finished your treatment. Photos &amp; report attached. Anything you noticed? Reply STOP to stop these messages. Reply with any questions."
+
+Day +3 (NPS):
+"Hi [name], one quick question: scale of 0-10, how likely are you to recommend [Brand] to a friend or neighbor? Reply with a number — that\'s it!"
+[If 9-10]: "Thank you! Quick favor — would you leave us a Google review? Here\'s the link: [link]. We read every one."
+[If 0-6]: "I\'d love to make this right. Mind if I call you tomorrow at [time]?"
+
+Day +30 (between services):
+"Hey [name] — [tech] will be back on [date] for your next quarterly. Anything you want them to focus on?"
+
+Day +60 (referral):
+"Hi [name] — happy with us so far? If yes, here\'s a thank-you: tell a neighbor and we\'ll credit your account $50 when they sign up. Just give them this code: REF[customer_id]"`},
+      {label:'CL-100 Termite Letter Realtor Email',body:`Subject: CL-100 termite letters — same-week, $35 with us
+
+[Realtor name],
+
+Quick fact most realtors don\'t know: in SC, CL-100 termite letters are required for VA loans and common for FHA — meaning every closing under those programs needs one.
+
+We\'re offering:
+• $35 CL-100 letters (vs $100-150 typical) for our preferred realtors
+• 48-hour turnaround when you\'re in contract
+• Discount if you bundle with the seller\'s pest service
+• Direct cell — no call tree
+
+If your seller signs up for our quarterly service ($85/mo), the CL-100 is FREE. That\'s a real selling point for your listing presentations.
+
+15 min coffee this week to get you set up?
+
+[Your Name] · SC Cat 7A licensed · [phone]`},
+    ],
+    hvac:[
+      {label:'Master HVAC Recruitment Email',body:`Subject: Different kind of HVAC partnership in [metro]
+
+Hey [name],
+
+[Mutual contact] said you\'re the best master tech they\'ve worked with — and that you\'ve been frustrated since [Apex/Wrench/Service Experts] bought you out.
+
+Real talk: I run a marketing company. I\'m not a tech. I\'m looking for a master HVAC to partner with — not work for. The structure:
+
+- Your name on the door (co-brand)
+- $130K base + 1-3% net profit + 15% phantom equity vesting 4 years
+- I personally guarantee the SBA loan, you sign nothing
+- ServiceTitan from day one — no QuickBooks/paper-tickets nonsense
+- You run the trade. I run sales/marketing/finance. Clear lanes.
+- 5-year math: $1M EBITDA × 10x = $10M sale, your 15% = $1.5M
+
+I\'ve already got the marketing engine. I just need a master who wants to build something they own a piece of.
+
+15 min coffee this week? Even if it\'s not a fit, I\'d like to hear what you\'d look for in a real partnership.
+
+[Your Name] · [phone]`},
+      {label:'CSR Booking Script — The Six Steps',body:`(Train CSR with this verbatim)
+
+STEP 1: WARM GREETING (don\'t skip)
+"Thanks for calling [Brand], this is [name] — I can help. What\'s going on?"
+
+STEP 2: PROBLEM ACK (validate their pain)
+[Listen.] "That sounds rough — let\'s get you taken care of today."
+
+STEP 3: SPECIFIC TIMING (commit, don\'t hedge)
+"I have [tech] available this afternoon between 2-4pm — does that work?"
+[NEVER: "we\'ll call you back" or "let me check"]
+
+STEP 4: PRICE FRAME (control expectations)
+"Our diagnostic is $89 and goes toward any repair. Most repairs run $200-500. Sound good?"
+
+STEP 5: DIRECT BOOKING ASK (this is where the industry fails)
+"Can I lock you in for 2:30 today?"
+[Pause. Wait.]
+
+STEP 6: RESCUE OFFER (if they hesitate)
+"I understand. Worst case — would tomorrow at 10am work? I\'ll hold it for you and you can call back to confirm or cancel."
+
+[Confirm address, phone, get card on file or PO if commercial.]
+[Text customer immediately with appointment confirmation + tech bio.]
+
+TARGET: 70-85% booking rate (industry avg is 46%).`},
+      {label:'Maintenance Plan At-Register Pitch',body:`(For tech to deliver at end of every job)
+
+"[Customer name], I want to make sure you\'re set up right. Two quick questions:
+
+1. How often does someone come check on this system? [Wait for answer.]
+2. When was the last time anyone changed the filter? [Wait.]
+
+Most people answer \'I don\'t know\' — and that\'s the problem. A tune-up twice a year would have caught what we just fixed today before it broke.
+
+We have a Comfort Club at $19/month. Here\'s exactly what you get:
+- Two tune-ups a year (we call you to schedule, no remembering)
+- 15% off any repair
+- Priority scheduling — you skip the line on weekends
+- Free filters
+
+That\'s $228/year. The repair we just did would have been caught for free under this. Next breakdown saves you another $400+.
+
+Want to add it? Takes 30 seconds — I just scan your card right here on my tablet."
+
+[Industry attach rate is 20%. Top quartile is 40%. Practice this until 40%+ feels natural.]`},
+    ],
+    roofing:[
+      {label:'D2D Storm Canvass Pitch (post-hail/wind event)',body:`(Knock. Take 1 step back from door. Smile.)
+
+"Good [morning/afternoon] — I\'m [name] with [Brand]. We\'re local in [city]. Did you know your neighborhood got hit pretty hard in the storm last [day]? I\'m offering free roof inspections this week to anyone in [neighborhood] — totally free, takes 15 minutes, I\'ll go up myself with a drone and show you photos.
+
+[If they\'re interested]: \'Fantastic. Quick question — who\'s your insurance carrier? [State Farm/Allstate/etc.] OK perfect. I\'ll be back tomorrow at [specific time]. I just need 15 minutes — you don\'t even have to be home, but I\'ll text you the photos as soon as I\'m done.\'
+
+[If they say no]: \'Totally understood — most people are skeptical because of out-of-state storm chasers, and I get it. We\'re local, I live in [neighborhood/city], here\'s my driver\'s license and my SC registration. If you change your mind in the next two weeks while we\'re still working in this area, just call me — direct number — [phone]. Have a good one.\'
+
+NEVER pressure. Local + transparent + drone documentation = you win the long game."`},
+      {label:'Insurance Carrier Direct Pitch',body:`Subject: [Brand] — local SC roofer interested in [carrier] preferred panel
+
+[Adjuster manager],
+
+Quick intro from a SC-licensed local roofer that does things differently:
+
+What we bring to your panel:
+1. CompanyCam photo documentation on every claim — your adjusters get every photo timestamped and geotagged
+2. Xactimate-trained estimators (no OEM-arguing, we use your scope)
+3. Local crews — not out-of-state storm chasers — so we stay for warranty work
+4. 24-hr response on emergency tarping, all major SC metros
+5. Drone inspection on every claim, included free for your insureds
+
+What we\'re asking:
+- 20 minutes to discuss your panel application process
+- Test placement on 3-5 claims so you can evaluate our cycle time and customer NPS
+
+I respect the rules — no gifts, just a meeting and a working relationship.
+
+Open dates: [3 specific dates]. Which works?
+
+[Your Name] · SC Residential Specialty roofer · [phone]`},
+      {label:'Post-Storm SMS Blast (to existing customer DB)',body:`(Send within 6 hrs of hailstorm or wind event in your service area)
+
+"[Brand]: Big storm hit [neighborhood] last night. Quick check — any visible damage to your roof, gutters, or windows? Reply YES and we\'ll come out FREE this week to assess + document for insurance. Reply NO if you\'re good. Reply STOP to opt out."
+
+[For YES replies — auto-send]: "Thanks [name] — [tech] will reach out within 4 hrs to schedule. Don\'t file a claim yet — let us document first so we know what we\'re looking at."
+
+[Track open + reply rates. A well-built DB of 500 past customers = 30-50 free assessments per major storm = 8-15 booked jobs.]`},
+    ],
+    garage:[
+      {label:'Commercial Building Manager Outreach',body:`Subject: [Property name] garage floor coating — same-day install
+
+[Property manager name],
+
+Saw [property name] on the [chamber/CCIM] list and noticed your building hasn\'t had its parking deck/garage floor recoated since [estimated year].
+
+Three quick reasons commercial managers in [metro] are doing this:
+1. Slip-and-fall liability — uncoated concrete after rain is a lawsuit waiting to happen
+2. Tenant retention — clean, finished floors reduce complaints from white-collar tenants
+3. Property valuation — visible improvements show in the next NOI assessment
+
+We do 1-day installs (close Friday night, reopen Monday morning) using polyaspartic — 10-yr warranty.
+
+Pricing for buildings your size: $X/sqft for standard, $Y/sqft for slip-resistant grit finish. Free 15-min estimate visit.
+
+Worth 20 min next week?
+
+[Your Name] · [phone]`},
+      {label:'Instagram/TikTok Post Template',body:`(Use this format for every job — it\'s the platform-native pattern that goes viral)
+
+[Reel/Video Format — 30 seconds]:
+- 0-3s: Mid-prep grinding shot, dust flying, dramatic music
+- 3-8s: Pull back to show full ugly oil-stained garage floor — text overlay: "BEFORE"
+- 8-15s: Speed-ramp showing the prep + base coat application
+- 15-22s: Polyaspartic flake throw — slow-mo at 60fps
+- 22-28s: Reveal: clean glossy finished floor — text overlay: "AFTER"
+- 28-30s: Customer reaction (face, "wow")
+
+Caption:
+"Charleston/Greenville garage transformation 🔥 [color name] flake polyaspartic, 1-day install, 10-year warranty.
+Tap save if you\'re thinking about doing yours. DM us to see this in person.
+🔧 #garagefloor #charleston #greenville #garage #garagegoals"
+
+[Post 4-6/week for 6 months — this is the moat. Most operators post 1-2/month.]`},
+      {label:'Residential Cluster Door Hanger Campaign',body:`(Print 1,000. Hang in HOA neighborhood where you\'ve done one job)
+
+[Front side]:
+WE JUST FINISHED YOUR NEIGHBOR\'S GARAGE.
+
+[Photo of the actual finished garage with house number obscured]
+
+[Back side]:
+Hi neighbor. We\'re [Brand], based in [city]. We just completed a 1-day garage floor transformation at [street name]. The owner [optional first name] said we could let neighbors know.
+
+NEIGHBOR DISCOUNT (this week only):
+- 15% off any 2-car garage scheduled within 30 days
+- Bring 4 neighbors who book and yours is FREE
+
+WHY NOW:
+- Spring &amp; fall are the best install windows (humidity right)
+- Material costs going up Q3 — lock in 2026 pricing
+- Most jobs scheduled within 2 weeks
+
+Text "GARAGE" to [phone] to see pricing or schedule a free 15-min estimate. We\'ll come look, take measurements, send you a quote same day.
+
+[Brand] · [Insta handle] · [website]`},
+    ],
+  };
+  const list=T[key]||[];
+  if(list.length===0)return '<p class="muted">Templates coming soon for this trade.</p>';
+  return list.map(t=>`<div class="template-block"><span class="tlabel">${t.label}</span>${t.body}</div>`).join('');
+}
+
+function renderContacts(key){
+  const baseSC=`
+    <div class="contact-block">
+      <span class="clabel">SC Apprenticeship Tax Credit ($1,000/yr/apprentice up to 4 yrs)</span>
+      <div class="cname">Apprenticeship Carolina (SC Technical College System)</div>
+      <div class="cdetails">Phone: <strong>(803) 896-5388</strong> · Email: <strong>info@apprenticeshipcarolina.com</strong> · Web: <a href="https://apprenticeshipcarolina.com" target="_blank">apprenticeshipcarolina.com</a><br>They handle all DOL paperwork free. Stack with federal benefits. Use this from your first apprentice hire.</div>
+    </div>
+    <div class="contact-block">
+      <span class="clabel">SBA 7(a) Lender — #1 by Volume Nationally for Trades</span>
+      <div class="cname">Live Oak Bank</div>
+      <div class="cdetails">Toll-free: <strong>(866) 543-8083</strong> · Web: <a href="https://www.liveoak.bank" target="_blank">liveoak.bank</a><br>Specializes in HVAC/plumbing/pest acquisitions but also funds startups with strong projections + collateral. Current rate: WSJ Prime + 2.75-3% (~10.5-11%).</div>
+    </div>
+    <div class="contact-block">
+      <span class="clabel">SC Trade School System</span>
+      <div class="cname">SC Technical College System</div>
+      <div class="cdetails">Greenville Tech (HVAC Excellence accredited) · Trident Tech (Charleston, $0 tuition options) · Midlands Tech (Columbia) · Spartanburg CC · Aiken Tech · Florence-Darlington<br>Web: <a href="https://www.sctechsystem.edu" target="_blank">sctechsystem.edu</a></div>
+    </div>
+    <div class="contact-block">
+      <span class="clabel">DOD SkillBridge — Free Trained Veterans (DOD Pays Salary)</span>
+      <div class="cname">SkillBridge Office of the Secretary of Defense</div>
+      <div class="cdetails">Web: <a href="https://www.skillbridge.osd.mil" target="_blank">skillbridge.osd.mil</a> · SC bases: Joint Base Charleston · Fort Jackson (Columbia) · Shaw AFB · MCAS Beaufort · Parris Island<br>Apply as employer to host transitioning service members for 180-day training. They work for free; DOD pays them.</div>
+    </div>
+  `;
+  const tradeSpecific={
+    foundation:`
+      <div class="contact-block">
+        <span class="clabel">SC Contractor License (GC) — Application</span>
+        <div class="cname">SC LLR Contractor's Licensing Board</div>
+        <div class="cdetails">Phone: <strong>(803) 896-4686</strong> · Email: <strong>contractors@llr.sc.gov</strong> · Web: <a href="https://llr.sc.gov/clb" target="_blank">llr.sc.gov/clb</a><br>App fee: $185 · License fee: $100 · Group 1 ($100K bid limit) sufficient for residential. Trade exam waived if licensed in TN/NC/GA/AL/LA/MS/OH/TX/UT.</div>
+      </div>
+      <div class="contact-block">
+        <span class="clabel">Equipment Supplier — Charleston/Greenville</span>
+        <div class="cname">Stone Mountain Materials · ABC Supply · Fastenal</div>
+        <div class="cdetails">Stone Mountain (foundation specialty): <a href="https://www.stonemountainmaterials.com" target="_blank">stonemountainmaterials.com</a><br>For helical piers, hydraulic equipment: contact Foundation Supportworks dealer network.</div>
+      </div>
+    `,
+    restoration:`
+      <div class="contact-block">
+        <span class="clabel">IICRC Certification</span>
+        <div class="cname">Institute of Inspection Cleaning &amp; Restoration Certification</div>
+        <div class="cdetails">Phone: <strong>(844) 464-4272</strong> · Web: <a href="https://www.iicrc.org" target="_blank">iicrc.org</a><br>Required certs: WRT (Water Restoration Tech, ~$700) · ASD (Applied Structural Drying) · FSRT (Fire/Smoke) · AMRT (Microbial Remediation). 2-4 weeks per cert.</div>
+      </div>
+      <div class="contact-block">
+        <span class="clabel">Insurance Software (Mandatory for Insurance Billing)</span>
+        <div class="cname">Xactimate (Verisk) + DASH (Cotality) + Encircle</div>
+        <div class="cdetails">Xactimate: ~$200/mo/seat · DASH: $75-150/user/mo · Encircle Scope (AI scoping): trial through March 2026<br>Web: <a href="https://www.xactware.com" target="_blank">xactware.com</a> · <a href="https://www.getencircle.com" target="_blank">getencircle.com</a></div>
+      </div>
+      <div class="contact-block">
+        <span class="clabel">Insurance Carrier TPA Programs (use as fill, NOT foundation)</span>
+        <div class="cname">Alacrity Solutions · Contractor Connection · Accuserve</div>
+        <div class="cdetails">Alacrity (Allstate-aligned): <a href="https://www.alacritysolutions.com" target="_blank">alacritysolutions.com</a><br>Contractor Connection (Crawford): <a href="https://www.contractorconnection.com" target="_blank">contractorconnection.com</a><br>Accuserve (merged CodeBlue + MADSKY): <a href="https://www.accuserve.com" target="_blank">accuserve.com</a><br>Cap TPA work at 30-40% of revenue to preserve margin.</div>
+      </div>
+    `,
+    pest:`
+      <div class="contact-block">
+        <span class="clabel">SC Pesticide Applicator License (Cat 7A — General Pest)</span>
+        <div class="cname">Clemson University Department of Pesticide Regulation</div>
+        <div class="cdetails">Phone: <strong>(864) 646-2150</strong> · Email: <strong>dpr@clemson.edu</strong> · Web: <a href="https://www.clemson.edu/public/regulatory/pesticide-regulation" target="_blank">clemson.edu/public/regulatory/pesticide-regulation</a><br>Exam fee: ~$200 · Cat 7A = residential gen pest · Cat 7B = termite · Cat 8 = mosquito/public health<br>YOU can take the Cat 7A exam yourself in ~1 month of study.</div>
+      </div>
+      <div class="contact-block">
+        <span class="clabel">SC Pesticide Business License</span>
+        <div class="cname">Clemson DPR — Business Licensing</div>
+        <div class="cdetails">Same office as above. Annual fee + Designated Certified Applicator (DCA) requirement. $100K combined-single-limit GL with max $1K deductible required by SC statute (~$3-5K/yr).</div>
+      </div>
+      <div class="contact-block">
+        <span class="clabel">Field Service Software</span>
+        <div class="cname">FieldRoutes (ServiceTitan) · PestPac · GorillaDesk</div>
+        <div class="cdetails">FieldRoutes (recommended for growth): <a href="https://www.fieldroutes.com" target="_blank">fieldroutes.com</a> · ~$200/mo<br>GorillaDesk (SMB-friendly): <a href="https://www.gorilladesk.com" target="_blank">gorilladesk.com</a> · $49+/mo<br>PestPac (legacy enterprise): <a href="https://www.pestpac.com" target="_blank">pestpac.com</a></div>
+      </div>
+    `,
+    hvac:`
+      <div class="contact-block">
+        <span class="clabel">SC Master HVAC Certification (replaced MASC Jan 1, 2026)</span>
+        <div class="cname">Carolinas AGC (CAGC)</div>
+        <div class="cdetails">Phone: <strong>(704) 372-1450</strong> · Web: <a href="https://www.cagc.org" target="_blank">cagc.org</a><br>Anyone certified pre-2026 by MASC is grandfathered. New entrants take CAGC exam.</div>
+      </div>
+      <div class="contact-block">
+        <span class="clabel">EPA Section 608 Refrigerant Certification (mandatory federally)</span>
+        <div class="cname">EPA-Approved Testing Organizations</div>
+        <div class="cdetails">Web: <a href="https://www.epa.gov/section608" target="_blank">epa.gov/section608</a><br>Universal cert: ~$200 · 1-2 weeks of study · Required for any refrigerant work.</div>
+      </div>
+      <div class="contact-block">
+        <span class="clabel">SC Mechanical Contractor License (Class M / M-1)</span>
+        <div class="cname">SC LLR Contractor's Licensing Board</div>
+        <div class="cdetails">Phone: <strong>(803) 896-4686</strong> · Web: <a href="https://llr.sc.gov/clb" target="_blank">llr.sc.gov/clb</a><br>Class M (unlimited) or M-1 (≤3 stories residential + light commercial). 2-yr experience in prior 5. Trade exam waived for license in TN/NC/GA/AL/LA/MS/OH/TX/UT.</div>
+      </div>
+      <div class="contact-block">
+        <span class="clabel">Field Service Software (industry gold standard)</span>
+        <div class="cname">ServiceTitan</div>
+        <div class="cdetails">Web: <a href="https://www.servicetitan.com" target="_blank">servicetitan.com</a><br>$400-650/seat/mo + $10-50K setup. Justified at 5+ trucks. Below that, Housecall Pro ($49-499/mo) is the better choice.</div>
+      </div>
+    `,
+    roofing:`
+      <div class="contact-block">
+        <span class="clabel">SC Residential Roofing — Specialty Contractor Registration</span>
+        <div class="cname">SC LLR Residential Builders Commission</div>
+        <div class="cdetails">Phone: <strong>(803) 896-4696</strong> · Web: <a href="https://llr.sc.gov/res" target="_blank">llr.sc.gov/res</a><br><strong>NO TRADE EXAM REQUIRED.</strong> $5,000 surety bond. 1 yr supervised experience documented. Threshold: any work over $500.</div>
+      </div>
+      <div class="contact-block">
+        <span class="clabel">EPA RRP Lead-Safe Certification (pre-1978 homes)</span>
+        <div class="cname">EPA Renovation, Repair, and Painting Program</div>
+        <div class="cdetails">Web: <a href="https://www.epa.gov/lead/renovation-repair-and-painting-program" target="_blank">epa.gov/lead/rrp</a> · Course: ~$300 · Mandatory for any work disturbing lead paint on pre-1978 homes.</div>
+      </div>
+      <div class="contact-block">
+        <span class="clabel">Roofing-Specific Software</span>
+        <div class="cname">AccuLynx · JobNimbus · CompanyCam · EagleView · Roofr</div>
+        <div class="cdetails">CompanyCam (photo documentation, essentially mandatory for insurance work): $30/user/mo<br>EagleView (aerial measurements): $25-75/report<br>Roofr (modern proposal tool): <a href="https://www.roofr.com" target="_blank">roofr.com</a></div>
+      </div>
+    `,
+    garage:`
+      <div class="contact-block">
+        <span class="clabel">SC Specialty Contractor Registration (jobs over $500)</span>
+        <div class="cname">SC LLR Residential Builders Commission</div>
+        <div class="cdetails">Phone: <strong>(803) 896-4696</strong> · Web: <a href="https://llr.sc.gov/res" target="_blank">llr.sc.gov/res</a><br>No exam required. $5,000 surety bond. 1 year supervised experience.</div>
+      </div>
+      <div class="contact-block">
+        <span class="clabel">Coating Manufacturer Training Programs</span>
+        <div class="cname">Floor Shield · Penntek · Versatile Building Products · ArmorPoxy</div>
+        <div class="cdetails">Floor Shield: <a href="https://www.floorshieldcoatings.com" target="_blank">floorshieldcoatings.com</a> · 1-week training $3-5K<br>Wise Coatings (training-focused franchise): <a href="https://www.wisecoatings.com" target="_blank">wisecoatings.com</a><br>Independent build is generally preferred over franchise (saves 7-12% royalty/marketing fees).</div>
+      </div>
+      <div class="contact-block">
+        <span class="clabel">Equipment — Diamond Grinders &amp; Shot Blasters</span>
+        <div class="cname">Substrate Technology · Husqvarna · National Concrete Polishing</div>
+        <div class="cdetails">15HP diamond grinder: ~$15K · Shot blaster (used): $5-8K · Sprayers: $1K<br>Used equipment via concrete polishing forums + Facebook Marketplace.</div>
+      </div>
+    `,
+  };
+  return baseSC + (tradeSpecific[key] || '');
 }
 window.selectStudio=selectStudio;
 
