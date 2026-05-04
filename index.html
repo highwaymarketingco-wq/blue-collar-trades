@@ -15,10 +15,10 @@
   --line:#e5dfd0;
   --line2:#d4cdb8;
   --line3:#bcb4a0;
-  --text:#1a1f1a;
-  --text-soft:#3d3f38;
-  --muted:#6a6d62;
-  --dim:#9b9d92;
+  --text:#0f1410;
+  --text-soft:#1f2520;
+  --muted:#4a4d44;
+  --dim:#737569;
   --accent:#0d4f2c;
   --accent-light:#22884f;
   --accent-bg:rgba(13,79,44,0.07);
@@ -41,7 +41,7 @@
   --shadow-xl:0 20px 30px -5px rgba(26,31,26,0.10),0 10px 10px -5px rgba(26,31,26,0.04);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;font-feature-settings:'cv11','ss01','kern'}
+html,body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;font-feature-settings:'cv11','ss01','kern'}
 a{color:var(--accent);text-decoration:none;font-weight:500;border-bottom:1px solid transparent;transition:border-color 0.15s}
 a:hover{border-bottom-color:var(--accent)}
 .wrap{max-width:1400px;margin:0 auto;padding:24px}
@@ -142,7 +142,7 @@ p{color:var(--text-soft);margin-bottom:14px}
 .kv .v{color:var(--text);font-size:14px;line-height:1.55}
 
 .bullets{list-style:none;padding-left:0}
-.bullets li{padding:7px 0 7px 24px;position:relative;color:var(--text-soft);font-size:14px;line-height:1.6}
+.bullets li{padding:8px 0 8px 26px;position:relative;color:var(--text);font-size:15px;line-height:1.65}
 .bullets li:before{content:"→";position:absolute;left:0;color:var(--accent);font-weight:700}
 .bullets.warn li:before{content:"!";color:var(--secondary)}
 .bullets.bad li:before{content:"×";color:var(--danger)}
@@ -231,7 +231,7 @@ table tr:hover td{background:var(--panel2)}
 .net-node .nn-icon{font-size:28px;margin-bottom:10px}
 .net-node .nn-role{font-family:'Fraunces',serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:7px;letter-spacing:-0.01em}
 .net-node .nn-impact{font-size:11px;color:var(--accent);font-weight:800;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px}
-.net-node .nn-action{font-size:13px;color:var(--text-soft);line-height:1.6}
+.net-node .nn-action{font-size:14px;color:var(--text);line-height:1.65}
 
 .money-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
 .money-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:var(--shadow-sm)}
@@ -248,7 +248,7 @@ table tr:hover td{background:var(--panel2)}
 .income-step .is-year{font-size:11px;color:var(--accent);font-weight:800;letter-spacing:0.09em;text-transform:uppercase;margin-bottom:10px}
 .income-step:nth-child(3) .is-year{color:var(--gold)}
 .income-step .is-rev{font-family:'Fraunces',serif;font-size:34px;font-weight:700;color:var(--text);letter-spacing:-0.025em;line-height:1.0}
-.income-step .is-detail{font-size:13px;color:var(--text-soft);margin-top:10px;line-height:1.6}
+.income-step .is-detail{font-size:14px;color:var(--text);margin-top:12px;line-height:1.65}
 .income-step .is-take{font-size:14px;font-weight:700;color:var(--accent);margin-top:12px}
 .income-step:nth-child(3) .is-take{color:var(--gold)}
 
@@ -258,7 +258,7 @@ table tr:hover td{background:var(--panel2)}
 .timeline-modern .tm-step::before{content:"";position:absolute;left:-32px;top:22px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--bg),0 0 0 4px var(--line2)}
 .timeline-modern .tm-when{font-size:11px;color:var(--accent);font-weight:800;letter-spacing:0.09em;text-transform:uppercase;margin-bottom:6px}
 .timeline-modern .tm-what{font-family:'Fraunces',serif;font-size:17px;font-weight:700;margin-bottom:6px;color:var(--text);letter-spacing:-0.01em}
-.timeline-modern .tm-detail{font-size:14px;color:var(--text-soft);line-height:1.65}
+.timeline-modern .tm-detail{font-size:15px;color:var(--text);line-height:1.7}
 
 .master-card{background:linear-gradient(135deg,var(--accent-bg) 0%,var(--panel) 70%);border:1px solid var(--accent);border-radius:16px;padding:26px;box-shadow:var(--shadow-sm)}
 .master-card h4{font-family:'Fraunces',serif;font-size:20px;margin-bottom:12px;color:var(--accent);text-transform:none;letter-spacing:-0.015em}
@@ -266,10 +266,10 @@ table tr:hover td{background:var(--panel2)}
 .risk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:14px;margin-top:10px}
 .risk-card{background:var(--secondary-bg);border:1px solid var(--secondary);border-radius:14px;padding:20px}
 .risk-card .rc-title{font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--secondary);margin-bottom:10px;letter-spacing:-0.01em}
-.risk-card .rc-mit{font-size:13px;color:var(--text-soft);margin-top:10px;padding-top:10px;border-top:1px solid rgba(194,65,12,0.2);line-height:1.6}
+.risk-card .rc-mit{font-size:14px;color:var(--text);margin-top:12px;padding-top:12px;border-top:1px solid rgba(194,65,12,0.25);line-height:1.65}
 .risk-card .rc-mit strong{color:var(--accent);font-weight:700}
 
-.quote-block{background:var(--panel2);border-left:4px solid var(--accent);padding:20px 24px;border-radius:0 12px 12px 0;margin:14px 0;font-style:italic;font-size:15px;color:var(--text-soft);line-height:1.7;font-family:'Fraunces',serif}
+.quote-block{background:var(--panel2);border-left:4px solid var(--accent);padding:22px 26px;border-radius:0 12px 12px 0;margin:14px 0;font-style:italic;font-size:16px;color:var(--text);line-height:1.7;font-family:'Fraunces',serif}
 .quote-block .source{display:block;margin-top:12px;font-size:11px;color:var(--muted);font-style:normal;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;font-family:'Inter',sans-serif}
 
 .back-btn{background:var(--panel);border:1px solid var(--line2);color:var(--muted);padding:11px 18px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:600;font-family:inherit;margin-bottom:24px;display:inline-flex;align-items:center;gap:8px;box-shadow:var(--shadow-sm)}
@@ -2742,19 +2742,234 @@ function selectStudio(key){
       </div>
 
       <div class="section-block">
-        <h3><span class="num">11</span>Templates You Can Use Monday Morning</h3>
-        <p style="margin-bottom:14px;color:var(--muted);font-size:14px">Copy/paste, edit the brackets, send. These are battle-tested across PE-backed home-service platforms.</p>
+        <h3><span class="num">11</span>Quick Math — Plain English Calculator</h3>
+        <p style="margin-bottom:18px;color:var(--text-soft);font-size:15px">No jargon. Move the sliders, see real numbers.</p>
+        ${renderMiniCalc(i.key)}
+      </div>
+
+      <div class="section-block">
+        <h3><span class="num">12</span>Conservative Scale Path with SBA Financing</h3>
+        <p style="margin-bottom:18px;color:var(--text-soft);font-size:15px">For someone new to the industry, the conservative scale-up path uses your own cash for Year 1 (prove demand) then SBA 7(a) financing for Year 2/3 expansion. Below: when, how much, and what it pays for.</p>
+        ${renderSBAPath(i.key)}
+      </div>
+
+      <div class="section-block">
+        <h3><span class="num">13</span>Templates You Can Use Monday Morning</h3>
+        <p style="margin-bottom:14px;color:var(--text-soft);font-size:15px">Copy/paste, edit the brackets, send. These are battle-tested across PE-backed home-service platforms.</p>
         ${renderTemplates(i.key)}
       </div>
 
       <div class="section-block">
-        <h3><span class="num">12</span>SC Contacts &amp; Real Numbers</h3>
-        <p style="margin-bottom:14px;color:var(--muted);font-size:14px">Concrete phone numbers, application fees, and offices for SC-specific actions.</p>
+        <h3><span class="num">14</span>SC Contacts &amp; Real Numbers</h3>
+        <p style="margin-bottom:14px;color:var(--text-soft);font-size:15px">Concrete phone numbers, application fees, and offices for SC-specific actions.</p>
         ${renderContacts(i.key)}
       </div>
     </div>
   `;
   window.scrollTo({top:0,behavior:'smooth'});
+  // Initialize the mini calculator outputs after DOM is in place
+  setTimeout(()=>{try{updateMiniCalc(i.key);}catch(e){}},50);
+}
+
+// Per-industry calculator presets (plain English)
+const CALC_PRESETS={
+  foundation:{avgTicket:10000,grossMargin:0.50,jobsLow:3,jobsMid:8,jobsHigh:15,subCost:0.55,monthlyOverhead:6000,startupCash:45000},
+  restoration:{avgTicket:5000,grossMargin:0.65,jobsLow:4,jobsMid:10,jobsHigh:20,subCost:0.50,monthlyOverhead:7000,startupCash:80000},
+  pest:{avgTicket:1200,grossMargin:0.60,jobsLow:25,jobsMid:60,jobsHigh:120,subCost:0.45,monthlyOverhead:5500,startupCash:40000,recurring:true,monthlyPerCust:65,churn:0.015},
+  hvac:{avgTicket:8000,grossMargin:0.45,jobsLow:4,jobsMid:10,jobsHigh:18,subCost:0.55,monthlyOverhead:9000,startupCash:65000},
+  roofing:{avgTicket:18000,grossMargin:0.30,jobsLow:2,jobsMid:6,jobsHigh:12,subCost:0.65,monthlyOverhead:6000,startupCash:25000},
+  garage:{avgTicket:3500,grossMargin:0.45,jobsLow:6,jobsMid:14,jobsHigh:25,subCost:0.50,monthlyOverhead:5000,startupCash:60000},
+};
+
+function dollarFmt(n){return '$'+Math.round(n).toLocaleString()}
+
+function renderMiniCalc(key){
+  const p=CALC_PRESETS[key]||CALC_PRESETS.foundation;
+  const id='mc_'+key;
+  const recurringHTML=p.recurring?`
+    <div style="padding:18px;background:var(--accent-bg);border:1px solid var(--accent);border-radius:12px;margin-top:16px">
+      <h4 style="color:var(--accent);font-family:'Fraunces',serif;font-size:18px;text-transform:none;letter-spacing:-0.01em;margin-bottom:8px">Recurring Revenue Bonus (Pest is special)</h4>
+      <p style="margin:0;font-size:14px;color:var(--text)">Each customer pays roughly <strong>$${p.monthlyPerCust}/month</strong>. With ~1.5% monthly churn, average customer stays ~5.5 years = <strong>~$${Math.round(p.monthlyPerCust/0.015)} lifetime value per customer</strong>. Your 100th customer is paying you forever even if you stop adding new ones. THIS is why pest is the highest-multiple exit in trades.</p>
+    </div>
+  `:'';
+  return `
+    <div style="background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:24px;margin-bottom:16px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px">
+        <div>
+          <label style="display:block;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px;font-weight:700">Jobs you book per month</label>
+          <input type="range" id="${id}_jobs" min="${p.jobsLow}" max="${p.jobsHigh}" value="${p.jobsMid}" step="1" oninput="updateMiniCalc('${key}')" style="width:100%">
+          <div id="${id}_jobs_val" style="font-family:'Fraunces',serif;font-size:32px;font-weight:700;color:var(--accent);margin-top:6px">${p.jobsMid}</div>
+          <div style="font-size:12px;color:var(--muted)">Year 1 realistic: ${p.jobsLow}–${p.jobsMid} · Year 2 with crew: ${p.jobsMid}–${p.jobsHigh}</div>
+        </div>
+        <div>
+          <label style="display:block;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px;font-weight:700">Average price you charge per job</label>
+          <input type="range" id="${id}_ticket" min="${Math.round(p.avgTicket*0.5)}" max="${Math.round(p.avgTicket*2)}" value="${p.avgTicket}" step="500" oninput="updateMiniCalc('${key}')" style="width:100%">
+          <div id="${id}_ticket_val" style="font-family:'Fraunces',serif;font-size:32px;font-weight:700;color:var(--accent);margin-top:6px">${dollarFmt(p.avgTicket)}</div>
+          <div style="font-size:12px;color:var(--muted)">Industry typical: ${dollarFmt(p.avgTicket)}</div>
+        </div>
+        <div>
+          <label style="display:block;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px;font-weight:700">Are you sub-contracting (Year 1) or running W-2 crew (Year 2+)?</label>
+          <select id="${id}_mode" onchange="updateMiniCalc('${key}')" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--line2);font-size:15px;font-family:inherit;background:var(--panel)">
+            <option value="sub">Sub-contracting (Year 1) — pay 55% to crew</option>
+            <option value="w2" selected>W-2 crew (Year 2+) — keep 100% margin</option>
+          </select>
+          <div style="font-size:12px;color:var(--muted);margin-top:8px">Sub model = lower risk, lower margin. W-2 = bigger investment, bigger pocket.</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:24px">
+        <div style="background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px">
+          <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;font-weight:700;margin-bottom:6px">Money You Bring In Each Year</div>
+          <div id="${id}_annual_rev" style="font-family:'Fraunces',serif;font-size:30px;font-weight:700;color:var(--text);letter-spacing:-0.02em">—</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:6px">Total revenue (before any costs)</div>
+        </div>
+        <div style="background:var(--accent-bg);border:1px solid var(--accent);border-radius:12px;padding:18px">
+          <div style="font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:0.07em;font-weight:800;margin-bottom:6px">Money YOU Pocket (after expenses)</div>
+          <div id="${id}_annual_take" style="font-family:'Fraunces',serif;font-size:34px;font-weight:700;color:var(--accent);letter-spacing:-0.02em">—</div>
+          <div style="font-size:12px;color:var(--accent);margin-top:6px">After labor, materials, overhead, marketing</div>
+        </div>
+        <div style="background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px">
+          <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;font-weight:700;margin-bottom:6px">Months to Pay Back Your Startup Money</div>
+          <div id="${id}_payback" style="font-family:'Fraunces',serif;font-size:30px;font-weight:700;color:var(--text);letter-spacing:-0.02em">—</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:6px">Based on $${p.startupCash.toLocaleString()} startup</div>
+        </div>
+        <div style="background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px">
+          <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;font-weight:700;margin-bottom:6px">Per Month Take-Home</div>
+          <div id="${id}_monthly_take" style="font-family:'Fraunces',serif;font-size:30px;font-weight:700;color:var(--text);letter-spacing:-0.02em">—</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:6px">Your owner draw / pay</div>
+        </div>
+      </div>
+
+      ${recurringHTML}
+
+      <div style="margin-top:20px;padding:16px 20px;background:var(--info-bg);border-left:3px solid var(--info);border-radius:0 10px 10px 0;font-size:14px;color:var(--text);line-height:1.65">
+        <strong>How this math works:</strong> Revenue = Jobs × Price. Then we take out crew labor (sub: 55% of revenue / W-2: 25% via salaries), materials &amp; overhead (~$${(p.monthlyOverhead).toLocaleString()}/mo), marketing (~10% of revenue), and self-employment tax. What's left is what you actually pay yourself with. Add 20-30% buffer to the startup money for the first 6 months while you ramp.
+      </div>
+    </div>
+  `;
+}
+
+function updateMiniCalc(key){
+  const p=CALC_PRESETS[key]||CALC_PRESETS.foundation;
+  const id='mc_'+key;
+  const jobs=+document.getElementById(id+'_jobs').value;
+  const ticket=+document.getElementById(id+'_ticket').value;
+  const mode=document.getElementById(id+'_mode').value;
+  const annualRev=jobs*ticket*12;
+  const subPct=mode==='sub'?p.subCost:0.25;
+  const grossAfterCrew=annualRev*(1-subPct);
+  const overhead=p.monthlyOverhead*12;
+  const marketing=annualRev*0.10;
+  const taxes=Math.max(0,(grossAfterCrew-overhead-marketing))*0.15;
+  const yourPocket=Math.max(0,grossAfterCrew-overhead-marketing-taxes);
+  const monthly=yourPocket/12;
+  const paybackMo=monthly>0?Math.ceil(p.startupCash/monthly):'—';
+  document.getElementById(id+'_jobs_val').textContent=jobs;
+  document.getElementById(id+'_ticket_val').textContent=dollarFmt(ticket);
+  document.getElementById(id+'_annual_rev').textContent=dollarFmt(annualRev);
+  document.getElementById(id+'_annual_take').textContent=dollarFmt(yourPocket);
+  document.getElementById(id+'_payback').textContent=(typeof paybackMo==='number'?paybackMo+' mo':'—');
+  document.getElementById(id+'_monthly_take').textContent=dollarFmt(monthly);
+}
+window.updateMiniCalc=updateMiniCalc;
+
+function renderSBAPath(key){
+  const SBA={
+    foundation:{
+      year1:'Self-fund $35–50K. Subcontract crews. Build 30–50 jobs of track record. Goal: $300–500K revenue, $60–120K to your pocket.',
+      sbaWhen:'Month 14–18 (after 12 months of clean books showing $50K+ owner take + growth trend)',
+      sbaSize:'$150–250K SBA 7(a) loan',
+      sbaPays:'Push pier rig ($60K) · Mini-excavator ($35K) · Crew lead 6-month float ($50K) · Wrapped truck ($35K) · Working capital cushion ($30K)',
+      sbaTerm:'10-year term, ~10.5–11% rate (current). Payment: ~$2,100/month on $200K loan. Easily covered by Year 2 cash flow.',
+      year3:'Year 3 with W-2 crew: $2–3M revenue, $400–700K to your pocket. SBA loan paid off ahead of schedule possible.',
+      ceiling:'Year 5 conservative: $4–6M revenue with second crew. Sell to Groundworks/KKR at 7–10× EBITDA = $5–10M enterprise value.'
+    },
+    restoration:{
+      year1:'Self-fund $60–90K. You + 1 IICRC-certified tech. Build 50–100 emergency response jobs. Plumber referral network active. Goal: $200–400K revenue, $50–120K to your pocket.',
+      sbaWhen:'Month 14–18 (after demonstrated emergency response capability + insurance carrier relationships)',
+      sbaSize:'$200–300K SBA 7(a) loan',
+      sbaPays:'2nd service vehicle ($35K) · Equipment fleet expansion ($60K) · Crew lead 6-month float ($45K) · Reconstruction tools (Residential Builder license + crew) ($40K) · Plumber spiff fund ($20K) · Working capital ($50K)',
+      sbaTerm:'10-year term, ~10.5–11% rate. Payment: ~$2,600/month on $250K loan. Covered easily by Year 2 cash flow once you add reconstruction work.',
+      year3:'Year 3 with reconstruction line + 3 mitigation crews: $1.5–2.5M revenue, $300–500K to your pocket. Plumber network paying out at 26× ROI.',
+      ceiling:'Year 5: $3–5M revenue with fire/large-loss capability. Sell to BluSky/BELFOR/ATI at 6–10× EBITDA = $5–10M enterprise value.'
+    },
+    pest:{
+      year1:'Self-fund $30–55K. You take SC Cat 7A applicator exam yourself (~$200, 1 month study). 100–200 quarterly recurring customers built. Goal: $150–300K revenue, $50–100K to your pocket. Recurring base = $60–120K already locked in.',
+      sbaWhen:'Month 12–15 (recurring revenue is bankable — SBA loves predictable cash flow)',
+      sbaSize:'$120–200K SBA 7(a) loan',
+      sbaPays:'2nd service vehicle ($35K) · Tech 1 hire 6-month float ($30K) · Tech 2 hire 3-month float ($15K) · Equipment + chemical inventory expansion ($15K) · Marketing scaled with D2D testing ($30K) · Termite specialty equipment ($15K) · Working capital ($25K)',
+      sbaTerm:'10-year term, ~10.5–11% rate. Payment: ~$1,700/month on $160K loan. Recurring revenue base from Year 1 covers this 4× over.',
+      year3:'Year 3: 800+ recurring customers, $1–1.5M revenue, $250–400K to your pocket. Termite + mosquito + commercial mix layered in.',
+      ceiling:'Year 5: $2.5–4M revenue. Rollins/Rentokil/Anticimex/Aruza all calling. Exit at 8–14× EBITDA = $5.6M–$16.8M enterprise value. Retention metric drives the multiple — 88% retention → 14×; 60% → 8×.'
+    },
+    hvac:{
+      year1:'Self-fund $50–80K (with master HVAC partner who has license). You + master + 1 helper. Service-heavy mix. Build maintenance plan base from Day 1. Goal: $300–600K revenue, $50–120K to your pocket.',
+      sbaWhen:'Month 14–18 (after master partnership proven + maintenance plan base 100+ members)',
+      sbaSize:'$300–500K SBA 7(a) loan',
+      sbaPays:'2 wrapped vans ($150K) · Tools + inventory expansion ($50K) · ServiceTitan setup + Year 1 ($30K) · 2 additional techs 3-month float ($60K) · CSR + dispatcher 3-month float ($25K) · Marketing scaled ($75K) · Working capital ($60K)',
+      sbaTerm:'10-year term, ~10.5–11% rate. Payment: ~$4,200/month on $400K loan. Year 2 revenue at $1.5M × 18% margin = $270K covers this 5× over.',
+      year3:'Year 3: 3–5 trucks, $2–3.5M revenue, $300–600K to your pocket. 30%+ recurring on maintenance plans. CSR booking rate 70%+.',
+      ceiling:'Year 5: $5–10M revenue, $1–2M EBITDA. PE acquirers (Apex, Wrench, Champions/Blackstone at 18.5× precedent) calling. Exit at 8–18× EBITDA = $8–36M enterprise value.'
+    },
+    roofing:{
+      year1:'Self-fund $15–35K. Subcontract crew model. Owner-operated sales. Build storm-response playbook for first hurricane/hail event. Goal: $400–800K revenue, $50–100K to your pocket.',
+      sbaWhen:'Month 14–18 (after storm-response capability proven + insurance carrier relationships + W-2 transition started)',
+      sbaSize:'$150–250K SBA 7(a) loan',
+      sbaPays:'Multiple trucks + trailers ($50K) · Crew tools + safety equipment ($25K) · Crew lead + canvassers W-2 hire ($50K float) · Workers comp class 5551 reserves ($30K) · EagleView + measurement subscriptions ($10K) · Marketing + D2D ramp ($60K) · Working capital ($30K)',
+      sbaTerm:'10-year term, ~10.5–11% rate. Payment: ~$2,100/month on $200K loan. Year 2 revenue at $1.5M × 10% margin = $150K covers this with cushion.',
+      year3:'Year 3: 2–3 W-2 crews, sales reps on commission, $2–4M revenue, $200–500K to your pocket. Storm + retail mix.',
+      ceiling:'Year 5: $5–10M revenue with commercial mix. PE acquirers (Tecta, CentiMark, Peak, Centerline) active. Exit at 6–9× EBITDA = $3–9M enterprise value.'
+    },
+    garage:{
+      year1:'Self-fund $45–75K. Solo or 2-person crew. 80–200 residential jobs OR 5–15 commercial. Build review base + Instagram. Goal: $200–500K revenue, $60–150K to your pocket.',
+      sbaWhen:'Month 14–18 (after commercial pipeline built — SBA looks better with B2B repeating customers than one-off residential)',
+      sbaSize:'$100–180K SBA 7(a) loan',
+      sbaPays:'Box truck + 2nd grinder/blaster setup ($55K) · Crew lead + helper W-2 float ($30K) · Showroom/sample display ($10K) · Marketing scaled ($40K) · Commercial sales rep base float ($30K) · Working capital ($20K)',
+      sbaTerm:'10-year term, ~10.5–11% rate. Payment: ~$1,500/month on $140K loan. Manageable on Year 2 cash flow.',
+      year3:'Year 3: 2–3 crews, commercial pipeline 30–50% of revenue, $700K–$1.5M revenue, $120–300K to your pocket.',
+      ceiling:'Year 5: $1.5–3M revenue, $300–600K SDE. Exit at 3–5× SDE = $1–3M enterprise value. Smaller exit ceiling than foundation/restoration — best treated as cash flow business, not asset-build.'
+    },
+  };
+  const s=SBA[key]||SBA.foundation;
+  return `
+    <div style="display:grid;gap:16px">
+      <div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px">
+        <div style="font-size:11px;color:var(--accent);font-weight:800;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px">PHASE 1 — YEAR 1 · Self-Funded · Prove Demand</div>
+        <h4 style="font-family:'Fraunces',serif;font-size:20px;color:var(--text);text-transform:none;letter-spacing:-0.01em;margin-bottom:10px">Use your own cash. No debt yet.</h4>
+        <p style="font-size:15px;color:var(--text);line-height:1.65;margin:0">${s.year1}</p>
+      </div>
+
+      <div style="background:linear-gradient(135deg,var(--info-bg) 0%,var(--panel) 70%);border:1px solid var(--info);border-radius:14px;padding:22px">
+        <div style="font-size:11px;color:var(--info);font-weight:800;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px">PHASE 2 — MONTH ${s.sbaWhen.match(/\d+–\d+/)?.[0]||'14–18'} · SBA 7(a) Loan</div>
+        <h4 style="font-family:'Fraunces',serif;font-size:20px;color:var(--text);text-transform:none;letter-spacing:-0.01em;margin-bottom:14px">Live Oak Bank · ${s.sbaSize} · 10-year term</h4>
+        <div style="display:grid;gap:10px;font-size:15px;line-height:1.65;color:var(--text)">
+          <div><strong>When to apply:</strong> ${s.sbaWhen}</div>
+          <div><strong>How much:</strong> ${s.sbaSize}</div>
+          <div><strong>What it pays for:</strong> ${s.sbaPays}</div>
+          <div><strong>Payback math:</strong> ${s.sbaTerm}</div>
+        </div>
+        <div style="margin-top:14px;padding:14px 18px;background:var(--info-bg);border-radius:10px;font-size:13px;color:var(--text)">
+          <strong style="color:var(--info)">Why SBA over other financing?</strong> Lowest rate available for trade businesses (Prime + 2.75%). 10-year amortization keeps monthly payment manageable. SBA-backed = bank takes less risk on you (75% government guarantee), so they approve startup operators with 12 months track record that conventional banks would reject. Live Oak Bank funded $2.68B in SBA 7(a) loans in 2025 alone — they understand trades.
+        </div>
+      </div>
+
+      <div style="background:linear-gradient(135deg,var(--accent-bg) 0%,var(--panel) 70%);border:1px solid var(--accent);border-radius:14px;padding:22px">
+        <div style="font-size:11px;color:var(--accent);font-weight:800;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px">PHASE 3 — YEAR 3 · Scale Operating</div>
+        <h4 style="font-family:'Fraunces',serif;font-size:20px;color:var(--text);text-transform:none;letter-spacing:-0.01em;margin-bottom:10px">SBA loan is paying for itself</h4>
+        <p style="font-size:15px;color:var(--text);line-height:1.65;margin:0">${s.year3}</p>
+      </div>
+
+      <div style="background:linear-gradient(135deg,var(--gold-bg) 0%,var(--panel) 70%);border:1px solid var(--gold);border-radius:14px;padding:22px">
+        <div style="font-size:11px;color:var(--gold);font-weight:800;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px">PHASE 4 — YEAR 5 · Exit or Continue</div>
+        <h4 style="font-family:'Fraunces',serif;font-size:20px;color:var(--text);text-transform:none;letter-spacing:-0.01em;margin-bottom:10px">Conservative exit math</h4>
+        <p style="font-size:15px;color:var(--text);line-height:1.65;margin:0">${s.ceiling}</p>
+      </div>
+
+      <div style="padding:18px 22px;background:var(--secondary-bg);border-left:3px solid var(--secondary);border-radius:0 10px 10px 0;font-size:14px;color:var(--text);line-height:1.65">
+        <strong style="color:var(--secondary)">Conservative path notes:</strong> This roadmap assumes you DON'T do crazy aggressive moves (no max-leverage, no acquiring competitors with debt, no signing personal guarantees on $1M+ commitments while inexperienced). It assumes you prove demand with your own money first, then layer SBA on top of provable cash flow. This is the "I have a marketing company day-job, this is my second business" approach — and it's what 90% of successful SC trade operators actually did.
+      </div>
+    </div>
+  `;
 }
 
 function renderTemplates(key){
