@@ -149,8 +149,12 @@ table tr:hover td{background:var(--panel2)}
 <nav class="tabs" id="nav">
   <button data-tab="overview" class="active">Overview</button>
   <button data-tab="industries">Industries (24)</button>
-  <button data-tab="compare">Compare Side-by-Side</button>
-  <button data-tab="path">Your Path (SC/NC)</button>
+  <button data-tab="compare">Compare</button>
+  <button data-tab="verdicts">Verdicts</button>
+  <button data-tab="ai-longevity">AI Longevity</button>
+  <button data-tab="master-hire">Hire the Master</button>
+  <button data-tab="real-cac">Real CAC</button>
+  <button data-tab="sc-reality">SC Reality</button>
   <button data-tab="startbuy">Start vs Acquire</button>
   <button data-tab="calc">Calculators</button>
   <button data-tab="plan">Action Plan</button>
@@ -228,6 +232,560 @@ table tr:hover td{background:var(--panel2)}
     <button id="fReset">Reset</button>
   </div>
   <div class="industry-grid" id="industryGrid"></div>
+</section>
+
+<section class="tab" id="verdicts">
+  <h2>Verdicts: Stress-Testing the Claims You're Hearing</h2>
+  <p class="muted" style="margin-bottom:16px">Forum-scoured, operator-quoted, source-checked. The garage floor coating advice you got and the "water restoration is saturated" claim arbitrated against actual 2026 operator data.</p>
+
+  <div class="card" style="border-color:rgba(248,113,113,0.4);margin-bottom:16px">
+    <span class="badge tier5" style="margin-bottom:8px">CLAIM #1</span>
+    <h3 style="margin-top:6px">"Garage floor coating is the best blue-collar trade for a marketing entrant — water restoration is too competitive."</h3>
+    <p style="margin-top:8px"><strong style="color:var(--warn)">Verdict: PARTIALLY TRUE on garage coating fit · FALSE on the saturation comparison.</strong></p>
+
+    <h4 style="margin-top:14px">What the research actually shows</h4>
+    <ul class="bullets">
+      <li><strong>SC garage coating saturation is real, today.</strong> Charleston/Mt Pleasant alone has 7+ named polyaspartic/epoxy contractors (Lowcountry Surface Coatings, GarageExperts of Charleston, Apex Flooring, Carolina Flooring Specialists, PremierGarage, etc.). Greenville lists 5+ (Garage Force of Greenville, Surface Bella, Atlas Coatings, Home Run Coatings, IronDrive). Statewide 25+ marketing-active operators. Wise Coatings, Floor Shield, Garage Force, GarageExperts franchises all actively recruiting.</li>
+      <li><strong>The "magic beans" hype is from sellers, not operators.</strong> Independent confirmation that Nick Huber called this his #1 pick: NOT FOUND. The "best-trade-for-marketing-entrant" framing comes from franchise marketing (Wise Coatings, Floor Shield, GarageExperts) and concrete-coatings agencies, not operator consensus.</li>
+      <li><strong>One-and-done = no LTV moat.</strong> Garage coating has zero recurring revenue. Pest control LTV $3K–$5.7K. HVAC service plan LTV $15K+. Coating LTV = $1 transaction × $2K–$5K = single ticket only.</li>
+      <li><strong>~45% fail in 5 years</strong> per Floor Shield Coatings' own data; the dominant failure mode per ContractorTalk operators is callback/prep-failure margin erosion, not marketing.</li>
+      <li><strong>Operator quote (Garage Journal, "shaun oriold1"):</strong> "I personally think there is too much emphasis put on web advertising. In my area there are a lot of people who do it, and I would surmise its a lot of people shopping on price when they call."</li>
+      <li><strong>Operator quote (cached ContractorTalk):</strong> "the market is very saturated and many people claim to be epoxy installers but don't do proper prep work and use wrong materials. However, money is good for a professional epoxy applicator." — saturated at the bottom, profitable at the top.</li>
+    </ul>
+
+    <h4 style="margin-top:14px">When garage coating IS a fit (the honest case)</h4>
+    <ul class="bullets">
+      <li><strong>Commercial / industrial focus</strong> (warehouses, dealerships, manufacturing). SC has Boeing, Volvo, BMW, port commercial inventory in spades. 60% gross margins on metallic decorative work per Performance Financial.</li>
+      <li><strong>Solo or 2-3 person crew model</strong>. Production is teachable in 2–4 weeks; marketing is the moat.</li>
+      <li><strong>If you're capital-constrained</strong>. $50–100K total startup vs $250–500K for HVAC.</li>
+      <li><strong>Wise Coatings reference:</strong> $500K/month across 8 franchises after starting with $45K, ~25% margins. Real but franchise-amplified.</li>
+    </ul>
+
+    <div class="alert warn" style="margin-top:12px"><strong>Bottom line on garage coating:</strong> Real opportunity but the "low competition" pitch is from the previous era. Better than nothing if you have $50–100K and want low-risk entry, but it does NOT activate your network advantages (GCs don't refer epoxy, engineers don't matter, real estate agents don't drive demand). For your situation, foundation/restoration are materially better fits.</div>
+  </div>
+
+  <div class="card" style="border-color:rgba(52,211,153,0.4);margin-bottom:16px">
+    <span class="badge tier1" style="margin-bottom:8px">CLAIM #2</span>
+    <h3 style="margin-top:6px">"Water restoration is too saturated and hard to grow."</h3>
+    <p style="margin-top:8px"><strong style="color:var(--accent)">Verdict: MOSTLY FALSE.</strong> The "saturation" framing comes from operators who became dependent on TPAs (insurance third-party administrators) and hit margin compression. Marketing-led entrants who deliberately avoid TPAs have a clear path.</p>
+
+    <h4 style="margin-top:14px">What the research actually shows</h4>
+    <ul class="bullets">
+      <li><strong>Charleston has ~9 named water restoration companies</strong> on Expertise.com plus ServPro/PuroClean franchises. That's <em>fewer named players</em> than garage floor coating in the same metro.</li>
+      <li><strong>Higher per-job margins than coating.</strong> Water mitigation gross margin 50–80% (established firms 69–75%) vs coating 30–60%. Average mitigation ticket $2,500. Average insurance claim $15,400.</li>
+      <li><strong>Mid-size restoration owners earn $120–400K+/yr</strong> (Financial Models Lab); the trade is structurally higher-margin per job than coating.</li>
+      <li><strong>The incumbents are widely disliked.</strong> ServPro 1.4★ avg across 87 reviews (Pissed Consumer); PuroClean 1.6★ across 55 reviews. UnhappyFranchisee documents pattern of "tripling quotes, charging multiple times for identical services, resistance to providing itemized invoices." This is your competitive moat.</li>
+      <li><strong>The TPA trap is real but optional.</strong> Alacrity/Code Blue/Crawford/Accuserve compress margins to ~20% gross. Smart operators cap TPA work at 30–40% of revenue and build direct demand.</li>
+      <li><strong>Plumber referral programs are the ASYMMETRIC channel.</strong> Documented case: $95K paid to plumbers → $2.5M in restoration revenue (26× ROI) per Strategies for Success / JonDon. Standard spiff: $500–$1,250 per qualified water-damage referral.</li>
+    </ul>
+
+    <h4 style="margin-top:14px">Why this matches YOUR specific network</h4>
+    <ul class="bullets">
+      <li><strong>GCs encounter water damage on flips/remodels constantly</strong> — they want a reliable mitigation sub. Your GC network = direct emergency referral pipeline.</li>
+      <li><strong>House flippers buy distressed properties</strong>; many have water/mold/fire damage. A flipper doing 15 properties/yr finds restoration opportunity on 3–5.</li>
+      <li><strong>Real estate agents</strong> refer when pre-listing inspections find water damage (less core than foundation, but real).</li>
+      <li><strong>Plumber relationships in your GC orbit</strong> are the highest-ROI restoration channel.</li>
+      <li><strong>Marketing-led entrant who avoids TPAs</strong> beats the incumbents on customer experience (lower bar than you'd expect — see ServPro reviews).</li>
+    </ul>
+
+    <h4 style="margin-top:14px">The honest downsides</h4>
+    <ul class="bullets warn">
+      <li><strong>24/7 on-call life</strong> — restoration deploys at 2am. JonDon documents the burnout reality.</li>
+      <li><strong>Cash flow is brutal</strong> — insurance pays slow (60–120 day AR). Plumbing Zone operators report homeowners spending insurance checks before paying mitigators.</li>
+      <li><strong>70% failure rate within 10 years</strong> per Reets Drying Academy — top failure mode is "technicians who undercharge because they think with their hearts" rather than business operators.</li>
+      <li><strong>Reputation drag</strong> from ServPro/PuroClean is a tailwind for differentiation but a headwind for the trade as a whole.</li>
+    </ul>
+  </div>
+
+  <div class="card accent" style="margin-bottom:16px">
+    <h3 style="margin-top:0">Your Specific Best-Fit Ranking (Marketing Co. + GC/Architect/Engineer/Flipper/Realtor Network in SC)</h3>
+    <table style="margin-top:10px">
+      <thead><tr><th>Rank</th><th>Trade</th><th>Why It Fits YOUR Profile</th><th>Network Activation</th></tr></thead>
+      <tbody>
+        <tr><td><strong>#1</strong></td><td><strong>Foundation Repair / Waterproofing</strong></td><td>Engineer-on-staff = direct authority moat. Anxiety sale rewards marketing skill. PE rollup target (Groundworks/KKR direct buyer at 7–10×).</td><td>Engineer (PE stamps), GC (referral), Flippers (discovery), Realtors (transaction urgency)</td></tr>
+        <tr><td><strong>#2</strong></td><td><strong>Pest Control</strong></td><td>Best recurring revenue (LTV:CAC 10–25:1). Weakest local incumbents. SC's warm humid climate + Formosan termite epicenter = structural tailwind.</td><td>Realtors (every closing = pest opportunity), Flippers (pre-listing treatment), GCs (recurring property mgmt)</td></tr>
+        <tr><td><strong>#3</strong></td><td><strong>Water Damage Restoration</strong></td><td>Higher margins per job than coating. Weak incumbent reputation creates differentiation moat. Coastal SC storm exposure = structural demand.</td><td>Plumbers in GC orbit (#1 channel), GCs (emergency sub), Flippers (damaged properties), Realtors (pre-listing)</td></tr>
+        <tr><td>#4</td><td>Crawlspace Encapsulation + IAQ Bundle</td><td>Charleston-specific play. Lowcountry humidity = perpetual demand. No PE platform owns this in Charleston yet.</td><td>GCs, Realtors, Flippers</td></tr>
+        <tr><td>#5</td><td>Garage Floor Coating</td><td>Real opportunity but weak network activation. Better as commercial/industrial focus given your B2B contractor relationships.</td><td>Flippers (occasional), GCs (commercial only)</td></tr>
+        <tr><td>#6</td><td>Roofing</td><td>SC storm-belt advantage but storm-chaser saturation. Marketing-led local can win but margin work is grindy.</td><td>GCs (referral), Realtors (pre-listing)</td></tr>
+        <tr><td>#7</td><td>HVAC</td><td>Saturated, license-gated, big stable market. Better via acquisition than greenfield.</td><td>GCs (limited), Realtors (limited)</td></tr>
+        <tr><td>#8</td><td>Plumbing</td><td>Same as HVAC — better acquired than started. License gates fast entry.</td><td>GCs (referral)</td></tr>
+        <tr><td>#9</td><td>Pool Service</td><td>Wonderful asset class but the path is route acquisition, not marketing-led greenfield. Doesn't fit your strength.</td><td>—</td></tr>
+        <tr><td>#10</td><td>Electrical</td><td>Hardest license barrier; least suited to a marketing entrant despite biggest electrification tailwind.</td><td>GCs (referral)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">Where Fragmentation Actually Lives in SC (2026)</h3>
+    <ul class="bullets">
+      <li><strong>Geography:</strong> Florence/Pee Dee, Sumter, Aiken, Rock Hill — secondary metros are dramatically underserved vs Charleston/Greenville. Florence is "small pond, big fish" — Tier-1 industrial status just achieved.</li>
+      <li><strong>Customer segment:</strong> Commercial/industrial epoxy is genuinely under-attacked vs residential. Hilton Head/Bluffton premium-tier service ops are systematically thin.</li>
+      <li><strong>Service tier:</strong> The high end (premium polyaspartic with proper prep, IICRC-certified restoration with documented protocol, premium HVAC maintenance plans) is fragmented; the low end is crowded.</li>
+      <li><strong>Where PE has NOT yet operated in SC:</strong> Foundation in Greenville · Pool service anywhere · Crawlspace/IAQ in Charleston · Mosquito recurring in Hilton Head/Beaufort · HVAC+Plumbing in Florence/Pee Dee · Generator install statewide.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">Forum Reality — Real Operator Quotes</h3>
+    <table>
+      <thead><tr><th>Topic</th><th>Quote</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>HVAC marketing leverage</td><td>"The HVAC industry doesn't reward the best technicians; it rewards the most visible ones... your marketing either puts you in that position or it doesn't."</td><td>HVAC-Talk forum (cached)</td></tr>
+        <tr><td>Pest control simplicity</td><td>"Customers are going to pay you $40 a month or more...if you treat them well they'll be on board for years and years to come. No website. No digital marketing. No sales tracking systems."</td><td>Sweaty Startup (Nick Huber)</td></tr>
+        <tr><td>Restoration vs plumbers</td><td>"Mostly negative feelings about flood restoration companies... homeowners sometimes receive insurance checks directly and spend the money elsewhere, causing mitigation companies to go unpaid."</td><td>PlumbingZone (cached)</td></tr>
+        <tr><td>Garage coating callbacks</td><td>"Make sure you leave enough money in the job for a callback or two. Don't go cheap on materials or short on coats to save a customer a dollar."</td><td>ContractorTalk operator</td></tr>
+        <tr><td>Roofing storm chasing</td><td>"Yes you can make money as a storm chaser, you just have to understand how it works. Choose states with contractor licensing requirements [to avoid worst opportunists]."</td><td>RoofersCoffeeShop forum</td></tr>
+        <tr><td>Tech retention</td><td>"Owner cared more about parts margin than I did about my back... Truck was 14 years old, no AC. Owner wouldn't pay for NATE recertification — said I'd leave with it. So I left without it."</td><td>HVAC-Talk operator threads</td></tr>
+        <tr><td>Restoration failure rate</td><td>"70% of restoration businesses fail within 10 years. Top failure mode: technicians who undercharge because they think with their hearts rather than business operators."</td><td>Reets Drying Academy</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="tab" id="ai-longevity">
+  <h2>AI &amp; Robotics Longevity — 5/10/20 Year Outlook by Trade</h2>
+  <p class="muted" style="margin-bottom:16px">Specific 2026 product status, real funding numbers, deployed unit counts. Three frames: <strong>Substitute</strong> (replaces tradesperson), <strong>Additive</strong> (consumer buys themselves), <strong>Augmentative</strong> (operator uses to be more productive).</p>
+
+  <div class="alert info" style="margin-bottom:16px"><strong>Key insight:</strong> Most 2026 "automation" in trades is augmentative or additive. True substitute automation in unstructured residential environments is genuinely hard and remains 10+ years out for most trades. <strong>The threat isn't "AI eats blue-collar work" — it's "smart operators with AI-augmented sales/dispatch/diagnostics outcompete those without."</strong></div>
+
+  <h3>Tier Ranking — Most Safe to Most Threatened</h3>
+
+  <div class="card accent" style="margin-bottom:16px">
+    <span class="badge tier1" style="margin-bottom:8px">TIER 1 — BEDROCK SAFE (10–20 yr horizon: extremely robust)</span>
+    <table style="margin-top:8px">
+      <thead><tr><th>Trade</th><th>Why It's Safe</th><th>Augmentation Tailwind</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Electrical</strong></td><td>Biggest tailwind of any trade — electrification is generational. EV charging $32B (2024) → $125B+ (2030). Need 81K new electricians/year.</td><td>Smart panel monitoring (Span/Lumin) creates more service calls.</td></tr>
+        <tr><td><strong>Plumbing</strong></td><td>Strongest moat stack — state licensing + emergency 24/7 + aging stock + variable conditions. Insurance mandates Moen Flo (Farmers) accelerate device adoption = more service calls.</td><td>AI sewer scope (RIDGID, SewerAI AutoCode, WinCan VX, ITpipes AiDetect) raises sales and cuts inspection time.</td></tr>
+        <tr><td><strong>HVAC</strong></td><td>EPA 608 + AIM Act regulatory moat very strong. Avoca AI ($1B valuation 2026) handles dispatch — kills the receptionist role, not the tech.</td><td>Avoca/Rilla/Trellus give operators massive leverage.</td></tr>
+        <tr><td><strong>Septic</strong></td><td>Boring, untouched by robotics startups. Aging septic systems = decades-long tailwind.</td><td>Some IoT tank-level sensors emerging.</td></tr>
+        <tr><td><strong>Window Install</strong></td><td>Most variable conditions of any trade. Hand-installed in framing variability = deeply non-standardized.</td><td>None meaningful.</td></tr>
+        <tr><td><strong>Garage Door</strong></td><td>Liability (spring tension can kill) + variable conditions + emergency.</td><td>Smart openers (MyQ) drive more service calls (network/integration issues).</td></tr>
+        <tr><td><strong>Foundation Repair</strong></td><td>Underground unstructured environment + variable property conditions = automation deeply hard. Caterpillar autonomous lineup is utility-scale only.</td><td>Drone foundation inspection (general) — augmentative.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="margin-bottom:16px">
+    <span class="badge tier2" style="margin-bottom:8px">TIER 2 — SAFE WITH AUGMENTATION TAILWIND (operators who adopt AI win bigger)</span>
+    <table style="margin-top:8px">
+      <thead><tr><th>Trade</th><th>2026 Status</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Water Damage Restoration</strong></td><td>Encircle Scope AI cuts on-site time 2hrs → 15min. Emergency response cannot be done remotely. "Wet, dirty, mold-spore-laden, midnight emergency" is one of the LAST places robots will work well.</td></tr>
+        <tr><td><strong>Tree Service</strong></td><td>High-skill arborist work essentially automation-proof. Drone canopy inspection augmentative.</td></tr>
+        <tr><td><strong>Gutters</strong></td><td>iRobot Looj 330 DISCONTINUED 2017; iRobot itself filed bankruptcy Dec 2025. The "robotic gutter cleaner" threat as a category is dead.</td></tr>
+        <tr><td><strong>Pest Control</strong></td><td>Anticimex SMART IoT rodent traps deployed and growing. Commercial may shift to recurring tech-light models — a BETTER business (predictable revenue). Residential safe.</td></tr>
+        <tr><td><strong>Pool Service</strong></td><td>Robotic cleaners (Maytronics 24% market share, Aiper, etc.) are ADDITIVE — handle pool floor vacuuming. Service techs handle chemistry, equipment, repair. Skill-stack matters.</td></tr>
+        <tr><td><strong>Solar (residential)</strong></td><td>Electrical license is the moat. Residential rooftop installation 10+ yrs out. Policy is bigger risk than automation.</td></tr>
+        <tr><td><strong>Junk Removal</strong></td><td>Physical lifting in variable customer-property conditions = automation hard. Threat is gig-economy unbundling (Dropcurb $79), not robotics.</td></tr>
+        <tr><td><strong>Concrete / Garage Floor Coating (residential)</strong></td><td>Customer trust + marketing = real moat. Single-car residential garages too variable for automation. Boring beige business untouched by robotics.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="margin-bottom:16px">
+    <span class="badge tier4" style="margin-bottom:8px">TIER 3 — MIXED RISK (sub-segment selection matters)</span>
+    <table style="margin-top:8px">
+      <thead><tr><th>Trade</th><th>Sub-Segment Reality</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Painting</strong></td><td><strong>SAFE residential repaint/specialty</strong> — variable surfaces, trim, cut-in. <strong>AT RISK commercial new-build</strong> — Okibo EG7+ (1,000 sq ft/hr) and PaintJet Bravo (14× human speed) are real and shipping.</td></tr>
+        <tr><td><strong>Siding</strong></td><td>Repair/replace SAFE. New-construction sees prefab margin pressure (SHERA panels cut install 8hrs → 2.5hrs/100sf).</td></tr>
+        <tr><td><strong>Pressure Washing</strong></td><td>Residential ground-level SAFE. <strong>High-rise commercial AT RISK</strong> — Lucid Bots Sherpa $20M Series B (March 2026), 400+ active operators across 40+ states, ~1,000 robots deployed, $75M+ revenue generated.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="border-color:rgba(248,113,113,0.4)">
+    <span class="badge tier5" style="margin-bottom:8px">TIER 4 — HIGHEST SUBSTITUTE-AUTOMATION RISK</span>
+    <table style="margin-top:8px">
+      <thead><tr><th>Trade</th><th>Specific Threat</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Roofing</strong></td><td><strong>Renovate Robotics "Rufus"</strong> — REAL product. Beacon (Fortune 500 distributor, 580+ branches) partnered/invested March 2025. PA/NJ launch. Saint-Gobain/CertainTeed partners. Asphalt shingle install on residential roofs. Modular plans for tear-off, cutting, solar bracket install. <strong>Realest "substitute automation" threat in any trade.</strong> 5-yr: 5–15% of new asphalt roof installs done with Rufus-class robots in suburban tract housing where pitches are simple. 10-yr: plausibly 20–40%. Don't build a 20-yr career as residential asphalt shingle installer. DO build one in commercial roofing, low-slope/TPO/EPDM, restoration, or roof consulting/inspection.</td></tr>
+        <tr><td><strong>Landscaping / Lawn Care</strong></td><td><strong>Scythe M.52 + Husqvarna 540 EPOS + Honda ProZision</strong> — three major OEMs pursuing autonomous mowing means category is mainstreaming. Scythe: 7,500 preorders = 2% of all US commercial mower sales. $97M raised. Active in TX, rolling out FL. 5-yr: open-field commercial mowing 30–50% autonomous, crew sizes shrink (one operator running 3–5 robots vs 3 mowers + 3 crew). 10-yr: commercial open-field autonomous is default. Don't build a career as a commercial mowing crew member. DO build one in landscape design/build, hardscape, irrigation, tree work, or as a fleet operator.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid grid-2" style="margin-top:16px">
+    <div class="card">
+      <h4>Hype to DISCOUNT</h4>
+      <ul class="bullets bad">
+        <li>"Humanoids will do plumbing in 5 years" — FALSE. Tesla Optimus Q1 2026 production is "for learning and data collection only." Boston Dynamics Atlas in Hyundai automotive plants. Neither plumbing a toilet by 2031.</li>
+        <li>"AI will replace HVAC techs" — FALSE. AI replaces dispatchers, schedulers, sales coaches. Refrigerant work requires licensed humans (EPA 608).</li>
+        <li>"Robotic mowers will obsolete landscapers" — partially true at the mowing layer. Design/build/hardscape/irrigation are unaffected.</li>
+        <li>"Drones will clean all gutters" — FALSE. iRobot Looj discontinued; drone gutter cleaning is niche.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Hype to TAKE SERIOUSLY</h4>
+      <ul class="bullets warn">
+        <li><strong>Renovate Robotics Rufus</strong> for residential asphalt roofing — Beacon, Saint-Gobain, CertainTeed serious partners.</li>
+        <li><strong>Scythe M.52 + Husqvarna 540 EPOS + Honda ProZision</strong> — three OEMs = category mainstreaming.</li>
+        <li><strong>Lucid Bots Sherpa</strong> for high-rise facade cleaning — already at scale.</li>
+        <li><strong>Okibo / PaintJet / Canvas</strong> for commercial interior finishing — real and shipping.</li>
+        <li><strong>Avoca AI / Rilla / SewerAI / Encircle</strong> — already changing operator economics. Adopters win.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="tab" id="master-hire">
+  <h2>Hire The Master — The Single Most Important Decision of the Next 5 Years</h2>
+  <p class="muted" style="margin-bottom:16px">The Qualifying Party (QP) playbook for SC. Where to find them, how to pitch them, what to pay them, how to lock them in. Get this wrong and the business shutters. Get it right and you have a 10–15 year partner.</p>
+
+  <div class="card accent" style="margin-bottom:16px">
+    <h3 style="margin-top:0">SC's Strict Standard (Title 40, Chapter 11, §40-11-230)</h3>
+    <p>The QP must "serve in a management capacity for the applicant and <strong>are actively involved in management, supervision, and operations</strong> for the work undertaken by the applicant." Must be "an integral party of the applicant's business" and "may not take other employment that would conflict with the duties as primary qualifying party."</p>
+    <p style="margin-top:8px"><strong>Translation:</strong> No passive figureheads. No "license rental." The QP is a real W-2 employee/partner with operational authority. Penalties escalate to felony for fraud-flavored violations.</p>
+  </div>
+
+  <h3>Step 1 · The Ideal Candidate Profile</h3>
+  <div class="card" style="margin-bottom:16px">
+    <ul class="bullets">
+      <li><strong>Age 38–55.</strong> Old enough for 15–25 yrs in trade, young enough to want a 10-yr equity run.</li>
+      <li><strong>Currently a field lead / service manager / senior tech</strong> at established shop. NOT an owner. NOT 25 years old.</li>
+      <li><strong>Holds the SC license OR has experience hours</strong> (Master Plumber 6,000 hrs; HVAC/Mechanical 2 yrs in prior 5; Electrical varies by classification).</li>
+      <li><strong>Frustrated with current employer</strong> — bad owner, stagnant pay, no growth path. Listen for this in your GC/flipper conversations.</li>
+      <li><strong>Good customer reputation, no business training.</strong> Wants ownership, doesn't know how to sell/market/build systems.</li>
+      <li><strong>Stable family situation, no addiction red flags.</strong> You're locking 10 years to this person.</li>
+    </ul>
+  </div>
+
+  <h3>Step 2 · Where to Find Them (Ranked by Yield)</h3>
+  <div class="card" style="margin-bottom:16px">
+    <ol class="bullets">
+      <li><strong>Your GC/flipper/realtor network — highest yield.</strong> Ask "who's the best master plumber/HVAC tech/foundation crew lead you've worked with? Are they happy?" Most successful hires come from this.</li>
+      <li><strong>Trade supply house counter staff.</strong> Ferguson, Winsupply, Carrier Enterprise, Trane Supply, Reece — counter sales know every operating master in 50-mile radius and who's unhappy. Tip them $100 for warm intro.</li>
+      <li><strong>Trade association referrals.</strong> SC PHCC chapter, ACCA chapter, Carolinas AGC, Apprenticeship Carolina employer councils.</li>
+      <li><strong>Direct poach from PE platforms operating in SC:</strong> ARS/Rescue Rooter, Apex Service Partners (107 brands), Wrench Group, Service Experts, Mr. Rooter (Neighborly), Southern Home Services. Many feel "cogged out" post-PE acquisition — pay typically rises ~20% post-deal but autonomy collapses (per Marketplace Oct 2024).</li>
+      <li><strong>Union halls (right-to-work caveat).</strong> Plumbers Local 421, IBEW Local 776 (Charleston), IBEW Local 382 (Columbia/Greenville), SMART Local 399.</li>
+      <li><strong>SC Tech College advisory boards.</strong> Greenville Tech HVAC/R, Trident Tech (Charleston), Midlands Tech (Columbia), Aiken Tech, Florence-Darlington, Spartanburg CC. The masters ON these boards are exactly your target.</li>
+      <li><strong>Specialized recruiters per trade</strong> (NOT generalists). Work With Your Handz, CalTek. Fees 15–25% of first-year salary ($10–20K per master placement).</li>
+    </ol>
+  </div>
+
+  <h3>Step 3 · Compensation Structures (Pick One — Don't Freelance)</h3>
+  <div class="card" style="margin-bottom:16px">
+    <table>
+      <thead><tr><th>Structure</th><th>Year-1 Comp</th><th>Equity</th><th>Best For</th><th>Tradeoff</th></tr></thead>
+      <tbody>
+        <tr><td><strong>A. Salaried + Phantom Equity (most common)</strong></td><td>$110–160K base + 1–3% net profit bonus</td><td>5–15% phantom shares vesting 4–5 yrs (Carta, Reins administrators)</td><td>You're cautious, want full control. Avoids K-1 / S-corp basis problems.</td><td>Weakest alignment. Master can leave with no skin lost.</td></tr>
+        <tr><td><strong>B. True Equity Partnership (the "leap of faith")</strong></td><td>$80–110K base (reduced for equity)</td><td>15–25% real equity, 4-yr vest, 1-yr cliff. Buy-sell formula at 4–5× EBITDA cap.</td><td>Strongest alignment. The CSLB 20% rule is the implicit floor.</td><td>Material ownership given up. Careful with control.</td></tr>
+        <tr><td><strong>C. Qualifier Agreement + Salary</strong></td><td>$2,500–5,000/mo retainer for license-on-file PLUS normal salary</td><td>None typically</td><td>Master prefers salary certainty over equity. Already owns side business.</td><td>Less aligned long-term.</td></tr>
+        <tr><td><strong>D. 50/50 Co-Founder</strong></td><td>$80–100K base</td><td>50% real equity</td><td>You genuinely want a co-founder.</td><td>Lose control; have to agree on everything.</td></tr>
+      </tbody>
+    </table>
+    <div class="alert info" style="margin-top:12px"><strong>Most common successful structure for your situation:</strong> $115–135K base + $20–40K performance bonus + 15–20% profit interest vesting 4 years + path to 25% equity at $2M revenue milestone. Trade-experienced attorney drafts the agreement (NOT a generalist).</div>
+  </div>
+
+  <h3>Step 4 · The "Leap of Faith" Pitch — What Actually Works</h3>
+  <div class="card" style="margin-bottom:16px">
+    <p>Masters leaving stable jobs are NOT motivated by 10% more pay. The pitch elements verified across Owned and Operated podcast, Acquisitions Anonymous (#227 with John Wilson), and Roofing Success:</p>
+    <ol class="bullets">
+      <li><strong>"Your name on the door."</strong> Co-brand: "Smith Plumbing, a [Marketing Co.] company." Masters who spent 15 yrs building reputation get to keep it.</li>
+      <li><strong>"You run the trade. I run the marketing &amp; ops."</strong> Make explicit who decides what. Mark off territory. The single biggest reason master-techs leave PE rollups is loss of operational autonomy.</li>
+      <li><strong>"I'll generate the leads."</strong> Your superpower. A master who's been working 70 hrs/wk chasing his own business will hear "I'll fill your calendar with 30+ calls/day" as a religious experience.</li>
+      <li><strong>No PG.</strong> Owner takes the LOC, lease, equipment loans personally. Master signs nothing.</li>
+      <li><strong>A real exit.</strong> Show the math: $1M EBITDA in 5 years × 5× = $5M sale, master's 20% = $1M. Use Apex/Wrench/Champions ($2.5B Blackstone deal) comps.</li>
+      <li><strong>ServiceTitan from day 1.</strong> Masters know older shops run on QuickBooks + paper tickets. Modern stack signals a real business.</li>
+    </ol>
+    <h4 style="margin-top:14px">The 3-Meeting Sequence</h4>
+    <ul class="bullets">
+      <li><strong>Meeting 1 (45 min, coffee):</strong> Tell your story. Marketing co, GC/flipper/realtor network, capital ready. Ask about their career — frustrations, ambitions. Don't pitch. Listen.</li>
+      <li><strong>Meeting 2 (90 min, their location):</strong> Show the plan. Demand model (referrals + paid), financial projections, marketing stack, network list with names. "I can drive 120 qualified leads year 1. I need a partner who can execute the work and own the trade side."</li>
+      <li><strong>Meeting 3 (2 hrs, with your attorney):</strong> Present structure. This is where leap of faith happens. Make YOUR risk visible — personally guarantee the SBA loan, you've spent X on marketing/legal, Y committed to payroll. Show the runway.</li>
+    </ul>
+  </div>
+
+  <h3>Step 5 · The Agreement Clauses That Matter</h3>
+  <div class="card">
+    <ul class="bullets">
+      <li><strong>License-tied non-compete:</strong> If they leave and take their license to a competitor within 50 miles for 3 years, liquidated damages ($150K+).</li>
+      <li><strong>90-day minimum notice for QP withdrawal.</strong> Gives you time to find replacement before license invalidates.</li>
+      <li><strong>Right to cross-qualify a second master</strong> without their approval. Redundancy is mandatory.</li>
+      <li><strong>Equity buyout formula in writing.</strong> Prevents future negotiation when emotions are hot. Standard: 3–4× trailing earnings on their shares.</li>
+      <li><strong>Vesting with accelerators.</strong> 4-year vest, 1-year cliff, double-trigger acceleration on sale.</li>
+      <li><strong>Role clarity.</strong> Written job description — they run field ops, you run sales/marketing/finance. Avoid overlap.</li>
+      <li><strong>Documented operational involvement.</strong> Required to satisfy SC's "actively engaged" standard. Weekly ops meeting attendance, job site visits log, permits in their name.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="tab" id="real-cac">
+  <h2>Real CAC — 2026 Channel Benchmarks Per Trade</h2>
+  <p class="muted" style="margin-bottom:16px">The marketing-led operator's edge depends on knowing the actual cost-per-lead and channel mix. These are 2026 numbers verified across LocaliQ, WordStream, WebFX, NetRocket, Marketing Code, Hook Agency, Service Direct.</p>
+
+  <div class="alert warn" style="margin-bottom:16px"><strong>Big shift in 2026:</strong> Google LSA arbitrage is closing fast. 70% of contractors now bidding (vs 30% three years ago); CPL up 40%+ YoY; Google Verified replaced Google Guaranteed Oct 2025 (money-back guarantee killed). The next edge is OPERATING LSA (disputes, response time, conversation quality), not just running it.</div>
+
+  <h3>Channel CPL Benchmarks 2026</h3>
+  <div class="card" style="margin-bottom:16px;overflow-x:auto">
+    <table>
+      <thead><tr><th>Channel</th><th>HVAC</th><th>Plumbing</th><th>Roofing</th><th>Restoration</th><th>Pest</th><th>Foundation</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Google LSA</strong></td><td>$45–80</td><td>$25–50</td><td>$30–162 storm</td><td>$80–180</td><td>$35–65</td><td>$87–113</td></tr>
+        <tr><td><strong>Google Search PPC</strong></td><td>$100–149</td><td>$40–80 emergency</td><td>$228 avg, $350–500 premium</td><td>$120–200</td><td>$60–120</td><td>$87–113</td></tr>
+        <tr><td><strong>SEO (mature, amortized)</strong></td><td>$10–50</td><td>$10–50</td><td>$15–60</td><td>$20–80</td><td>$10–40</td><td>$20–60</td></tr>
+        <tr><td><strong>Facebook/Meta</strong></td><td>$30–75</td><td>$40–80</td><td>$50–150</td><td>$60–140</td><td>$20–50 (best fit)</td><td>$60–120</td></tr>
+        <tr><td><strong>Direct Mail</strong></td><td>$15–40</td><td>$15–40</td><td>$20–50</td><td>$25–60</td><td>$15–35</td><td>$25–60</td></tr>
+        <tr><td><strong>D2D Canvass</strong></td><td>—</td><td>—</td><td>$50–120 storm zone</td><td>—</td><td>$80–150</td><td>—</td></tr>
+        <tr><td><strong>Angi/Thumbtack</strong></td><td>$542 booked</td><td>$250 booked</td><td>$542 booked</td><td>$542 booked</td><td>$250 booked</td><td>$542 booked</td></tr>
+        <tr><td><strong>Referrals (programmed)</strong></td><td>~$150</td><td>~$150</td><td>~$150</td><td>$500–1,250 per booked job from plumbers</td><td>~$150</td><td>$300–1,000 spiff</td></tr>
+        <tr><td><strong>Industry CAC benchmark</strong></td><td>$153</td><td>$150</td><td>$600–1,500</td><td>$300–600</td><td>$250 → $85 optimized</td><td>$300–500</td></tr>
+        <tr><td><strong>Industry LTV (5-yr)</strong></td><td>$15,340</td><td>$8,000</td><td>$25,000</td><td>$15,400 single ticket</td><td>$3,000–3,600</td><td>$8,000 single ticket</td></tr>
+        <tr><td><strong>Target LTV:CAC</strong></td><td>3:1+</td><td>3:1+</td><td>3:1+</td><td>3:1+</td><td>5:1+ (10:1 best)</td><td>3:1+</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Marketing Budget % of Revenue (for $2–5M shops)</h3>
+  <div class="card" style="margin-bottom:16px">
+    <table>
+      <thead><tr><th>Trade</th><th>Steady-State</th><th>Growth Mode</th><th>Top Channels</th></tr></thead>
+      <tbody>
+        <tr><td>HVAC</td><td>8–12%</td><td>15–20%</td><td>LSA (25–35%) · PPC · SEO · Direct mail expiries · Membership reactivation</td></tr>
+        <tr><td>Plumbing</td><td>7–10%</td><td>12–15%</td><td>LSA (30–40%) · Emergency SEO · Branded search · Plumber-restoration referrals</td></tr>
+        <tr><td>Electrical</td><td>5–8%</td><td>10–12%</td><td>LSA (25%) · SEO · Referrals + GC partnerships (20%) · EV/panel Facebook</td></tr>
+        <tr><td>Roofing</td><td>7–10%</td><td>10–12%</td><td>LSA · PPC · D2D canvass (storm zones 15–25%) · Facebook · Direct mail</td></tr>
+        <tr><td>Foundation</td><td>6–10%</td><td>10–14%</td><td>Search PPC · Home shows · Realtor referrals · Engineer partnerships</td></tr>
+        <tr><td>Pest Control</td><td>8–15%</td><td>20–30%</td><td>Digital paid (40–50%) · Traditional (20–30%) · SEO/content (15–20%)</td></tr>
+        <tr><td>Restoration</td><td>6–9%</td><td>10–14%</td><td>Plumber referral programs (25–35%) · TPA work (cap 30–40%) · LSA · Facebook · Realtors</td></tr>
+        <tr><td>Garage Floor Coating</td><td>10–18%</td><td>20–30%</td><td>Facebook (visual) · Google + Local SEO · Home shows · Commercial sales</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>The Asymmetric Channels (Where Marketing Skill Compounds Most)</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <h4 style="color:var(--accent)">Plumber Referral Program (Restoration)</h4>
+      <p><strong>Documented case:</strong> $95K paid to plumbers → $2.5M restoration revenue (26× ROI) — Strategies for Success / JonDon.</p>
+      <p style="margin-top:8px">Build framework: Identify top 50 plumbers by Google reviews + plumbing volume. Monthly check-ins, lunch/coffee, ride-alongs, branded lockboxes, dispatch hotlines. Spiff: $500–$1,250 per qualified water-damage referral that books. Software: Airtable + Twilio + Stripe payouts works.</p>
+    </div>
+    <div class="card">
+      <h4 style="color:var(--accent)">CSR Booking Rate Optimization</h4>
+      <p><strong>Industry avg 46% → top quartile 77–85%.</strong> Moving from 46% → 70% on $200K LSA spend = ~$300K/yr pure recovered revenue.</p>
+      <p style="margin-top:8px">Six-step protocol: warm greeting → problem acknowledgment → specific timing → price range → direct booking ask → rescue offer. Power Selling Pros gets clients from 60% → 85–90% routinely. Cost: $325/CSR/mo coaching.</p>
+    </div>
+    <div class="card">
+      <h4 style="color:var(--accent)">Database Reactivation</h4>
+      <p>Most $2-5M shops have 5,000–25,000 dormant customers. Monthly drip + seasonal offer = 1–3% activation = pure margin (zero acquisition cost).</p>
+      <p style="margin-top:8px">Sell as $2K–$5K/mo Marketing Pro / Klaviyo setup + monthly retainer. Stack: ServiceTitan Marketing Pro, Klaviyo, ActiveCampaign, NiceJob/Podium for review automation.</p>
+    </div>
+    <div class="card">
+      <h4 style="color:var(--accent)">Real Estate Agent Referrals (Foundation, Restoration, Plumbing)</h4>
+      <p>Top 50 producers in service area by transaction volume. Closing-gift partnerships, listing-prep checklists, free pre-listing inspections.</p>
+      <p style="margin-top:8px">Spiff: $200–$1,000 per booked job depending on ticket. RESPA compliance for any real estate-related kickback structure (treat as sponsorship/co-marketing where regulated).</p>
+    </div>
+    <div class="card">
+      <h4 style="color:var(--accent)">GC / Contractor Network (Most Underutilized)</h4>
+      <p>GCs and remodelers send recurring sub work — most underutilized channel in trades.</p>
+      <p style="margin-top:8px">Approach: visit local GC offices monthly with pricing sheet + emergency response promise; offer trade discounts on sub-work. High value for: HVAC, electrical, plumbing, foundation, roofing, septic. Network map: AGC chapters, NARI, NAHB local builder councils.</p>
+    </div>
+    <div class="card">
+      <h4 style="color:var(--accent)">Membership Plan Attach (HVAC/Plumbing)</h4>
+      <p>Industry attach rate target: 20%+ of completed jobs. Top quartile: 35–45%.</p>
+      <p style="margin-top:8px">Member households book 1.6–2× more frequently. ServiceTitan Marketing Pro automates the welcome drip + idle-account reactivation. Plans: $150–$300/yr/customer = $500K+ recurring on a 2,000-customer base.</p>
+    </div>
+  </div>
+</section>
+
+<section class="tab" id="sc-reality">
+  <h2>SC Reality — Metro-by-Metro Opportunity Assessment</h2>
+  <p class="muted" style="margin-bottom:16px">SC is one of the strongest setups in the country for 2026. Led the US in raw population growth in 2025; Greenville-Anderson MSA crossed 1M; Charleston permits jumped 4× YoY (742 → 2,804). Below: licensing precision + metro-by-metro opportunity + business climate.</p>
+
+  <h3>Two-Track Licensing Structure (SC LLR)</h3>
+  <div class="card" style="margin-bottom:16px">
+    <ul class="bullets">
+      <li><strong>Contractor's Licensing Board (CLB)</strong> — commercial general &amp; mechanical. Title 40, Chapter 11. Required for projects over <strong>$10,000 commercial</strong>.</li>
+      <li><strong>Residential Builders Commission (RBC)</strong> — residential building, residential specialty contractors. Title 40, Chapter 59. Required for residential GC over <strong>$5,000</strong> or specialty work over <strong>$500</strong> (raised from $200 in 2023 — almost any meaningful repair hits this).</li>
+      <li>Many top operators carry <strong>both</strong>.</li>
+    </ul>
+  </div>
+
+  <h3>Financial Groups (CLB) — Bid Limits</h3>
+  <div class="card" style="margin-bottom:16px">
+    <table>
+      <thead><tr><th>Group</th><th>GC Bid Limit</th><th>GC Working Cap</th><th>GC Net Worth</th><th>Mechanical Bid Limit</th></tr></thead>
+      <tbody>
+        <tr><td>Group 1</td><td>$100,000</td><td>$10,000</td><td>$20,000</td><td>$35,000</td></tr>
+        <tr><td>Group 2</td><td>$400,000</td><td>$40,000</td><td>$60,000</td><td>$100,000</td></tr>
+        <tr><td>Group 3</td><td>$1,000,000</td><td>$100,000</td><td>$150,000</td><td>$200,000</td></tr>
+        <tr><td>Group 4</td><td>$3,000,000</td><td>$175,000</td><td>$250,000</td><td>$400,000</td></tr>
+        <tr><td>Group 5</td><td>Unlimited</td><td>$250,000</td><td>$350,000</td><td>Unlimited ($200K WC)</td></tr>
+      </tbody>
+    </table>
+    <p class="muted" style="font-size:12px;margin-top:8px">Surety bonds in lieu of working capital accepted at same dollar levels. For residential service (tickets &lt;$10K), Group 1 mechanical is fine. For new construction or commercial, get Group 3+ on day one — banks and GCs treat anything below as a tradesman, not an operator.</p>
+  </div>
+
+  <h3>SC Licensing by Trade</h3>
+  <div class="card" style="margin-bottom:16px">
+    <table>
+      <thead><tr><th>Trade</th><th>SC License</th><th>QP Experience</th><th>Practical Path</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Foundation Repair</strong></td><td>No standalone foundation license. CLB GC "Structural Framing" / "Masonry" subclass OR residential structural-repair specialty</td><td>2 yrs in prior 5</td><td><strong>Cleanest path.</strong> Most serious foundation operators carry CLB GC Group 3+ (piers/underpinning routinely cross $10K).</td></tr>
+        <tr><td><strong>Water Mitigation</strong></td><td>NONE for mitigation-only (drying, demo, cleanup)</td><td>IICRC certs (WRT/ASD/FSRT/AMRT) — 2-4 wks</td><td><strong>Lowest SC licensing friction.</strong> Get 2 techs IICRC-certified quickly. Add Residential Builder for reconstruction work later.</td></tr>
+        <tr><td><strong>HVAC / Mechanical</strong></td><td>Class M (unlimited), M-1 (≤3 stories res + light commercial), Class R (commercial refrigeration), Class H (oil/fossil)</td><td>2 yrs in prior 5</td><td>Easier than plumbing. CAGC master HVAC exam (replaced MASC Jan 1, 2026). Master HVAC more plentiful than plumber.</td></tr>
+        <tr><td><strong>Plumbing (Master)</strong></td><td>SC Mechanical Contractor — Plumbing classification</td><td>6,000 hrs journeyman + PSI exam (Trade 80q + Business/Law 50q, both 70% pass)</td><td>Hardest QP to recruit, highest comp ($130–180K + equity). MASC Master Plumber cert can waive the technical exam portion.</td></tr>
+        <tr><td><strong>Electrical</strong></td><td>Two-track. Residential (≤3 stories, ≤16 units, $15K bond, 1 yr exp) OR Commercial</td><td>1 yr res / 2 yrs commercial in prior 5</td><td>Harder to find Master Electrician in SC. $130–170K + equity. NASCLA accreditation accepted commercial track.</td></tr>
+        <tr><td><strong>Roofing</strong></td><td>Residential = Residential Specialty (RBC, $5K bond, 1 yr exp, NO EXAM). Commercial = CLB GC-Building Roofing subclass (exam required)</td><td>1 yr supervised</td><td>Easy entry. SC's exam-free residential roofing means many entrants but quality is the moat.</td></tr>
+        <tr><td><strong>Pest Control</strong></td><td>Two layers. (1) Cat 7A/6/8 applicator certification through Clemson Dept of Pesticide Regulation. (2) Pesticide Business License + Designated Certified Applicator (DCA)</td><td>DCA needs 2 yrs verifiable exp OR 4-yr degree</td><td>YOU can take the applicator exam yourself in ~1 month. $100K combined-single-limit GL required by statute, max $1,000 deductible.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Reciprocity (Exam Waiver)</h3>
+  <div class="card" style="margin-bottom:16px">
+    <p>SC waives the <strong>trade exam only</strong> (not Business &amp; Law) for license earned by exam in: <strong>AL, GA, LA, MS, NC, OH, TN, TX, UT</strong>. Florida is NOT on the list. Tennessee is the most generous reciprocity partner — TN's board waives all exams (including Mechanical and Plumbing) when bringing an SC license north.</p>
+  </div>
+
+  <h3>SC Metro-by-Metro Opportunity (Ranked for Your Profile)</h3>
+
+  <div class="grid grid-2">
+    <div class="card accent">
+      <h4 style="margin-top:0">🥇 Tier 1: Greenville-Spartanburg-Anderson — Foundation Repair</h4>
+      <p><strong>Population:</strong> 1,014,101 (crossed 1M July 2025) · <strong>Median home:</strong> $350,285 · <strong>Spartanburg:</strong> Top-10 fastest-growing US metro 2 years running (+2.7%)</p>
+      <p style="margin-top:8px"><strong>Why foundation here:</strong> Red-clay Ultisols expand/contract dramatically — perpetual settlement. BMW Greer (11,000 employees, largest BMW plant in world) drives wealthy in-migration from PNW/CA/NY/Chicago = higher willingness to pay.</p>
+      <p style="margin-top:8px"><strong>Competition:</strong> Groundworks/Mount Valley is the only true platform. Rest is sub-scale local. PE has NOT locked the market the way they have HVAC.</p>
+      <p style="margin-top:8px"><strong>Hail risk:</strong> 42 ground-truth hail reports + 79 radar detections trailing 12 months (HailTrace) = roofing storm market too.</p>
+    </div>
+
+    <div class="card accent">
+      <h4 style="margin-top:0">🥇 Tier 1: Charleston — Crawlspace + Mosquito + IAQ Bundle</h4>
+      <p><strong>Population:</strong> 850K MSA · <strong>Permits:</strong> 4× YoY jump (742 → 2,804) · <strong>Median home:</strong> $440K</p>
+      <p style="margin-top:8px"><strong>Why this bundle:</strong> Lowcountry humidity is the unifier. Bohicket coastal soil drains poorly. Pre-1980 housing on stub piers = perpetual maintenance pool. Charleston is FIRST US site of Formosan termite (1957) and remains the epicenter.</p>
+      <p style="margin-top:8px"><strong>Competition:</strong> NO national platform has systematized this bundle in Charleston. ServPro/PuroClean franchises don't own crawlspace + IAQ.</p>
+      <p style="margin-top:8px"><strong>Major employers:</strong> Boeing (7K, $1B expansion announced 2024), Joint Base Charleston, Volvo, Mercedes-Benz Vans, MUSC, SC Ports Authority (#2 East Coast container port).</p>
+    </div>
+
+    <div class="card">
+      <h4 style="margin-top:0">🥈 Tier 2: Hilton Head/Bluffton/Beaufort — Premium HVAC Maintenance</h4>
+      <p><strong>Population:</strong> 200K county · <strong>Median home:</strong> Hilton Head $650K, Bluffton $500K · <strong>Days on market:</strong> 77 (HHI)</p>
+      <p style="margin-top:8px"><strong>Why premium:</strong> Second-home owners, retiree migration, Marines base demand (MCAS Beaufort, Parris Island, Naval Hospital Beaufort). Few systematized players. Premium pricing tolerance.</p>
+      <p style="margin-top:8px"><strong>Play:</strong> Class M-1 mechanical license + brand/marketing investment beats incumbents (mostly "old guy with a truck" serving plantations).</p>
+    </div>
+
+    <div class="card">
+      <h4 style="margin-top:0">🥈 Tier 2: Myrtle Beach/Grand Strand — Pool Service</h4>
+      <p><strong>Population:</strong> 568K MSA, fastest-growing metro by % several years · <strong>Median home:</strong> $325K</p>
+      <p style="margin-top:8px"><strong>Why pool:</strong> Massive installed base, weak operator discipline, recurring revenue, low capital intensity. Hot-tub repair + salt-cell replacement = premium service tier.</p>
+      <p style="margin-top:8px"><strong>Storm exposure:</strong> Hurricane corridor (Florence 2018, Debby 2024) = restoration also viable.</p>
+    </div>
+
+    <div class="card">
+      <h4 style="margin-top:0">🥉 Tier 2: Florence/Pee Dee — "Small Pond, Big Fish"</h4>
+      <p><strong>Population:</strong> 140K county · <strong>Median home:</strong> $245K · <strong>Tier-1 industrial status</strong> just achieved (Honda SC Manufacturing — power equipment)</p>
+      <p style="margin-top:8px"><strong>Why here:</strong> Almost no PE competition. Clean acquisition targets at low multiples. Best small-pond play if you don't mind rural drives. McLeod Health, MUSC Health, FedEx Ground hub anchor employment.</p>
+    </div>
+
+    <div class="card" style="border-color:rgba(251,191,36,0.4)">
+      <h4 style="margin-top:0">⚠ Caution: Columbia (Midlands)</h4>
+      <p><strong>Population:</strong> 880K MSA, slowest growth (+1.4% YoY) · <strong>Median home:</strong> $265K · "Balanced" market = margin compression</p>
+      <p style="margin-top:8px">Only enter via acquisition with strong cash flow already. Fort Jackson (Army's largest basic training, 50K soldiers/yr cycle) + USC + Prisma Health + Nephron Pharmaceuticals are stable demand but slower growth than rest of state.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:24px">SC Business Climate Quick Reference</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <h4>LLC Setup</h4>
+      <ul class="bullets">
+        <li>Articles of Organization: $110 mail / $125 online</li>
+        <li><strong>NO annual report</strong> required (huge advantage vs NC's $200 annual or FL's $138.75)</li>
+        <li>Registered agent required (can self-serve free)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Tax Structure</h4>
+      <ul class="bullets">
+        <li>Corporate income tax: 5% flat (or pass-through to personal at 6.4% top dropping to 6%)</li>
+        <li>Sales tax: 6% state + 0–4% local (services NOT generally taxed; materials ARE)</li>
+        <li>Property tax: 4% assessment (residential) / 6% (commercial). Effective rate ~0.55% — among lowest in country</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Workers' Comp Class Rates 2026 (per $100 payroll)</h4>
+      <ul class="bullets">
+        <li>HVAC (5537): ~$3.77</li>
+        <li>Plumbing (5183): ~$4.50–5.00</li>
+        <li>Electrical (5190): ~$2.50–3.00</li>
+        <li>Roofing (5551): ~$15–25 (highest of all)</li>
+        <li>Carpentry (5645): ~$8–12</li>
+        <li>Pest control (9014/0917): ~$2.00–3.00</li>
+        <li>Painting (5474): ~$7–9</li>
+        <li>Max weekly comp rate 2026: $1,189.94</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>SBA Lender Ecosystem</h4>
+      <ul class="bullets">
+        <li><strong>Live Oak Bank</strong> — #1 SBA 7(a) lender by volume nationally ($2.68B in 2025); deeply familiar with HVAC/plumbing/pest acquisitions</li>
+        <li>Pinnacle Bank, South State Bank, First Citizens Bank, Truist — local SC SBA-active</li>
+        <li>Newtek, Byline, Celtic Bank, Huntington — national SBA shops</li>
+        <li>Typical: 10% buyer down, 5–10% seller note, 80% SBA at WSJ Prime + 2.75-3% (currently ~10.5–11%)</li>
+        <li>SBA multiples: 2.5–3.5× SDE (sub-$1M SDE shops); 4–5× SDE ($1–2M SDE); 5–7× EBITDA above</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top:24px">SC Talent Pipeline</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <h4>Trade Schools (Pipeline Map)</h4>
+      <ul class="bullets">
+        <li><strong>Greenville Tech</strong> — HVAC, plumbing, welding, electrical line worker; HVAC Excellence accredited (only 2 in SC); strong BMW supply chain partnerships</li>
+        <li><strong>Trident Tech (Charleston)</strong> — HVAC, electrical, welding, automotive; $0 tuition options; Boeing aviation feeder</li>
+        <li><strong>Midlands Tech (Columbia)</strong> — HVAC-R AAS + diploma; pipe welding included</li>
+        <li><strong>Spartanburg Community College</strong> — HVAC certificate (39 cr) + AAS (67 cr); embedded apprenticeship</li>
+        <li><strong>Horry-Georgetown Tech (Myrtle Beach)</strong> · <strong>Aiken Tech</strong> · <strong>Florence-Darlington</strong> · <strong>Piedmont Tech (Greenwood)</strong> · <strong>Tri-County Tech (Pendleton)</strong></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Apprenticeship Carolina (Most Operator-Friendly in SE)</h4>
+      <ul class="bullets">
+        <li><strong>$1,000 SC state income tax credit</strong> per apprentice per year, up to 4 years</li>
+        <li>Stackable with federal apprenticeship benefits</li>
+        <li>USDOL-registered; SC has registered 50,000+ apprentices since 2007</li>
+        <li>Fully free paperwork support — they handle DOL filings</li>
+      </ul>
+      <p style="margin-top:10px;font-size:12px;color:var(--muted)">NC's program is more generous on dollars ($2K/yr + $2.5K tuition + 50% wage reimbursement up to $15/hr) but SC's combination with Tech College tuition support is still strong.</p>
+    </div>
+    <div class="card">
+      <h4>DOD SkillBridge — Free Trained Vets</h4>
+      <p>180-day "free intern" access to transitioning service members on full DOD pay/benefits. <strong>SC has ~399,000 veterans (15th nationally)</strong> and three major active installations:</p>
+      <ul class="bullets">
+        <li><strong>Joint Base Charleston</strong> (AF/Navy joint, 80K+ on base community)</li>
+        <li><strong>Shaw AFB / Sumter</strong> + Third Army HQ at Fort Jackson</li>
+        <li><strong>Fort Jackson (Columbia)</strong> — Army's largest basic training (50K soldiers/yr)</li>
+        <li>Plus MCAS Beaufort, Parris Island, Naval Health Clinic Beaufort, SC ANG units</li>
+      </ul>
+      <p style="margin-top:8px;font-size:12px;color:var(--muted)">RightTek HVAC SkillBridge program: 98% placement, 30-day average. Veteran SC unemployment 1.7% (vs 4.3% non-vet) — candidates know their value.</p>
+    </div>
+    <div class="card">
+      <h4>Hispanic/Immigrant Labor Reality + ICE</h4>
+      <ul class="bullets">
+        <li>Latino workers ~30% US construction workforce; ~70% of new labor force growth in roofing since 2020</li>
+        <li>Trades with highest concentration: roofing, drywall, framing, masonry, painting, flooring, landscaping</li>
+        <li>HVAC/plumbing/electrical (licensed trades) skew lower due to language and licensing barriers</li>
+        <li><strong>Nov 2-3, 2025:</strong> ICE conducted two-night operation in North Charleston; SC Highway Patrol + SLED assisted under 287(g) authority</li>
+        <li>SC is E-Verify mandatory since 2012 — stay W-2 + E-Verify clean</li>
+        <li>Subcontracting roofing crews is the norm — vet sub I-9 compliance with hold-harmless</li>
+        <li>Budget 5–10% wage inflation through 2027</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top:24px">Recent SC Acquisitions Worth Noting (2024–2026)</h3>
+  <div class="card">
+    <ul class="bullets">
+      <li><strong>Swift Services</strong> acquired Appco Power Solutions (SC home generator company), Feb 2025</li>
+      <li><strong>Champions Group → Blackstone $2.5B</strong>, Feb 2026 — sets new ceiling on multiples (18.5× EBITDA)</li>
+      <li><strong>FirstCall Mechanical (SkyKnight)</strong> — 15 acquisitions targeting Southeast since 2022</li>
+      <li><strong>Frontier Service Partners (Apex tuck-in)</strong> — Jan 2024</li>
+      <li><strong>Pulliam Restoration</strong> — expanded to Greenville Aug 2025</li>
+      <li>HVAC PE add-on transactions overall: <strong>+88% YoY</strong> through June 2025; PE platforms drove 39 of 77 first-half 2025 HVAC M&amp;A deals</li>
+    </ul>
+  </div>
 </section>
 
 <section class="tab" id="compare">
